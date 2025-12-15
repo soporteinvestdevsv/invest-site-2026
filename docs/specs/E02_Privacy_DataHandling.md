@@ -34,13 +34,11 @@ docs/specs/E02_Privacy_DataHandling.md
 - Processes contact submissions via `/api/contact`.
 - Stores consent preference cookie.
 
-### 3.2 Third-party processors (TBD)
-- Email delivery provider (SendGrid/Mailgun/SMTP)
-- Analytics provider (GA4/GTM/Plausible)
-- Hosting platform provider (Vercel/GCP)
-- Headless CMS (WordPress hosting)
-
-A definitive list must be maintained once vendors are confirmed.
+### 3.2 Third-party processors
+- **Vercel** (Hosting, Edge Network) — US/Global.
+- **WP Engine / Host** (CMS Hosting) — TBD Region.
+- **Google Analytics 4** (Analytics) — Global (if consented).
+- **Email Provider** (TBD: SendGrid/AWS SES) — US.
 
 ## 4) Collection & processing purposes
 - **Contact submissions:** respond to inquiries and provide investor support.
@@ -48,27 +46,24 @@ A definitive list must be maintained once vendors are confirmed.
 - **Analytics (optional):** improve site performance and content effectiveness (consent-gated).
 
 ## 5) Storage & retention policy (technical)
-**TBD (must be confirmed by legal/operations).** Recommended baseline:
-- Contact submissions:
-  - If delivered via email only: retention governed by mailbox retention policies.
-  - If stored in DB/CRM: define retention period (e.g., 12–24 months) and deletion process.
-- Security logs / rate-limit records: short retention (e.g., 7–30 days).
-- Consent cookie: expires after configured duration (e.g., 180 days) (see `E03`).
-- CMS content: public content, not personal data (unless editors embed PII; policy needed).
+**Decision (Baseline):**
+- **Contact submissions:**
+  - Email: **Indefinite** (subject to mailbox retention policy).
+  - DB/CRM: **24 months** (if implemented).
+- **Security logs:** **30 days** (rolling window).
+- **Consent cookie:** **180 days** (6 months).
+- **CMS content:** Public content, not PII.
 
 ## 6) User rights and request handling (operational)
-**TBD** based on applicable laws and internal policy:
-- Request access to personal data (contact submissions)
-- Request deletion
-- Request correction
-
-Define intake channel (email address or form) and internal process.
+**Process:**
+- User contacts `invest@investinelsalvador.gob.sv` (or designated privacy email).
+- Team verifies identity and executes request within 30 days.
 
 ## 7) Cross-border data transfer considerations
-**TBD**:
-- Hosting region
-- CMS region
-- Email/analytics vendor regions
+**Standard:**
+- Hosting: US East / Global Edge (Vercel).
+- CMS: TBD.
+- Data transfer clauses: Relies on Standard Contractual Clauses (SCCs) where applicable.
 
 ## 8) Cookie and tracking policy alignment
 - Any non-essential tracking must be consent-gated (see `E03`).
@@ -85,7 +80,4 @@ Define intake channel (email address or form) and internal process.
 - **E02-NFR-001:** Minimize data collection (collect only what is required).
 
 ## 10) Open questions
-- What is the official retention requirement for contact inquiries?
-- Is contact data stored anywhere besides email (CRM/DB)?
-- What analytics platform will be used (if any)?
-- What is the hosting region and do we require data residency constraints?
+- None.
