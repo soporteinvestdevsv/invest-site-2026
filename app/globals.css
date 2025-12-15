@@ -1,2 +1,12 @@
-/* Global styles (Tailwind will typically be wired here) */
-/* Keep this file; shadcn/Tailwind setup will extend it. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-white text-text-primary antialiased font-sans;
+  }
+}

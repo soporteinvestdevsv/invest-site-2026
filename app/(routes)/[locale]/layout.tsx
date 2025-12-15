@@ -15,7 +15,9 @@ export default function LocaleLayout({
       <Header locale={params.locale} />
       <ConsentScripts />
       <CookieBanner locale={params.locale} />
-      {children}
+      <main className="min-h-screen pt-16 lg:pt-20 flex flex-col">
+        {children}
+      </main>
       <Footer locale={params.locale} />
     </>
   );
