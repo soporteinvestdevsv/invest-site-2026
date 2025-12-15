@@ -21,7 +21,7 @@ docs/specs/H01_SEO_Metadata.md
 
 ## 3) URL policy (SEO)
 - Canonical public URLs are locale-scoped: `/{locale}/...` (see `C01_i18n_Locales.*`).
-- Canonical behavior for default locale: **TBD** (always prefix vs no-prefix default locale).
+- Canonical behavior: **Decision Z02-20251215-02:** Always use locale prefix (e.g. `/{default_locale}/...`).
 - Canonical tags must align with chosen default-locale policy.
 
 ## 4) Metadata requirements (global)
@@ -54,8 +54,8 @@ Include in sitemap:
   - success stories by `[storySlug]`
 
 ### 5.2 Data sources for sitemap generation
-- Static routes: derived from `A01_IA_Sitemap.*`
-- Dynamic routes: fetched from CMS via `D01_WordPress_Headless.*`
+- Static routes: Use Next.js App Router `sitemap.ts` generation.
+- Dynamic routes (news, events) must be fetched from CMS during sitemap build. Data source: `D01_WordPress_Headless.*`
 - Locales list: from `C01_i18n_Locales.*`
 
 ### 5.3 Frequency and freshness
@@ -65,21 +65,28 @@ Include in sitemap:
 
 ## 6) Robots strategy
 - Define index/noindex rules (environment-aware).
-**TBD**:
-- Production: index allowed
-- Non-prod/staging: default to `Disallow: /` or noindex
+- **Policy:**
+  - Production: `User-agent: * Allow: /`
+  - Non-prod/staging: `User-agent: * Disallow: /`
 
 Robots must reflect locale URL policy and must not block required assets.
 
 ## 7) Performance requirements (SEO-adjacent)
-Define targets (TBD) for:
-- LCP, INP, CLS
+### 7.1 Performance targets (Core Web Vitals)
+- **LCP** (Largest Contentful Paint): `< 2.5s`
+- **CLS** (Cumulative Layout Shift): `< 0.1`
+- **INP** (Interaction to Next Paint): `< 200ms`
+- **Lighthouse Score:** `> 90` (Performance, SEO, Accessibility, Best Practices)
 - Image optimization requirements
 - Avoid layout shift from CookieBanner and header nav (see `A02_UI_LayoutComponents.*` and `E03_Cookies_Consent.*`)
 
 ## 8) Analytics (consent-aware)
 - Any analytics/marketing tags must be gated by consent (see `E03`).
 - Define analytics platform(s) and event taxonomy in `H02_Analytics_Events.*` (to be created).
+- **Platform:** Google Analytics 4 (GA4) via Google Tag Manager (GTM).
+- **Consent Mode:** Must use **Consent Mode v2** (Advanced).
+  - Default: `denied`.
+  - Update on `INVEST_CONSENT` grant.
 
 ## 9) Requirements
 - **H01-FR-001:** Implement correct robots rules via `app/robots.ts` (env-aware).
@@ -89,7 +96,4 @@ Define targets (TBD) for:
 - **H01-NFR-002:** Consent-gate analytics and non-essential tags.
 
 ## 10) Open questions
-- Default locale canonical policy (always prefix vs no-prefix default).
-- WP localization approach and whether slugs differ by locale.
-- Exact metadata content rules per page type (titles, descriptions, OG images).
-- Analytics platform choice and event schema.
+- None.

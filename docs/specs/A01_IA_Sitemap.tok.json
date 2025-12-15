@@ -4,41 +4,144 @@
   "t": "Information Architecture (IA) & Sitemap",
   "v": "0.1.0",
   "st": "draft",
-  "own": ["ux", "product", "eng"],
+  "own": [
+    "ux",
+    "product",
+    "eng"
+  ],
   "src": {
     "md": "docs/specs/A01_IA_Sitemap.md"
   },
   "rel": [
-    { "doc": "A00", "why": "As-is route inventory is the authoritative input for page list and patterns." },
-    { "doc": "C01", "why": "Locale routing and translation workflow affect IA behavior and URL policy." },
-    { "doc": "D01", "why": "Collections (news/events/reports/etc.) are expected to be CMS-driven." },
-    { "doc": "E03", "why": "Footer/legal and cookie management link behavior depends on consent spec." },
-    { "doc": "A02", "why": "Header/footer implementation details belong to layout components spec." }
+    {
+      "doc": "A00",
+      "why": "As-is route inventory is the authoritative input for page list and patterns."
+    },
+    {
+      "doc": "C01",
+      "why": "Locale routing and translation workflow affect IA behavior and URL policy."
+    },
+    {
+      "doc": "D01",
+      "why": "Collections (news/events/reports/etc.) are expected to be CMS-driven."
+    },
+    {
+      "doc": "E03",
+      "why": "Footer/legal and cookie management link behavior depends on consent spec."
+    },
+    {
+      "doc": "A02",
+      "why": "Header/footer implementation details belong to layout components spec."
+    }
   ],
   "body": {
     "url_policy": {
       "canonical": "/{locale}/...",
-      "ref": { "doc": "A00", "sec": "route_patterns" }
+      "ref": {
+        "doc": "A00",
+        "sec": "route_patterns"
+      }
     },
     "nav": {
       "header": [
-        { "k": "why_es", "label": "Why El Salvador", "href": "/{locale}/why-el-salvador" },
-        { "k": "why_invest", "label": "Why Invest", "href": "/{locale}/why-invest" },
-        { "k": "how_to_invest", "label": "How to Invest", "href": "/{locale}/how-to-invest" },
-        { "k": "sectors", "label": "Sectors", "href": "/{locale}/sectors" },
-        { "k": "stories", "label": "Success Stories", "href": "/{locale}/success-stories" },
-        { "k": "insights", "label": "Insights", "href": "/{locale}/insights" },
-        { "k": "news_events", "label": "News & Events", "href": "/{locale}/news", "alt": ["/{locale}/events"] },
-        { "k": "media", "label": "Media", "href": "/{locale}/media" },
-        { "k": "about", "label": "About", "href": "/{locale}/about" },
-        { "k": "contact", "label": "Contact", "href": "/{locale}/contact" }
+        {
+          "k": "why_es",
+          "label": "Why El Salvador",
+          "href": "/{locale}/why-el-salvador"
+        },
+        {
+          "k": "why_invest",
+          "label": "Why Invest",
+          "href": "/{locale}/why-invest"
+        },
+        {
+          "k": "how_to_invest",
+          "label": "How to Invest",
+          "href": "/{locale}/how-to-invest"
+        },
+        {
+          "k": "sectors",
+          "label": "Sectors",
+          "href": "/{locale}/sectors"
+        },
+        {
+          "k": "stories",
+          "label": "Success Stories",
+          "href": "/{locale}/success-stories"
+        },
+        {
+          "k": "insights",
+          "label": "Insights",
+          "href": "/{locale}/insights"
+        },
+        {
+          "k": "news_events",
+          "label": "News & Events",
+          "href": "/{locale}/news",
+          "alt": [
+            "/{locale}/events"
+          ]
+        },
+        {
+          "k": "media",
+          "label": "Media",
+          "href": "/{locale}/media"
+        },
+        {
+          "k": "about",
+          "label": "About",
+          "href": "/{locale}/about"
+        },
+        {
+          "k": "contact",
+          "label": "Contact",
+          "href": "/{locale}/contact"
+        }
+      ],
+      "primary": [
+        "Sectors",
+        "Investors",
+        "Success Stories",
+        "News & Events",
+        "About",
+        "Contact"
       ],
       "footer": [
-        { "k": "legal_accessibility", "label": "Accessibility", "href": "/{locale}/legal/accessibility" },
-        { "k": "legal_cookies", "label": "Cookies", "href": "/{locale}/legal/cookies" },
-        { "k": "legal_privacy", "label": "Privacy", "href": "/{locale}/legal/privacy" },
-        { "k": "legal_terms", "label": "Terms", "href": "/{locale}/legal/terms" },
-        { "k": "manage_cookies", "label": "Manage cookies", "href": "TBD", "ref": { "doc": "E03", "sec": "banner" } }
+        {
+          "k": "legal_accessibility",
+          "label": "Accessibility",
+          "href": "/{locale}/legal/accessibility"
+        },
+        {
+          "k": "legal_cookies",
+          "label": "Cookies",
+          "href": "/{locale}/legal/cookies"
+        },
+        {
+          "k": "legal_privacy",
+          "label": "Privacy",
+          "href": "/{locale}/legal/privacy"
+        },
+        {
+          "k": "legal_terms",
+          "label": "Terms",
+          "href": "/{locale}/legal/terms"
+        },
+        {
+          "k": "manage_cookies",
+          "label": "Manage cookies",
+          "href": "TBD",
+          "ref": {
+            "doc": "E03",
+            "sec": "banner"
+          }
+        }
+      ],
+      "footer_links": [
+        "Privacy",
+        "Terms",
+        "Manage Cookies (Consent)",
+        "Social Links"
       ]
     },
     "pages": {
@@ -70,18 +173,63 @@
         "/{locale}/legal/terms"
       ],
       "collections": [
-        { "k": "news", "index": "/{locale}/news", "detail": "/{locale}/news/{slug}", "param": "slug", "src": "cms", "ref": { "doc": "A00", "sec": "collections" } },
-        { "k": "events", "index": "/{locale}/events", "detail": "/{locale}/events/{slug}", "param": "slug", "src": "cms", "ref": { "doc": "A00", "sec": "collections" } },
-        { "k": "reports", "index": "/{locale}/insights/reports", "detail": "/{locale}/insights/reports/{slug}", "param": "slug", "src": "cms", "ref": { "doc": "A00", "sec": "collections" } },
-        { "k": "sectors", "index": "/{locale}/sectors", "detail": "/{locale}/sectors/{sectorSlug}", "param": "sectorSlug", "src": "cms", "ref": { "doc": "A00", "sec": "collections" } },
-        { "k": "success_stories", "index": "/{locale}/success-stories", "detail": "/{locale}/success-stories/{storySlug}", "param": "storySlug", "src": "cms", "ref": { "doc": "A00", "sec": "collections" } }
+        {
+          "k": "news",
+          "index": "/{locale}/news",
+          "detail": "/{locale}/news/{slug}",
+          "param": "slug",
+          "src": "cms",
+          "ref": {
+            "doc": "A00",
+            "sec": "collections"
+          }
+        },
+        {
+          "k": "events",
+          "index": "/{locale}/events",
+          "detail": "/{locale}/events/{slug}",
+          "param": "slug",
+          "src": "cms",
+          "ref": {
+            "doc": "A00",
+            "sec": "collections"
+          }
+        },
+        {
+          "k": "reports",
+          "index": "/{locale}/insights/reports",
+          "detail": "/{locale}/insights/reports/{slug}",
+          "param": "slug",
+          "src": "cms",
+          "ref": {
+            "doc": "A00",
+            "sec": "collections"
+          }
+        },
+        {
+          "k": "sectors",
+          "index": "/{locale}/sectors",
+          "detail": "/{locale}/sectors/{sectorSlug}",
+          "param": "sectorSlug",
+          "src": "cms",
+          "ref": {
+            "doc": "A00",
+            "sec": "collections"
+          }
+        },
+        {
+          "k": "success_stories",
+          "index": "/{locale}/success-stories",
+          "detail": "/{locale}/success-stories/{storySlug}",
+          "param": "storySlug",
+          "src": "cms",
+          "ref": {
+            "doc": "A00",
+            "sec": "collections"
+          }
+        }
       ]
     },
-    "open": [
-      { "q": "Final header nav ordering and whether to merge/split News vs Events.", "ref": { "doc": "A02", "sec": "header" } },
-      { "q": "Should Media remain top-level or move under Insights/About?", "ref": { "doc": "A02", "sec": "header" } },
-      { "q": "Which currently static pages should be CMS-managed long-term?", "ref": { "doc": "D01", "sec": "collections" } },
-      { "q": "Locale URL policy for default locale (always prefix vs no-prefix default).", "ref": { "doc": "C01", "sec": "routing" } }
-    ]
+    "open": []
   }
 }
