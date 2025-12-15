@@ -35,6 +35,10 @@
     {
       "doc": "A03",
       "why": "UI Design Tokens for colors and typography."
+    },
+    {
+      "doc": "A04",
+      "why": "Detailed specifications for the sticky navigation header."
     }
   ],
   "body": {
@@ -64,6 +68,7 @@
       "skip_link": true
     },
     "header": {
+      "spec": "A04",
       "nav_ref": {
         "doc": "A01",
         "sec": "nav.header"

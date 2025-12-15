@@ -1,0 +1,112 @@
+{
+    "id": "A04",
+    "fn": "docs/specs/A04_UI_NavigationHeader.tok.json",
+    "t": "UI Navigation Header (Responsive & Sticky)",
+    "v": "0.1.0",
+    "st": "draft",
+    "own": [
+        "ux",
+        "eng"
+    ],
+    "src": {
+        "md": "docs/specs/A04_UI_NavigationHeader.md"
+    },
+    "rel": [
+        {
+            "doc": "A01",
+            "why": "Defines the navigation items (IA)."
+        },
+        {
+            "doc": "A03",
+            "why": "Defines styling tokens (colors, typography)."
+        },
+        {
+            "doc": "C01",
+            "why": "Defines locale routing rules."
+        },
+        {
+            "doc": "G01",
+            "why": "Defines acceptance criteria standards."
+        }
+    ],
+    "body": {
+        "layout": {
+            "position": "fixed",
+            "z_index": "50",
+            "height": "h-16 (default)",
+            "width": "full",
+            "background": "white (border-b neutral) or brand.primary",
+            "breakpoints": {
+                "mobile": "< 1024px",
+                "desktop": ">= 1024px"
+            }
+        },
+        "behavior": {
+            "sticky": true,
+            "scroll_lock": true,
+            "close_on_route_change": true,
+            "close_on_esc": true
+        },
+        "structure": {
+            "zones": [
+                "Brand",
+                "Nav",
+                "Utility"
+            ],
+            "utility_items": [
+                "LocaleSwitcher",
+                "ContactCTA"
+            ]
+        },
+        "content_source": {
+            "doc": "A01",
+            "sections": [
+                "nav.primary",
+                "nav.header"
+            ]
+        },
+        "tokens": {
+            "bg": "white",
+            "text": "text.primary",
+            "accent": "brand.primary"
+        },
+        "req": [
+            {
+                "id": "A04-FR-001",
+                "txt": "Header is sticky at top of viewport.",
+                "pri": "P0"
+            },
+            {
+                "id": "A04-FR-002",
+                "txt": "Desktop view shows all primary items horizontally.",
+                "pri": "P0"
+            },
+            {
+                "id": "A04-FR-003",
+                "txt": "Mobile view shows hamburger; toggles drawer.",
+                "pri": "P0"
+            },
+            {
+                "id": "A04-FR-004",
+                "txt": "Navigation via drawer locks body scroll.",
+                "pri": "P0"
+            }
+        ],
+        "open": [
+            {
+                "q": "Transparent-to-solid scroll effect vs always solid?",
+                "ref": {
+                    "doc": "A04",
+                    "sec": "layout"
+                }
+            },
+            {
+                "q": "Interaction pattern for 'Investors' grouping (click vs hover)?",
+                "ref": {
+                    "doc": "A01",
+                    "sec": "nav.primary"
+                }
+            }
+        ]
+    }
+}

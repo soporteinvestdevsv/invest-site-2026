@@ -31,7 +31,7 @@ docs/specs/A02_UI_LayoutComponents.md
 
 ### 3.2 Slot model
 For all locale routes:
-- **Header**: primary nav + locale switcher + key CTAs (TBD)
+- **Header**: Primary nav + switcher (Implementation: `A04_UI_NavigationHeader`)
 - **Main**: page content
 - **Footer**: legal links + manage cookies + contact/branding elements (TBD)
 - **Consent**:

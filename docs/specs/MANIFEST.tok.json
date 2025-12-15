@@ -133,6 +133,15 @@
               "md": "docs/specs/A03_UI_DesignTokens.md",
               "tok": "docs/specs/A03_UI_DesignTokens.tok.json"
             }
+          },
+          {
+            "id": "A04",
+            "t": "UI Navigation Header (Responsive & Sticky)",
+            "st": "draft",
+            "files": {
+              "md": "docs/specs/A04_UI_NavigationHeader.md",
+              "tok": "docs/specs/A04_UI_NavigationHeader.tok.json"
+            }
           }
         ]
       },
