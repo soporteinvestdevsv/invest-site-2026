@@ -92,7 +92,7 @@
         "impacted_specs": ["MANIFEST", "P00", "A*", "B*", "C*", "D*", "E*", "F*", "G*", "H*", "Z*"],
         "impacted_code": [],
         "acceptance_notes": "PRs that change behavior include spec updates; impactful decisions are logged; MANIFEST remains current."
-}   
+        }   
     ]
   }
 }

@@ -83,3 +83,4 @@ For each decision:
 **Impacted specs:** MANIFEST, P00, A*, B*, C*, D*, E*, F*, G*, H*, Z*  
 **Impacted code:** N/A (workflow)  
 **Acceptance notes:** PRs that change behavior include spec updates; decisions are logged; MANIFEST stays current.
+
