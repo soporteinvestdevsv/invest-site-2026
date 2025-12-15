@@ -1,0 +1,61 @@
+{
+  "id": "F01",
+  "fn": "docs/specs/F01_Environments_Config.tok.json",
+  "t": "Environments & Configuration (Runtime + Secrets)",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["eng", "devops"],
+  "src": { "md": "docs/specs/F01_Environments_Config.md" },
+  "rel": [
+    { "doc": "A00", "why": "Confirms /api/contact and /api/revalidate endpoints exist." },
+    { "doc": "B01", "why": "WP integration lives under lib/wp and i18n config under lib/i18n." },
+    { "doc": "C01", "why": "Locales/default locale must match routing + i18n config." },
+    { "doc": "D01", "why": "WP integration and caching/revalidation strategy affect env vars." },
+    { "doc": "E03", "why": "Analytics must be consent-gated; affects public env vars." }
+  ],
+  "body": {
+    "envs": ["local", "staging", "production"],
+    "rules": {
+      "no_secrets_in_git": true,
+      "client_exposure_prefix": "NEXT_PUBLIC_",
+      "server_only_secrets": true
+    },
+    "vars": [
+      { "k": "NEXT_PUBLIC_SITE_URL", "scope": "public", "req": true, "ex": "https://investinelsalvador.gob.sv" },
+      { "k": "NEXT_PUBLIC_DEFAULT_LOCALE", "scope": "public", "req": "TBD", "ref": { "doc": "C01", "sec": "locales" } },
+      { "k": "NEXT_PUBLIC_SUPPORTED_LOCALES", "scope": "public", "req": "TBD", "ref": { "doc": "C01", "sec": "locales" } },
+
+      { "k": "WP_BASE_URL", "scope": "server", "req": "TBD", "ref": { "doc": "D01", "sec": "config" } },
+      { "k": "WP_API_TYPE", "scope": "server", "req": "TBD (rest|graphql)", "ref": { "doc": "D01", "sec": "layers" } },
+      { "k": "WP_AUTH_MODE", "scope": "server", "req": "TBD", "ref": { "doc": "D01", "sec": "config" } },
+      { "k": "WP_AUTH_TOKEN", "scope": "server", "req": false },
+      { "k": "WP_USERNAME", "scope": "server", "req": false },
+      { "k": "WP_PASSWORD", "scope": "server", "req": false },
+
+      { "k": "REVALIDATE_SECRET", "scope": "server", "req": true, "ref": { "doc": "A00", "sec": "api_routes" } },
+
+      { "k": "CONTACT_DESTINATION", "scope": "server", "req": "TBD", "ref": { "doc": "P00", "sec": "req.functional" } },
+      { "k": "SMTP_HOST", "scope": "server", "req": false },
+      { "k": "SMTP_PORT", "scope": "server", "req": false },
+      { "k": "SMTP_USER", "scope": "server", "req": false },
+      { "k": "SMTP_PASS", "scope": "server", "req": false },
+      { "k": "CONTACT_TO_EMAIL", "scope": "server", "req": false },
+      { "k": "EMAIL_PROVIDER_KEY", "scope": "server", "req": false },
+
+      { "k": "NEXT_PUBLIC_ANALYTICS_PROVIDER", "scope": "public", "req": "TBD", "ref": { "doc": "H01", "sec": "analytics" } },
+      { "k": "NEXT_PUBLIC_ANALYTICS_ID", "scope": "public", "req": "TBD", "ref": { "doc": "H01", "sec": "analytics" } }
+    ],
+    "req": [
+      { "id": "F01-FR-001", "txt": "Document required env vars for local/staging/prod.", "pri": "P0" },
+      { "id": "F01-FR-002", "txt": "Secure /api/revalidate with REVALIDATE_SECRET.", "pri": "P0" },
+      { "id": "F01-FR-003", "txt": "WP integration uses server-only secrets; no client leakage.", "pri": "P0" },
+      { "id": "F01-NFR-001", "txt": "No secret appears in client bundles (no NEXT_PUBLIC_ for secrets).", "pri": "P0" }
+    ],
+    "open": [
+      { "q": "Hosting/deployment target (Vercel vs GCP vs other)?", "ref": { "doc": "P00", "sec": "open" } },
+      { "q": "Exact WP API type and auth mode?", "ref": { "doc": "D01", "sec": "config" } },
+      { "q": "Contact lead destination (email/CRM/DB) and anti-abuse?", "ref": { "doc": "P00", "sec": "req.functional" } },
+      { "q": "Supported locales + default locale values?", "ref": { "doc": "C01", "sec": "locales" } }
+    ]
+  }
+}

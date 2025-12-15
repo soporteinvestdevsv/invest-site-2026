@@ -1,0 +1,61 @@
+{
+  "id": "E02",
+  "fn": "docs/specs/E02_Privacy_DataHandling.tok.json",
+  "t": "Privacy & Data Handling",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["legal", "product", "eng"],
+  "src": { "md": "docs/specs/E02_Privacy_DataHandling.md" },
+  "rel": [
+    { "doc": "E03", "why": "Consent cookie schema and tracking consent gating." },
+    { "doc": "E01", "why": "Security baseline and API abuse protections." },
+    { "doc": "A00", "why": "Contact and revalidation endpoints exist." },
+    { "doc": "H01", "why": "Analytics/SEO tags are potentially involved and must be consented." },
+    { "doc": "D01", "why": "CMS is a third-party system that may have operational implications." },
+    { "doc": "F01", "why": "Environment/hosting choices affect processors and data residency." }
+  ],
+  "body": {
+    "pii": {
+      "contact_form_fields": ["name", "email", "organization (optional)", "message", "phone (optional)"],
+      "operational": ["ip_address", "user_agent", "timestamp"]
+    },
+    "processors": {
+      "first_party": ["this_site", "invest_mailbox (if email delivery)"],
+      "third_party_tbd": ["hosting_provider", "email_provider", "analytics_provider", "cms_provider"]
+    },
+    "purposes": [
+      { "k": "contact_response", "txt": "Respond to inquiries and provide investor support." },
+      { "k": "security", "txt": "Rate limiting and abuse prevention." },
+      { "k": "analytics", "txt": "Site improvement (consent-gated).", "ref": { "doc": "E03", "sec": "script_gating" } }
+    ],
+    "retention": {
+      "contact": "TBD (mailbox_policy | crm_policy | db_policy)",
+      "security_logs": "TBD (7-30 days recommended)",
+      "consent_cookie": { "ref": { "doc": "E03", "sec": "cookie_schema" } }
+    },
+    "rights": {
+      "access": "TBD",
+      "delete": "TBD",
+      "correct": "TBD",
+      "intake_channel": "TBD"
+    },
+    "cross_border": {
+      "hosting_region": "TBD",
+      "vendor_regions": "TBD",
+      "residency_constraints": "TBD"
+    },
+    "req": [
+      { "id": "E02-FR-001", "txt": "Document PII collected by /api/contact and destinations.", "pri": "P0" },
+      { "id": "E02-FR-002", "txt": "Define retention policy for contact data and security logs.", "pri": "P0" },
+      { "id": "E02-FR-003", "txt": "Consent-gate and document analytics/tracking.", "pri": "P0" },
+      { "id": "E02-FR-004", "txt": "Maintain list of third-party processors and purposes.", "pri": "P1" },
+      { "id": "E02-NFR-001", "txt": "Minimize data collection to what is required.", "pri": "P0" }
+    ],
+    "open": [
+      { "q": "Official retention requirement for contact inquiries?", "ref": { "doc": "P00", "sec": "open" } },
+      { "q": "Is contact data stored beyond email (CRM/DB)?", "ref": { "doc": "F01", "sec": "vars" } },
+      { "q": "Analytics platform choice (if any)?", "ref": { "doc": "H01", "sec": "analytics" } },
+      { "q": "Hosting region and data residency constraints?", "ref": { "doc": "F01", "sec": "open" } }
+    ]
+  }
+}

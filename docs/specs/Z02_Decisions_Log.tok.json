@@ -1,0 +1,84 @@
+{
+  "id": "Z02",
+  "fn": "docs/specs/Z02_Decisions_Log.tok.json",
+  "t": "Decisions Log",
+  "v": "0.1.0",
+  "st": "active",
+  "own": ["product", "eng"],
+  "src": { "md": "docs/specs/Z02_Decisions_Log.md" },
+  "rel": [
+    { "doc": "MANIFEST", "why": "MANIFEST references the governance rules and current doc statuses." },
+    { "doc": "P00", "why": "PRD scope changes must be logged." },
+    { "doc": "C01", "why": "Locale URL policy decisions must be logged." },
+    { "doc": "D01", "why": "CMS mapping/caching decisions must be logged." },
+    { "doc": "E01", "why": "Security posture decisions must be logged." },
+    { "doc": "E02", "why": "Data handling/retention decisions must be logged." },
+    { "doc": "E03", "why": "Consent model decisions must be logged." },
+    { "doc": "H01", "why": "SEO/robots/sitemap decisions must be logged." },
+    { "doc": "G01", "why": "Release gate decisions must be logged." }
+  ],
+  "body": {
+    "rules": {
+      "id_format": "Z02-YYYYMMDD-XX",
+      "required_fields": [
+        "id",
+        "date",
+        "status",
+        "owner",
+        "area",
+        "context",
+        "decision",
+        "alternatives",
+        "consequences",
+        "impacted_specs",
+        "impacted_code",
+        "acceptance_notes"
+      ],
+      "status_enum": ["Proposed", "Accepted", "Rejected", "Superseded"]
+    },
+    "entries": [
+      {
+        "id": "Z02-20251215-01",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Product/Engineering",
+        "area": "Governance",
+        "context": "Need modular specs usable by humans and as LLM context.",
+        "decision": "Adopt docs/specs as authoritative paired .md + .tok.json spec store with MANIFEST-driven navigation.",
+        "alternatives": ["README-only docs", "single large PRD file"],
+        "consequences": ["Specs drive code changes", "Pairs must remain in sync", "MANIFEST must be maintained"],
+        "impacted_specs": ["MANIFEST", "P00", "A*", "B*", "C*", "D*", "E*", "F*", "G*", "H*", "Z*"],
+        "impacted_code": [],
+        "acceptance_notes": "Specs exist, are paired, and referenced consistently from MANIFEST."
+      },
+      {
+        "id": "Z02-20251215-02",
+        "date": "2025-12-15",
+        "status": "Proposed",
+        "owner": "Product/Engineering",
+        "area": "i18n/SEO",
+        "context": "Scaffold uses [locale] segment for all pages; need canonical URL policy.",
+        "decision": "Use /{locale}/... as canonical for all pages initially; revisit default-locale no-prefix option later.",
+        "alternatives": ["Default locale without prefix"],
+        "consequences": ["Simpler routing+sitemap", "Potential marketing preference trade-off"],
+        "impacted_specs": ["C01", "H01", "A01"],
+        "impacted_code": ["app/(routes)/[locale]/*"],
+        "acceptance_notes": "Update to Accepted/Rejected once locale strategy is confirmed."
+      },
+      {
+        "id": "Z02-20251215-03",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Engineering",
+        "area": "Privacy",
+        "context": "Consent system exists; needed stable numbering without churn.",
+        "decision": "Keep cookies/consent as E03 and define E01 security baseline + E02 privacy/data handling to complete E-domain.",
+        "alternatives": ["Renumber E03 to E00/E01"],
+        "consequences": ["Logical E-domain ordering without breaking refs"],
+        "impacted_specs": ["E01", "E02", "E03", "MANIFEST"],
+        "impacted_code": [],
+        "acceptance_notes": "MANIFEST reflects E01/E02/E03 and all files exist."
+      }
+    ]
+  }
+}

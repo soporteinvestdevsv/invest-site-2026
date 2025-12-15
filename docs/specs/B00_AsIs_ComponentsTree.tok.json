@@ -1,0 +1,59 @@
+{
+  "id": "B00",
+  "fn": "docs/specs/B00_AsIs_ComponentsTree.tok.json",
+  "t": "As-Is Components Tree Inventory",
+  "v": "0.1.0",
+  "st": "as_is",
+  "own": ["eng", "ux"],
+  "src": {
+    "md": "docs/specs/B00_AsIs_ComponentsTree.md"
+  },
+  "rel": [
+    { "doc": "A02", "why": "Global layout components (Header/Footer) map to the UI layout spec." },
+    { "doc": "E03", "why": "CookieBanner and ConsentScripts map to cookie consent requirements." },
+    { "doc": "B04", "why": "components/ui is reserved for shadcn/ui conventions and rules." }
+  ],
+  "body": {
+    "root": "components",
+    "notes": [
+      "components/ui is reserved for shadcn/ui components; currently empty.",
+      "components/sections exists but is currently empty."
+    ],
+    "files": [
+      "components/layout/Footer.tsx",
+      "components/layout/Header.tsx",
+      "components/privacy/ConsentScripts.tsx",
+      "components/privacy/CookieBanner.tsx"
+    ],
+    "groups": [
+      {
+        "name": "layout",
+        "path": "components/layout",
+        "purpose": "Global layout components used across pages (header/footer).",
+        "files": ["Header.tsx", "Footer.tsx"],
+        "ref": { "doc": "A02", "sec": "header_footer" }
+      },
+      {
+        "name": "privacy",
+        "path": "components/privacy",
+        "purpose": "Cookie consent UI and consent-related scripts/components.",
+        "files": ["CookieBanner.tsx", "ConsentScripts.tsx"],
+        "ref": { "doc": "E03", "sec": "components" }
+      },
+      {
+        "name": "sections",
+        "path": "components/sections",
+        "purpose": "Page section modules (hero, CTA, feature grids, etc.).",
+        "status": "empty",
+        "needs": "NEEDS_DOC:A03"
+      },
+      {
+        "name": "ui",
+        "path": "components/ui",
+        "purpose": "Reserved for shadcn/ui primitives and shared UI components.",
+        "status": "empty",
+        "ref": { "doc": "B04", "sec": "ui_rules" }
+      }
+    ]
+  }
+}

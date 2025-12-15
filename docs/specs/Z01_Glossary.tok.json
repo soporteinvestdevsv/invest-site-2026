@@ -1,0 +1,44 @@
+{
+  "id": "Z01",
+  "fn": "docs/specs/Z01_Glossary.tok.json",
+  "t": "Glossary",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["product", "eng", "ux"],
+  "src": { "md": "docs/specs/Z01_Glossary.md" },
+  "rel": [
+    { "doc": "MANIFEST", "why": "Defines overall spec structure and terminology for TOK files." },
+    { "doc": "P00", "why": "PRD terminology and requirement IDs referenced by other docs." },
+    { "doc": "C00", "why": "Source-of-truth and translation workflow terms." },
+    { "doc": "C01", "why": "Locale and routing terminology." },
+    { "doc": "D01", "why": "CMS/collection terminology." },
+    { "doc": "E01", "why": "Security terminology (CSP, headers, revalidation auth)." },
+    { "doc": "E03", "why": "Consent terminology." },
+    { "doc": "G01", "why": "DoD/acceptance terminology." },
+    { "doc": "H01", "why": "SEO/canonical terminology." }
+  ],
+  "body": {
+    "terms": [
+      { "k": "app_router", "t": "App Router", "d": "Next.js routing system using app/ directory with layouts and nested routes." },
+      { "k": "as_is_inventory", "t": "As-Is Inventory", "d": "Snapshot of current scaffold used to ground decisions and prevent drift." },
+      { "k": "canonical_url", "t": "Canonical URL", "d": "Preferred URL for indexing; expected locale-scoped /{locale}/... (C01,H01)." },
+      { "k": "collection", "t": "Collection", "d": "CMS-driven content type with index + detail pages (D01)." },
+      { "k": "consent_cookie", "t": "Consent Cookie", "d": "Cookie storing consent choices (schema in E03)." },
+      { "k": "consent_gating", "t": "Consent Gating", "d": "Load non-essential scripts only after consent (E03)." },
+      { "k": "csp", "t": "CSP", "d": "Content Security Policy header controlling allowed sources; consent-aware (E01,H01)." },
+      { "k": "default_locale", "t": "Default Locale", "d": "Primary locale and related URL policy decision (C01)." },
+      { "k": "dod", "t": "DoD", "d": "Definition of Done used for release gating (G01)." },
+      { "k": "isr", "t": "ISR", "d": "Incremental Static Regeneration; revalidate-based updates for cached pages (D01)." },
+      { "k": "llm_context_store", "t": "LLM Context Store", "d": "docs/specs/ used as authoritative LLM context; .tok.json optimized for retrieval." },
+      { "k": "locale_segment", "t": "Locale Segment", "d": "Route parameter [locale] determining locale context (A00,C01)." },
+      { "k": "prd", "t": "PRD", "d": "Product Requirements Document; P00_PRD.* is master requirements." },
+      { "k": "revalidation", "t": "Revalidation", "d": "Refreshing cached/ISR content; protected /api/revalidate (D01,E01)." },
+      { "k": "source_of_truth", "t": "Source of Truth", "d": "Authoritative location for content/requirements (repo vs CMS vs external) (C00)." },
+      { "k": "tok", "t": "TOK / .tok.json", "d": "Token-oriented object notation: structured JSON spec for LLM context loading (MANIFEST)." },
+      { "k": "wp_headless", "t": "Headless WordPress", "d": "WordPress as CMS with Next.js rendering via APIs (D01)." }
+    ],
+    "open": [
+      { "q": "Add additional terms as new modules/integrations are introduced.", "ref": { "doc": "Z02", "sec": "entries" } }
+    ]
+  }
+}

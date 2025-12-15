@@ -1,0 +1,63 @@
+{
+  "id": "C01",
+  "fn": "docs/specs/C01_i18n_Locales.tok.json",
+  "t": "i18n, Locales & Routing Strategy",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["product", "eng", "ux"],
+  "src": {
+    "md": "docs/specs/C01_i18n_Locales.md"
+  },
+  "rel": [
+    { "doc": "A00", "why": "Locale segment and route patterns are defined by the App Router tree." },
+    { "doc": "B01", "why": "lib/i18n/config.ts is the implementation anchor for locale configuration." },
+    { "doc": "A02", "why": "Locale switcher UI belongs in global layout/header." },
+    { "doc": "D01", "why": "CMS localization strategy must align with WP queries and content model." }
+  ],
+  "body": {
+    "as_is": {
+      "locale_seg": "[locale]",
+      "routes_ref": { "doc": "A00", "sec": "route_patterns" },
+      "config_file": "lib/i18n/config.ts"
+    },
+    "locales": {
+      "default": "TBD",
+      "supported": "TBD"
+    },
+    "routing": {
+      "canonical_pattern": "/{locale}/...",
+      "invalid_locale": "TBD (404 | redirect_default | infer_accept_language)",
+      "default_locale_prefix": "TBD (always_prefix | no_prefix_default)"
+    },
+    "translations": {
+      "source_of_truth": "TBD (code_dicts | cms | tms)",
+      "loading": "TBD (server_load | ssg | hybrid_isr)",
+      "fallback_locale": "TBD",
+      "missing_key_behavior": "TBD (show_key | fallback_default | empty)"
+    },
+    "cms_localization": {
+      "collections_ref": { "doc": "A00", "sec": "collections" },
+      "strategy": "TBD (wpml | polylang | multisite | custom)",
+      "slug_policy": "TBD (stable | per_locale)"
+    },
+    "ui": {
+      "locale_switcher": {
+        "location": "components/layout/Header.tsx",
+        "behavior": "preserve_path_if_possible",
+        "missing_translation_behavior": "TBD (fallback_default | hide_option | warning)"
+      }
+    },
+    "req": [
+      { "id": "C01-FR-001", "txt": "Define supported locales and default locale in lib/i18n/config.ts.", "pri": "P0" },
+      { "id": "C01-FR-002", "txt": "Validate locale segment for every locale route.", "pri": "P0" },
+      { "id": "C01-FR-003", "txt": "URL locale is authoritative; persist or derive locale consistently.", "pri": "P1" },
+      { "id": "C01-NFR-001", "txt": "Translation loading must be performant; caching strategy defined.", "pri": "P1" }
+    ],
+    "open": [
+      { "q": "Supported locales and default locale?", "ref": { "doc": "B01", "sec": "groups" } },
+      { "q": "Default locale prefix rule (always prefix vs no-prefix default)?", "ref": { "doc": "A00", "sec": "route_patterns" } },
+      { "q": "Translation source of truth (repo vs CMS vs external TMS)?", "ref": { "doc": "P00", "sec": "open" } },
+      { "q": "How is WP content localized and queried per locale?", "ref": { "doc": "D01", "sec": "content_model" } }
+    ]
+  }
+}

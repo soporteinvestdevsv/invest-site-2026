@@ -1,0 +1,84 @@
+{
+  "id": "P00",
+  "fn": "docs/specs/P00_PRD.tok.json",
+  "t": "Technical Product Requirements Document (PRD)",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["product", "eng", "ux"],
+  "rel": [
+    { "doc": "A00", "why": "As-is routing inventory (App Router tree, params, route patterns)." },
+    { "doc": "B00", "why": "As-is components inventory (layout + privacy components)." },
+    { "doc": "B01", "why": "As-is lib inventory (i18n, privacy consent model, WP client)." },
+
+    { "doc": "C01", "why": "Locale strategy and routing behavior." },
+    { "doc": "D01", "why": "Headless WordPress: collections, queries, caching, revalidation." },
+    { "doc": "E03", "why": "Cookie consent: schema, banner behavior, script gating." },
+    { "doc": "H01", "why": "SEO/metadata/sitemap strategy and performance requirements." },
+    { "doc": "G01", "why": "Acceptance criteria and Definition of Done." }
+  ],
+  "body": {
+    "ctx": {
+      "site": "investinelsalvador.gob.sv",
+      "stack": {
+        "framework": "nextjs_app_router",
+        "routing": { "locale_seg": "[locale]", "ref": { "doc": "A00", "sec": "route_patterns" } },
+        "cms": { "type": "headless_wordpress", "ref": { "doc": "D01", "sec": "overview" } },
+        "consent": { "enabled": true, "ref": { "doc": "E03", "sec": "overview" } }
+      }
+    },
+    "goals": [
+      { "id": "G-001", "txt": "Deliver clear public journeys for investment promotion content." },
+      { "id": "G-002", "txt": "Support multilingual browsing via locale-aware routing." },
+      { "id": "G-003", "txt": "Enable editorial publishing for dynamic collections via headless CMS." },
+      { "id": "G-004", "txt": "Implement privacy baseline: consent capture + script gating." },
+      { "id": "G-005", "txt": "Provide SEO baseline: sitemap + robots + metadata strategy." }
+    ],
+    "nongoals": [
+      { "id": "NG-001", "txt": "Authenticated user portals (no login) in v1." },
+      { "id": "NG-002", "txt": "Full CRM/marketing automation; leads routing TBD." }
+    ],
+    "audiences": [
+      { "id": "U-INV", "name": "Investor" },
+      { "id": "U-MEDIA", "name": "Media/Stakeholders" },
+      { "id": "U-GEN", "name": "General Public" }
+    ],
+    "scope": {
+      "routes_ref": { "doc": "A00", "sec": "route_patterns" },
+      "collections_ref": { "doc": "A00", "sec": "collections" },
+      "components_ref": { "doc": "B00", "sec": "groups" },
+      "lib_ref": { "doc": "B01", "sec": "groups" }
+    },
+    "req": {
+      "functional": [
+        { "id": "FR-001", "txt": "Locale-aware routing via /{locale}/... for all public pages.", "pri": "P0", "ref": { "doc": "C01", "sec": "routing" } },
+        { "id": "FR-002", "txt": "Consistent locale layout across all locale routes (header/footer).", "pri": "P0", "ref": { "doc": "A02", "sec": "layout" } },
+
+        { "id": "FR-010", "txt": "Render index + detail pages for dynamic collections (news/events/reports/sectors/stories).", "pri": "P0", "ref": { "doc": "D01", "sec": "collections" } },
+        { "id": "FR-011", "txt": "Invalid slugs return not-found behavior.", "pri": "P0", "ref": { "doc": "G01", "sec": "routing" } },
+
+        { "id": "FR-020", "txt": "Cookie consent banner persists user choice.", "pri": "P0", "ref": { "doc": "E03", "sec": "cookie_schema" } },
+        { "id": "FR-021", "txt": "Consent gates non-essential scripts via consent script loader.", "pri": "P0", "ref": { "doc": "E03", "sec": "script_gating" } },
+
+        { "id": "FR-030", "txt": "Contact submission endpoint at /api/contact.", "pri": "P0", "ref": { "doc": "A00", "sec": "api_routes" } },
+        { "id": "FR-040", "txt": "Revalidation endpoint at /api/revalidate for CMS-driven refresh.", "pri": "P1", "ref": { "doc": "A00", "sec": "api_routes" } }
+      ],
+      "nonfunctional": [
+        { "id": "NFR-001", "txt": "Performance targets (Core Web Vitals) defined and met.", "pri": "P1", "ref": { "doc": "H01", "sec": "performance" } },
+        { "id": "NFR-002", "txt": "Accessibility baseline (WCAG target TBD).", "pri": "P1", "ref": { "doc": "A04", "sec": "a11y" } },
+        { "id": "NFR-003", "txt": "Security baseline for headers, inputs, secrets, API hardening.", "pri": "P0", "ref": { "doc": "E01", "sec": "baseline" } }
+      ]
+    },
+    "acceptance": {
+      "dod_ref": { "doc": "G01", "sec": "dod" },
+      "tests_ref": { "doc": "G02", "sec": "plan" }
+    },
+    "open": [
+      { "q": "Supported locales and prefix rules (default locale behavior)?", "ref": { "doc": "C01", "sec": "open" } },
+      { "q": "Translation workflow and ownership (files vs CMS vs external)?", "ref": { "doc": "C01", "sec": "workflow" } },
+      { "q": "WP content model mapping for each collection?", "ref": { "doc": "D01", "sec": "content_model" } },
+      { "q": "Media source of truth (WP vs external DAM) for downloads/gallery?", "ref": { "doc": "D02", "sec": "open" } },
+      { "q": "Contact lead destination and anti-abuse controls?", "ref": { "doc": "D03", "sec": "open" } },
+      { "q": "Revalidation auth strategy for /api/revalidate?", "ref": { "doc": "E01", "sec": "revalidate_auth" } }
+    ]
+  }
+}

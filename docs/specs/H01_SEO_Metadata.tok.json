@@ -1,0 +1,88 @@
+{
+  "id": "H01",
+  "fn": "docs/specs/H01_SEO_Metadata.tok.json",
+  "t": "SEO, Metadata, Sitemap & Robots",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["eng", "product", "seo"],
+  "src": { "md": "docs/specs/H01_SEO_Metadata.md" },
+  "rel": [
+    { "doc": "A00", "why": "robots.ts and sitemap.ts exist; route inventory informs SEO coverage." },
+    { "doc": "A01", "why": "Static page inventory is sourced from IA sitemap spec." },
+    { "doc": "C01", "why": "Locale list and URL policy determine canonical + sitemap locale coverage." },
+    { "doc": "D01", "why": "Dynamic collections for sitemap are sourced from headless WP." },
+    { "doc": "E03", "why": "Analytics and non-essential scripts must be consent-gated." },
+    { "doc": "A02", "why": "Header/banner can impact CLS; layout guidance affects performance." }
+  ],
+  "body": {
+    "as_is": {
+      "robots_file": "app/robots.ts",
+      "sitemap_file": "app/sitemap.ts",
+      "seo_lib_dir": "lib/seo (empty)"
+    },
+    "url_policy": {
+      "canonical_pattern": "/{locale}/...",
+      "default_locale_prefix": "TBD (always_prefix | no_prefix_default)",
+      "ref": { "doc": "C01", "sec": "routing" }
+    },
+    "metadata": {
+      "localized": true,
+      "required": ["title", "description", "canonical", "og", "twitter"],
+      "page_types": [
+        { "k": "static_page", "source": "A01" },
+        { "k": "news_detail", "source": "D01", "schema": "TBD Article" },
+        { "k": "event_detail", "source": "D01", "schema": "TBD Event" },
+        { "k": "report_detail", "source": "D01", "schema": "TBD Article/Report" },
+        { "k": "sector_detail", "source": "D01" },
+        { "k": "story_detail", "source": "D01" }
+      ],
+      "structured_data": "TBD (org | article | event | breadcrumb)"
+    },
+    "sitemap": {
+      "include": {
+        "static_ref": { "doc": "A01", "sec": "pages.static" },
+        "collections_ref": { "doc": "A01", "sec": "pages.collections" },
+        "locales_ref": { "doc": "C01", "sec": "locales" }
+      },
+      "dynamic_sources": {
+        "cms": { "doc": "D01", "sec": "collections" },
+        "slug_policy": "TBD (per_locale | stable)"
+      },
+      "freshness": {
+        "strategy": "TBD (isr_revalidate | tag_revalidate | ssr)",
+        "ref": { "doc": "D01", "sec": "caching" }
+      }
+    },
+    "robots": {
+      "env_aware": true,
+      "prod": "allow_index",
+      "nonprod": "disallow_or_noindex",
+      "tbd_rules": true
+    },
+    "performance": {
+      "targets": "TBD (LCP/INP/CLS)",
+      "cls_risks": [
+        { "k": "cookie_banner", "ref": { "doc": "E03", "sec": "banner" } },
+        { "k": "header_nav", "ref": { "doc": "A02", "sec": "header" } }
+      ]
+    },
+    "analytics": {
+      "consent_gated": true,
+      "platform": "TBD",
+      "events_spec": "NEEDS_DOC:H02"
+    },
+    "req": [
+      { "id": "H01-FR-001", "txt": "Implement env-aware robots rules via app/robots.ts.", "pri": "P0" },
+      { "id": "H01-FR-002", "txt": "Implement sitemap via app/sitemap.ts including static + dynamic + locales.", "pri": "P0" },
+      { "id": "H01-FR-003", "txt": "Provide localized metadata with correct canonicals per page type.", "pri": "P0" },
+      { "id": "H01-NFR-001", "txt": "Meet defined Core Web Vitals targets (values TBD).", "pri": "P1" },
+      { "id": "H01-NFR-002", "txt": "Consent-gate analytics and non-essential tags.", "pri": "P0" }
+    ],
+    "open": [
+      { "q": "Default locale canonical policy (always prefix vs no-prefix default).", "ref": { "doc": "C01", "sec": "routing" } },
+      { "q": "WP localization and slug policy (stable vs per-locale).", "ref": { "doc": "D01", "sec": "collections" } },
+      { "q": "Metadata rules per page type (titles/descriptions/OG images).", "ref": { "doc": "A01", "sec": "pages" } },
+      { "q": "Analytics platform and event taxonomy.", "ref": { "doc": "E03", "sec": "script_gating" } }
+    ]
+  }
+}

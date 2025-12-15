@@ -1,0 +1,61 @@
+{
+  "id": "B01",
+  "fn": "docs/specs/B01_AsIs_LibTree.tok.json",
+  "t": "As-Is lib/ Tree Inventory",
+  "v": "0.1.0",
+  "st": "as_is",
+  "own": ["eng"],
+  "src": {
+    "md": "docs/specs/B01_AsIs_LibTree.md"
+  },
+  "rel": [
+    { "doc": "C01", "why": "lib/i18n contains locale configuration and routing/i18n strategy support." },
+    { "doc": "E03", "why": "lib/privacy contains consent state and cookie persistence logic." },
+    { "doc": "H01", "why": "lib/seo will map to SEO/metadata requirements once implemented." },
+    { "doc": "D01", "why": "lib/wp contains the headless WordPress client/types/queries/mappers." }
+  ],
+  "body": {
+    "root": "lib",
+    "notes": [
+      "lib/seo exists but is currently empty (implementation TBD)."
+    ],
+    "files": [
+      "lib/i18n/config.ts",
+      "lib/privacy/consent.ts",
+      "lib/wp/client.ts",
+      "lib/wp/mappers.ts",
+      "lib/wp/queries.ts",
+      "lib/wp/types.ts"
+    ],
+    "groups": [
+      {
+        "name": "i18n",
+        "path": "lib/i18n",
+        "purpose": "i18n configuration and locale routing support.",
+        "files": ["config.ts"],
+        "ref": { "doc": "C01", "sec": "config" }
+      },
+      {
+        "name": "privacy",
+        "path": "lib/privacy",
+        "purpose": "Consent state management and cookie persistence utilities.",
+        "files": ["consent.ts"],
+        "ref": { "doc": "E03", "sec": "consent_model" }
+      },
+      {
+        "name": "seo",
+        "path": "lib/seo",
+        "purpose": "SEO/metadata helpers (TBD).",
+        "status": "empty",
+        "needs": "NEEDS_DOC:H01"
+      },
+      {
+        "name": "wp",
+        "path": "lib/wp",
+        "purpose": "Headless WordPress integration (client, queries, types, mappers).",
+        "files": ["client.ts", "queries.ts", "types.ts", "mappers.ts"],
+        "ref": { "doc": "D01", "sec": "wp_client" }
+      }
+    ]
+  }
+}

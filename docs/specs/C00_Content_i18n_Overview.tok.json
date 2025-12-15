@@ -1,0 +1,73 @@
+{
+  "id": "C00",
+  "fn": "docs/specs/C00_Content_i18n_Overview.tok.json",
+  "t": "Content & i18n Overview",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["product", "ux", "eng", "editorial"],
+  "src": { "md": "docs/specs/C00_Content_i18n_Overview.md" },
+  "rel": [
+    { "doc": "A00", "why": "As-is routes define the content surface area." },
+    { "doc": "B01", "why": "i18n config and WP integration live under lib/." },
+    { "doc": "C01", "why": "Locale routing rules and fallback behavior are defined there." },
+    { "doc": "D01", "why": "CMS mapping, queries, and localization approach for collections." },
+    { "doc": "H01", "why": "SEO metadata and sitemap depend on content types and localization." },
+    { "doc": "Z02", "why": "Decisions and migrations must be recorded for traceability." }
+  ],
+  "body": {
+    "principles": [
+      { "k": "url_locale_authoritative", "txt": "URL locale is authoritative: /{locale}/..." },
+      { "k": "single_source_of_truth", "txt": "One source of truth per content type; avoid duplication." },
+      { "k": "ui_content_separation", "txt": "UI renders content; content does not define UI layout logic." },
+      { "k": "progressive_migration", "txt": "Repo-managed pages may migrate to CMS; log decisions." }
+    ],
+    "ownership": [
+      { "domain": "institutional", "owner": ["editorial", "product"], "routes_ref": { "doc": "A00", "sec": "route_patterns" } },
+      { "domain": "investment_narrative", "owner": ["editorial", "product"] },
+      { "domain": "guides", "owner": ["product", "editorial"] },
+      { "domain": "collections", "owner": ["editorial"], "ref": { "doc": "D01", "sec": "collections" } },
+      { "domain": "legal", "owner": ["legal", "editorial"], "ref": { "doc": "E03", "sec": "policy_links" } },
+      { "domain": "media_assets", "owner": ["editorial"], "sot": "TBD (wp | external_dam)" }
+    ],
+    "source_of_truth": {
+      "repo": [
+        { "k": "ui_microcopy", "sot": "TBD (dicts)", "ref": { "doc": "C01", "sec": "translations.source_of_truth" } },
+        { "k": "system_messages", "sot": "repo" },
+        { "k": "nav_labels", "sot": "TBD (dicts|cms)" }
+      ],
+      "cms": [
+        { "k": "news", "sot": "wp", "ref": { "doc": "D01", "sec": "collections" } },
+        { "k": "events", "sot": "wp", "ref": { "doc": "D01", "sec": "collections" } },
+        { "k": "reports", "sot": "wp", "ref": { "doc": "D01", "sec": "collections" } },
+        { "k": "sectors", "sot": "TBD (wp)", "ref": { "doc": "D01", "sec": "collections" } },
+        { "k": "success_stories", "sot": "TBD (wp)", "ref": { "doc": "D01", "sec": "collections" } }
+      ],
+      "external": [
+        { "k": "dam_media", "sot": "TBD", "needs": "NEEDS_DOC:D02" },
+        { "k": "tms", "sot": "TBD", "needs": "NEEDS_DOC:C02" }
+      ]
+    },
+    "translation_workflow": {
+      "primary": "TBD (repo_dicts | cms_localized | tms_sync)",
+      "fallback_rules_ref": { "doc": "C01", "sec": "translations" },
+      "cms_localization_ref": { "doc": "D01", "sec": "collections" }
+    },
+    "page_patterns": [
+      { "k": "static_page", "render": "content_blocks", "sot": "TBD (repo|cms)" },
+      { "k": "collection_index", "render": "list", "features": "TBD (pagination|filters)" },
+      { "k": "collection_detail", "render": "detail", "seo_ref": { "doc": "H01", "sec": "metadata" } }
+    ],
+    "req": [
+      { "id": "C00-FR-001", "txt": "Each content type has a single source of truth (repo/cms/external).", "pri": "P0" },
+      { "id": "C00-FR-002", "txt": "Ownership for each content domain is explicit.", "pri": "P0" },
+      { "id": "C00-FR-003", "txt": "Translation workflow is defined and documented.", "pri": "P0" },
+      { "id": "C00-NFR-001", "txt": "Publishing path is predictable (draft→review→publish).", "pri": "P1" }
+    ],
+    "open": [
+      { "q": "Will static pages be CMS-managed long-term or remain repo-managed?", "ref": { "doc": "A01", "sec": "open" } },
+      { "q": "How are WP translations handled (WPML/Polylang/multisite/custom)?", "ref": { "doc": "C01", "sec": "cms_localization" } },
+      { "q": "Media source of truth for downloads/gallery (WP vs external DAM)?", "needs": "NEEDS_DOC:D02" },
+      { "q": "Legal approval workflow and release coordination?", "needs": "NEEDS_DOC:Z02" }
+    ]
+  }
+}

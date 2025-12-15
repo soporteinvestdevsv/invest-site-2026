@@ -1,0 +1,51 @@
+{
+  "id": "Z00",
+  "fn": "docs/specs/Z00_AsIs_DocsTree.tok.json",
+  "t": "As-Is Docs Tree Inventory",
+  "v": "0.1.0",
+  "st": "as_is",
+  "own": ["eng"],
+  "src": {
+    "md": "docs/specs/Z00_AsIs_DocsTree.md"
+  },
+  "rel": [
+    { "doc": "Z01", "why": "MANIFEST/Glossary/Decision log will live under docs/specs once created." },
+    { "doc": "A00", "why": "_tree_app.txt is the raw capture used to derive A00 as-is routing inventory." },
+    { "doc": "B00", "why": "_tree_components.txt is the raw capture used to derive B00 as-is components inventory." }
+  ],
+  "body": {
+    "root": "docs",
+    "notes": [
+      "docs/specs currently contains only raw tree snapshots; formal specs will be added next using paired .md + .tok.json files."
+    ],
+    "dirs": ["docs/specs"],
+    "files": [
+      "docs/specs/_tree_app.txt",
+      "docs/specs/_tree_components.txt",
+      "docs/specs/_tree_docs.txt",
+      "docs/specs/_tree_lib.txt"
+    ],
+    "raw_tree_snapshots": [
+      {
+        "name": "app_tree",
+        "file": "docs/specs/_tree_app.txt",
+        "derived_doc": "A00"
+      },
+      {
+        "name": "components_tree",
+        "file": "docs/specs/_tree_components.txt",
+        "derived_doc": "B00"
+      },
+      {
+        "name": "docs_tree",
+        "file": "docs/specs/_tree_docs.txt",
+        "derived_doc": "Z00"
+      },
+      {
+        "name": "lib_tree",
+        "file": "docs/specs/_tree_lib.txt",
+        "derived_doc": "B01"
+      }
+    ]
+  }
+}

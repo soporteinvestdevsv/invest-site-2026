@@ -1,0 +1,133 @@
+{
+  "id": "A00",
+  "fn": "docs/specs/A00_AsIs_AppTree.tok.json",
+  "t": "As-Is App Router Tree Inventory",
+  "v": "0.1.0",
+  "st": "as_is",
+  "own": ["eng", "ux"],
+  "src": {
+    "md": "docs/specs/A00_AsIs_AppTree.md"
+  },
+  "rel": [
+    { "doc": "A01", "why": "A01 sitemap/page inventory should be derived from this as-is tree." },
+    { "doc": "C01", "why": "[locale] routing and locale strategy are defined in the i18n spec." },
+    { "doc": "D01", "why": "Dynamic content routes (news/events/reports) likely map to CMS collections." }
+  ],
+  "body": {
+    "root": "app",
+    "route_group": "(routes)",
+    "notes": [
+      "Route group '(routes)' does not appear in the URL path.",
+      "All public pages are nested under /(routes)/[locale]/...",
+      "Dynamic segments present: [locale], [slug], [sectorSlug], [storySlug]."
+    ],
+    "top_level_files": [
+      "app/error.tsx",
+      "app/globals.css",
+      "app/layout.tsx",
+      "app/not-found.tsx",
+      "app/robots.ts",
+      "app/sitemap.ts"
+    ],
+    "files": [
+      "app/(routes)/[locale]/layout.tsx",
+      "app/(routes)/[locale]/page.tsx",
+      "app/(routes)/[locale]/about/page.tsx",
+      "app/(routes)/[locale]/about/governance/page.tsx",
+      "app/(routes)/[locale]/about/team/page.tsx",
+      "app/(routes)/[locale]/contact/page.tsx",
+      "app/(routes)/[locale]/contact/invest-support/page.tsx",
+      "app/(routes)/[locale]/events/page.tsx",
+      "app/(routes)/[locale]/events/[slug]/page.tsx",
+      "app/(routes)/[locale]/how-to-invest/page.tsx",
+      "app/(routes)/[locale]/how-to-invest/faqs/page.tsx",
+      "app/(routes)/[locale]/how-to-invest/requirements/page.tsx",
+      "app/(routes)/[locale]/how-to-invest/steps/page.tsx",
+      "app/(routes)/[locale]/insights/page.tsx",
+      "app/(routes)/[locale]/insights/reports/page.tsx",
+      "app/(routes)/[locale]/insights/reports/[slug]/page.tsx",
+      "app/(routes)/[locale]/legal/accessibility/page.tsx",
+      "app/(routes)/[locale]/legal/cookies/page.tsx",
+      "app/(routes)/[locale]/legal/privacy/page.tsx",
+      "app/(routes)/[locale]/legal/terms/page.tsx",
+      "app/(routes)/[locale]/media/page.tsx",
+      "app/(routes)/[locale]/media/downloads/page.tsx",
+      "app/(routes)/[locale]/media/gallery/page.tsx",
+      "app/(routes)/[locale]/news/page.tsx",
+      "app/(routes)/[locale]/news/[slug]/page.tsx",
+      "app/(routes)/[locale]/sectors/page.tsx",
+      "app/(routes)/[locale]/sectors/[sectorSlug]/page.tsx",
+      "app/(routes)/[locale]/success-stories/page.tsx",
+      "app/(routes)/[locale]/success-stories/[storySlug]/page.tsx",
+      "app/(routes)/[locale]/why-el-salvador/page.tsx",
+      "app/(routes)/[locale]/why-el-salvador/connectivity/page.tsx",
+      "app/(routes)/[locale]/why-el-salvador/macroeconomy/page.tsx",
+      "app/(routes)/[locale]/why-el-salvador/quality-of-life/page.tsx",
+      "app/(routes)/[locale]/why-el-salvador/talent/page.tsx",
+      "app/(routes)/[locale]/why-invest/page.tsx",
+      "app/(routes)/[locale]/why-invest/incentives/page.tsx",
+      "app/(routes)/[locale]/why-invest/services/page.tsx",
+      "app/api/contact/route.ts",
+      "app/api/revalidate/route.ts"
+    ],
+    "params": [
+      { "name": "locale", "seg": "[locale]", "scope": "all_public_routes", "ref": { "doc": "C01", "sec": "locales" } },
+      { "name": "slug", "seg": "[slug]", "scope": "events|news|reports", "ref": { "doc": "D01", "sec": "collections" } },
+      { "name": "sectorSlug", "seg": "[sectorSlug]", "scope": "sectors", "ref": { "doc": "D01", "sec": "collections" } },
+      { "name": "storySlug", "seg": "[storySlug]", "scope": "success_stories", "ref": { "doc": "D01", "sec": "collections" } }
+    ],
+    "api_routes": [
+      { "path": "/api/contact", "file": "app/api/contact/route.ts", "methods": "TBD (inspect file)" },
+      { "path": "/api/revalidate", "file": "app/api/revalidate/route.ts", "methods": "TBD (inspect file)" }
+    ],
+    "route_patterns": {
+      "static": [
+        "/{locale}",
+        "/{locale}/about",
+        "/{locale}/about/governance",
+        "/{locale}/about/team",
+        "/{locale}/contact",
+        "/{locale}/contact/invest-support",
+        "/{locale}/events",
+        "/{locale}/how-to-invest",
+        "/{locale}/how-to-invest/faqs",
+        "/{locale}/how-to-invest/requirements",
+        "/{locale}/how-to-invest/steps",
+        "/{locale}/insights",
+        "/{locale}/insights/reports",
+        "/{locale}/legal/accessibility",
+        "/{locale}/legal/cookies",
+        "/{locale}/legal/privacy",
+        "/{locale}/legal/terms",
+        "/{locale}/media",
+        "/{locale}/media/downloads",
+        "/{locale}/media/gallery",
+        "/{locale}/news",
+        "/{locale}/sectors",
+        "/{locale}/success-stories",
+        "/{locale}/why-el-salvador",
+        "/{locale}/why-el-salvador/connectivity",
+        "/{locale}/why-el-salvador/macroeconomy",
+        "/{locale}/why-el-salvador/quality-of-life",
+        "/{locale}/why-el-salvador/talent",
+        "/{locale}/why-invest",
+        "/{locale}/why-invest/incentives",
+        "/{locale}/why-invest/services"
+      ],
+      "dynamic": [
+        "/{locale}/events/{slug}",
+        "/{locale}/insights/reports/{slug}",
+        "/{locale}/news/{slug}",
+        "/{locale}/sectors/{sectorSlug}",
+        "/{locale}/success-stories/{storySlug}"
+      ]
+    },
+    "collections": [
+      { "name": "events", "index": "/{locale}/events", "detail": "/{locale}/events/{slug}", "param": "slug" },
+      { "name": "reports", "index": "/{locale}/insights/reports", "detail": "/{locale}/insights/reports/{slug}", "param": "slug" },
+      { "name": "news", "index": "/{locale}/news", "detail": "/{locale}/news/{slug}", "param": "slug" },
+      { "name": "sectors", "index": "/{locale}/sectors", "detail": "/{locale}/sectors/{sectorSlug}", "param": "sectorSlug" },
+      { "name": "success_stories", "index": "/{locale}/success-stories", "detail": "/{locale}/success-stories/{storySlug}", "param": "storySlug" }
+    ]
+  }
+}

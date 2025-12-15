@@ -1,0 +1,104 @@
+{
+  "id": "G01",
+  "fn": "docs/specs/G01_AcceptanceCriteria.tok.json",
+  "t": "Acceptance Criteria & Definition of Done (DoD)",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["qa", "eng", "product"],
+  "src": { "md": "docs/specs/G01_AcceptanceCriteria.md" },
+  "rel": [
+    { "doc": "P00", "why": "Acceptance criteria gate the PRD requirements." },
+    { "doc": "A00", "why": "Routing surface area and app shell behaviors." },
+    { "doc": "A02", "why": "Header/Footer shell and consent integration points." },
+    { "doc": "C00", "why": "Content governance assumptions impact acceptance." },
+    { "doc": "C01", "why": "Locale behavior and fallback rules." },
+    { "doc": "D01", "why": "CMS collections behavior and caching/revalidation." },
+    { "doc": "E01", "why": "Security baseline checks for APIs and headers." },
+    { "doc": "E02", "why": "Data handling and retention expectations for contact flow." },
+    { "doc": "E03", "why": "Consent banner and script gating checks." },
+    { "doc": "F01", "why": "Environment and secrets constraints." },
+    { "doc": "H01", "why": "Robots/sitemap/metadata requirements." },
+    { "doc": "MANIFEST", "why": "Spec governance and status tracking." }
+  ],
+  "body": {
+    "dod": [
+      "Matches relevant specs; no regressions.",
+      "Verified in local + staging.",
+      "Includes error handling and empty states.",
+      "Meets security + privacy baseline.",
+      "SEO metadata present where applicable.",
+      "Specs updated alongside code changes."
+    ],
+    "checks": [
+      {
+        "area": "routing_shell",
+        "ref": [{ "doc": "A00" }, { "doc": "A02" }],
+        "items": [
+          "All pages render under /{locale}/... with consistent header/footer.",
+          "notFound for invalid routes/slugs; error boundary for runtime errors."
+        ]
+      },
+      {
+        "area": "i18n",
+        "ref": [{ "doc": "C01" }, { "doc": "C00" }],
+        "items": [
+          "Supported locales + default implemented; invalid locale handling matches C01 decision.",
+          "Locale switcher accessible; preserves path when possible; missing translation behavior matches decision."
+        ]
+      },
+      {
+        "area": "cms_collections",
+        "ref": [{ "doc": "D01" }],
+        "items": [
+          "Each collection has working index + detail; 404 on invalid slugs.",
+          "Fetch failures show friendly error state; caching/revalidation matches D01."
+        ]
+      },
+      {
+        "area": "consent_privacy",
+        "ref": [{ "doc": "E03" }],
+        "items": [
+          "Banner only when missing/invalid consent; consent persists with correct schema/expiry.",
+          "Non-essential scripts gated; manage cookies entry point works; legal pages reachable."
+        ]
+      },
+      {
+        "area": "security",
+        "ref": [{ "doc": "E01" }, { "doc": "F01" }],
+        "items": [
+          "/api/revalidate requires valid secret; invalid requests 401; method restricted.",
+          "/api/contact validates inputs; anti-abuse baseline implemented.",
+          "No secrets in client bundles; security headers applied."
+        ]
+      },
+      {
+        "area": "seo",
+        "ref": [{ "doc": "H01" }],
+        "items": [
+          "robots env-aware; sitemap includes static+dynamic+locales.",
+          "Localized metadata exists for key page types; avoid major CLS."
+        ]
+      },
+      {
+        "area": "contact_data_handling",
+        "ref": [{ "doc": "E02" }, { "doc": "P00" }],
+        "items": [
+          "Contact submission works end-to-end; destination documented.",
+          "Data handling/retention documented (even if TBD placeholders)."
+        ]
+      }
+    ],
+    "release_readiness": [
+      "All P0 requirements met or explicitly deferred with decision logged.",
+      "No high/critical security vulnerabilities open (or mitigations documented).",
+      "Content owners can publish/update CMS content without code changes where applicable.",
+      "MANIFEST updated with current doc statuses."
+    ],
+    "open": [
+      { "q": "Final Core Web Vitals targets (LCP/INP/CLS).", "ref": { "doc": "H01", "sec": "performance" } },
+      { "q": "Contact anti-abuse mechanism (captcha vs rate limiting vs both).", "ref": { "doc": "E01", "sec": "api" } },
+      { "q": "Default locale URL policy.", "ref": { "doc": "C01", "sec": "routing" } },
+      { "q": "WP localization strategy and slug policy.", "ref": { "doc": "D01", "sec": "collections" } }
+    ]
+  }
+}
