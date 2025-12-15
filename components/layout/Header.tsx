@@ -112,7 +112,20 @@ export default function Header({ locale }: { locale: string }) {
             className="lg:hidden p-2 text-white hover:bg-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-white/50"
             aria-label="Toggle navigation"
           >
-            <i className={`pi ${isMobileOpen ? 'pi-times' : 'pi-bars'} text-xl`} />
+            <div className="w-6 h-6 flex flex-col justify-center items-center relative">
+              <span
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute ${isMobileOpen ? 'rotate-45 top-1/2 -translate-y-1/2' : 'top-1'
+                  }`}
+              />
+              <span
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute top-1/2 -translate-y-1/2 ${isMobileOpen ? 'opacity-0' : 'opacity-100'
+                  }`}
+              />
+              <span
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute ${isMobileOpen ? '-rotate-45 top-1/2 -translate-y-1/2' : 'bottom-1'
+                  }`}
+              />
+            </div>
           </button>
         </div>
       </div>
