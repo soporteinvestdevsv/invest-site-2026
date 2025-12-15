@@ -140,7 +140,7 @@ export default function Header({ locale }: { locale: string }) {
       {/* Mobile Drawer (Overlay) */}
       <div
         className={`fixed inset-0 z-40 bg-brand-primary transform transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6
-          ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <nav className="flex flex-col gap-6 mt-8">
           {navItems.map((item) => (
