@@ -32,6 +32,10 @@
     {
       "doc": "H01",
       "why": "Analytics/SEO scripts may be subject to consent gating and consent-mode."
+    },
+    {
+      "doc": "A03",
+      "why": "Banner styling must adhere to design tokens."
     }
   ],
   "body": {

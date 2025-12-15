@@ -4,14 +4,38 @@
   "t": "UI Layout Components (Header, Footer, Global Shell)",
   "v": "0.1.0",
   "st": "draft",
-  "own": ["ux", "eng"],
-  "src": { "md": "docs/specs/A02_UI_LayoutComponents.md" },
+  "own": [
+    "ux",
+    "eng"
+  ],
+  "src": {
+    "md": "docs/specs/A02_UI_LayoutComponents.md"
+  },
   "rel": [
-    { "doc": "A00", "why": "Defines where layouts live (root + locale) and all locale routes." },
-    { "doc": "B00", "why": "Header/Footer and privacy components exist under components/." },
-    { "doc": "A01", "why": "Header/footer navigation must align to IA sitemap." },
-    { "doc": "C01", "why": "Locale switcher behavior and locale rules." },
-    { "doc": "E03", "why": "Cookie banner and script gating behavior." }
+    {
+      "doc": "A00",
+      "why": "Defines where layouts live (root + locale) and all locale routes."
+    },
+    {
+      "doc": "B00",
+      "why": "Header/Footer and privacy components exist under components/."
+    },
+    {
+      "doc": "A01",
+      "why": "Header/footer navigation must align to IA sitemap."
+    },
+    {
+      "doc": "C01",
+      "why": "Locale switcher behavior and locale rules."
+    },
+    {
+      "doc": "E03",
+      "why": "Cookie banner and script gating behavior."
+    },
+    {
+      "doc": "A03",
+      "why": "UI Design Tokens for colors and typography."
+    }
   ],
   "body": {
     "as_is": {
@@ -23,21 +47,44 @@
       "locale_layout": "app/(routes)/[locale]/layout.tsx"
     },
     "layout_model": {
-      "shell": ["Header", "Main", "Footer"],
-      "global_once": ["ConsentScripts", "CookieBanner"],
-      "landmarks": ["header", "main", "footer"],
+      "shell": [
+        "Header",
+        "Main",
+        "Footer"
+      ],
+      "global_once": [
+        "ConsentScripts",
+        "CookieBanner"
+      ],
+      "landmarks": [
+        "header",
+        "main",
+        "footer"
+      ],
       "skip_link": true
     },
     "header": {
-      "nav_ref": { "doc": "A01", "sec": "nav.header" },
+      "nav_ref": {
+        "doc": "A01",
+        "sec": "nav.header"
+      },
       "locale_switcher": {
         "enabled": true,
         "preserve_path": true,
         "missing_translation_behavior": "TBD",
-        "ref": { "doc": "C01", "sec": "ui.locale_switcher" }
+        "ref": {
+          "doc": "C01",
+          "sec": "ui.locale_switcher"
+        }
       },
-      "responsive": { "mobile_menu": "collapsible", "desktop_menu": "horizontal" },
-      "a11y": { "keyboard": true, "focus_management": true }
+      "responsive": {
+        "mobile_menu": "collapsible",
+        "desktop_menu": "horizontal"
+      },
+      "a11y": {
+        "keyboard": true,
+        "focus_management": true
+      }
     },
     "footer": {
       "legal_links": [
@@ -46,25 +93,90 @@
         "/{locale}/legal/privacy",
         "/{locale}/legal/terms"
       ],
-      "manage_cookies": { "entry": true, "behavior": "TBD", "ref": { "doc": "E03", "sec": "banner" } }
+      "manage_cookies": {
+        "entry": true,
+        "behavior": "TBD",
+        "ref": {
+          "doc": "E03",
+          "sec": "banner"
+        }
+      }
     },
     "consent": {
-      "banner": { "show_when": "missing_or_invalid_cookie", "ref": { "doc": "E03", "sec": "banner" } },
-      "scripts": { "gating": true, "ref": { "doc": "E03", "sec": "script_gating" } }
+      "banner": {
+        "show_when": "missing_or_invalid_cookie",
+        "ref": {
+          "doc": "E03",
+          "sec": "banner"
+        }
+      },
+      "scripts": {
+        "gating": true,
+        "ref": {
+          "doc": "E03",
+          "sec": "script_gating"
+        }
+      }
     },
     "req": [
-      { "id": "A02-FR-001", "txt": "All locale pages use consistent Header/Footer shell.", "pri": "P0" },
-      { "id": "A02-FR-002", "txt": "Header nav follows A01 and is responsive + accessible.", "pri": "P0" },
-      { "id": "A02-FR-003", "txt": "Footer includes legal links and manage cookies entry.", "pri": "P0" },
-      { "id": "A02-FR-004", "txt": "Locale switcher aligns with C01 rules.", "pri": "P1" },
-      { "id": "A02-FR-005", "txt": "ConsentScripts and CookieBanner integrated once globally.", "pri": "P0" },
-      { "id": "A02-NFR-001", "txt": "Accessibility baseline: landmarks, skip link, focus management.", "pri": "P0" },
-      { "id": "A02-NFR-002", "txt": "Avoid significant layout shift from banner/nav (CLS constraints TBD).", "pri": "P1" }
+      {
+        "id": "A02-FR-001",
+        "txt": "All locale pages use consistent Header/Footer shell.",
+        "pri": "P0"
+      },
+      {
+        "id": "A02-FR-002",
+        "txt": "Header nav follows A01 and is responsive + accessible.",
+        "pri": "P0"
+      },
+      {
+        "id": "A02-FR-003",
+        "txt": "Footer includes legal links and manage cookies entry.",
+        "pri": "P0"
+      },
+      {
+        "id": "A02-FR-004",
+        "txt": "Locale switcher aligns with C01 rules.",
+        "pri": "P1"
+      },
+      {
+        "id": "A02-FR-005",
+        "txt": "ConsentScripts and CookieBanner integrated once globally.",
+        "pri": "P0"
+      },
+      {
+        "id": "A02-NFR-001",
+        "txt": "Accessibility baseline: landmarks, skip link, focus management.",
+        "pri": "P0"
+      },
+      {
+        "id": "A02-NFR-002",
+        "txt": "Avoid significant layout shift from banner/nav (CLS constraints TBD).",
+        "pri": "P1"
+      }
     ],
     "open": [
-      { "q": "Exact responsibility split: root layout vs locale layout?", "ref": { "doc": "A00", "sec": "files" } },
-      { "q": "Final nav grouping (News & Events merged vs split)?", "ref": { "doc": "A01", "sec": "nav.header" } },
-      { "q": "Manage cookies UX pattern (modal vs page vs reopen banner)?", "ref": { "doc": "E03", "sec": "open" } }
+      {
+        "q": "Exact responsibility split: root layout vs locale layout?",
+        "ref": {
+          "doc": "A00",
+          "sec": "files"
+        }
+      },
+      {
+        "q": "Final nav grouping (News & Events merged vs split)?",
+        "ref": {
+          "doc": "A01",
+          "sec": "nav.header"
+        }
+      },
+      {
+        "q": "Manage cookies UX pattern (modal vs page vs reopen banner)?",
+        "ref": {
+          "doc": "E03",
+          "sec": "open"
+        }
+      }
     ]
   }
 }
