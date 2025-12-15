@@ -10,8 +10,7 @@
   },
   "rel": [
     { "doc": "A02", "why": "Global layout components (Header/Footer) map to the UI layout spec." },
-    { "doc": "E03", "why": "CookieBanner and ConsentScripts map to cookie consent requirements." },
-    { "doc": "B04", "why": "components/ui is reserved for shadcn/ui conventions and rules." }
+    { "doc": "E03", "why": "CookieBanner and ConsentScripts map to cookie consent requirements." }
   ],
   "body": {
     "root": "components",
@@ -52,7 +51,7 @@
         "path": "components/ui",
         "purpose": "Reserved for shadcn/ui primitives and shared UI components.",
         "status": "empty",
-        "ref": { "doc": "B04", "sec": "ui_rules" }
+        "needs": "NEEDS_DOC:B04"
       }
     ]
   }

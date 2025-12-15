@@ -71,3 +71,15 @@ For each decision:
 **Impacted code:** None  
 **Acceptance notes:** MANIFEST reflects the E-domain ordering and all E docs exist.
 
+### Z02-20251215-04 — Enforce “specs + decisions + manifest” workflow
+**Date:** 2025-12-15  
+**Status:** Accepted  
+**Owner:** Product/Engineering  
+**Area:** Governance  
+**Context:** The repo is adopting `docs/specs` as an authoritative context store. We need an explicit workflow to prevent code/spec drift and ensure LLM context is reliable.  
+**Decision:** All meaningful scope/behavior changes must be reflected in specs, and architectural/constraint decisions must be logged in Z02. MANIFEST must be updated whenever specs are added/renamed.  
+**Alternatives considered:** Ad-hoc docs; code-first changes with later documentation. Rejected due to drift and loss of rationale.  
+**Consequences:** Specs become a required artifact for changes; Z02 entries provide traceability; MANIFEST stays complete for navigation and LLM loading.  
+**Impacted specs:** MANIFEST, P00, A*, B*, C*, D*, E*, F*, G*, H*, Z*  
+**Impacted code:** N/A (workflow)  
+**Acceptance notes:** PRs that change behavior include spec updates; decisions are logged; MANIFEST stays current.

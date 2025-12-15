@@ -2,24 +2,25 @@
   "id": "Z00",
   "fn": "docs/specs/Z00_AsIs_DocsTree.tok.json",
   "t": "As-Is Docs Tree Inventory",
-  "v": "0.1.0",
+  "v": "0.1.1",
   "st": "as_is",
   "own": ["eng"],
-  "src": {
-    "md": "docs/specs/Z00_AsIs_DocsTree.md"
-  },
+  "src": { "md": "docs/specs/Z00_AsIs_DocsTree.md" },
   "rel": [
-    { "doc": "Z01", "why": "MANIFEST/Glossary/Decision log will live under docs/specs once created." },
-    { "doc": "A00", "why": "_tree_app.txt is the raw capture used to derive A00 as-is routing inventory." },
-    { "doc": "B00", "why": "_tree_components.txt is the raw capture used to derive B00 as-is components inventory." }
+    { "doc": "MANIFEST", "why": "MANIFEST is the authoritative index for the docs/specs system." },
+    { "doc": "Z02", "why": "Decisions Log governs documentation + architecture decision workflow." },
+    { "doc": "A00", "why": "_tree_app.txt is a raw capture artifact used to derive A00 routing inventory." },
+    { "doc": "B00", "why": "_tree_components.txt is a raw capture artifact used to derive B00 components inventory." },
+    { "doc": "B01", "why": "_tree_lib.txt is a raw capture artifact used to derive B01 lib inventory." }
   ],
   "body": {
     "root": "docs",
-    "notes": [
-      "docs/specs currently contains only raw tree snapshots; formal specs will be added next using paired .md + .tok.json files."
-    ],
     "dirs": ["docs/specs"],
-    "files": [
+    "notes": [
+      "docs/specs is the authoritative spec store (paired .md + .tok.json).",
+      "_tree_*.txt files are raw capture artifacts retained as evidence/source inputs for the as-is inventories."
+    ],
+    "raw_capture_files": [
       "docs/specs/_tree_app.txt",
       "docs/specs/_tree_components.txt",
       "docs/specs/_tree_docs.txt",
@@ -46,6 +47,10 @@
         "file": "docs/specs/_tree_lib.txt",
         "derived_doc": "B01"
       }
-    ]
+    ],
+    "canonical_specs_dir": {
+      "path": "docs/specs",
+      "index_files": ["docs/specs/MANIFEST.md", "docs/specs/MANIFEST.tok.json"]
+    }
   }
 }

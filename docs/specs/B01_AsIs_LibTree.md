@@ -1,24 +1,22 @@
 docs/specs/B01_AsIs_LibTree.md
 
-/lib
+# B01 — As-Is Lib Tree (Snapshot)
+**Captured from:** `tree /f /a` (Windows)  
+**Root:** `lib/`
 
-# TOK Nomenclature
-B01_AsIs_LibTree.tok.json
-B01_AsIs_LibTree.md
-
-# Lib tree (relative)
-lib/
-  i18n/
-    config.ts
-
-  privacy/
-    consent.ts
-
-  seo/
-    (empty)
-
-  wp/
-    client.ts
-    mappers.ts
-    queries.ts
-    types.ts
+```txt
+Folder PATH listing
+Volume serial number is 40F3-1688
+C:\INVEST\DEV\INVEST-SITE\INVEST-SITE-2026\LIB
++---i18n
+|       config.ts
+|
++---privacy
+|       consent.ts
+|
++---seo
+\---wp
+        client.ts
+        mappers.ts
+        queries.ts
+        types.ts

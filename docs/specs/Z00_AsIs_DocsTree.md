@@ -1,15 +1,15 @@
 docs/specs/Z00_AsIs_DocsTree.md
 
-/docs
+# Z00 — As-Is Docs Tree (Snapshot)
+**Captured from:** `tree /f /a` (Windows)  
+**Root:** `docs/`
 
-# TOK Nomenclature
-Z00_AsIs_DocsTree.tok.json
-Z00_AsIs_DocsTree.md
-
-# Docs tree (relative)
-docs/
-  specs/
-    _tree_app.txt
-    _tree_components.txt
-    _tree_docs.txt
-    _tree_lib.txt
+```txt
+Folder PATH listing
+Volume serial number is 40F3-1688
+C:\INVEST\DEV\INVEST-SITE\INVEST-SITE-2026\DOCS
+\---specs
+        _tree_app.txt
+        _tree_components.txt
+        _tree_docs.txt
+        _tree_lib.txt

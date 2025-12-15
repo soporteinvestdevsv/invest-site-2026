@@ -78,7 +78,21 @@
         "impacted_specs": ["E01", "E02", "E03", "MANIFEST"],
         "impacted_code": [],
         "acceptance_notes": "MANIFEST reflects E01/E02/E03 and all files exist."
-      }
+      },
+      {
+        "id": "Z02-20251215-04",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Product/Engineering",
+        "area": "Governance",
+        "context": "Repo is adopting docs/specs as authoritative context store; need an explicit workflow to prevent drift and preserve decision rationale.",
+        "decision": "Enforce specs+decisions+manifest workflow: update specs for meaningful behavior changes, log architectural/constraint decisions in Z02, and update MANIFEST when specs change.",
+        "alternatives": ["Ad-hoc docs", "Code-first changes with later documentation"],
+        "consequences": ["Reduced drift between code and requirements", "Traceable decisions", "Reliable LLM context loading via MANIFEST"],
+        "impacted_specs": ["MANIFEST", "P00", "A*", "B*", "C*", "D*", "E*", "F*", "G*", "H*", "Z*"],
+        "impacted_code": [],
+        "acceptance_notes": "PRs that change behavior include spec updates; impactful decisions are logged; MANIFEST remains current."
+}   
     ]
   }
 }

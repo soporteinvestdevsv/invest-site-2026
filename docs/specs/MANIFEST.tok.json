@@ -1,102 +1,205 @@
 {
   "id": "MANIFEST",
   "fn": "docs/specs/MANIFEST.tok.json",
-  "t": "Specs Manifest",
-  "v": "0.1.0",
+  "t": "docs/specs — Manifest Index",
+  "v": "0.2.0",
   "st": "active",
-  "own": ["eng", "product", "ux"],
+  "own": ["product", "eng"],
   "body": {
-    "root": "docs/specs",
-    "rules": {
-      "pairing": { "md": true, "tok": true },
-      "id_format": "^[A-Z][0-9]{2}$ | ^(MANIFEST)$",
-      "ref_format": { "doc": "A01", "sec": "section_key" }
+    "how_to_use": {
+      "humans": ["Read P00_PRD.md first, then follow doc IDs in this manifest."],
+      "llm_tools": [
+        "Load MANIFEST.tok.json first.",
+        "Load P00_PRD.tok.json next.",
+        "Follow ref.doc pointers and load the minimum required additional docs."
+      ],
+      "pairing_rule": {
+        "human": "X##_Name.md",
+        "tok": "X##_Name.tok.json",
+        "must_match": ["id", "title_intent", "scope"]
+      }
     },
-    "human_read_order": [
-      { "doc": "MANIFEST" },
-      { "doc": "P00" },
-      { "domain": "A" },
-      { "domain": "B" },
-      { "domain": "C" },
-      { "domain": "D" },
-      { "domain": "E" },
-      { "domain": "F" },
-      { "domain": "G" },
-      { "domain": "H" },
-      { "domain": "Z" }
+    "governance": {
+      "decisions_log": {
+        "rule": "Any decision that changes constraints/behavior (architecture, stack, policy, security posture, IA) must be recorded and referenced from impacted specs.",
+        "files": ["Z02_Decisions_Log.md", "Z02_Decisions_Log.tok.json"]
+      },
+      "manifest_rule": "When adding a new spec, update BOTH MANIFEST.md and MANIFEST.tok.json.",
+      "specs_drive_code": "Update specs first or in the same PR as code changes."
+    },
+    "index": [
+      {
+        "domain": "master",
+        "items": [
+          {
+            "id": "MANIFEST",
+            "t": "Manifest Index",
+            "st": "active",
+            "files": { "md": "docs/specs/MANIFEST.md", "tok": "docs/specs/MANIFEST.tok.json" }
+          },
+          {
+            "id": "P00",
+            "t": "Product Requirements Document (PRD)",
+            "st": "draft",
+            "files": { "md": "docs/specs/P00_PRD.md", "tok": "docs/specs/P00_PRD.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "as_is_inventories",
+        "items": [
+          {
+            "id": "A00",
+            "t": "As-Is App Router Tree",
+            "st": "as_is",
+            "files": { "md": "docs/specs/A00_AsIs_AppTree.md", "tok": "docs/specs/A00_AsIs_AppTree.tok.json" }
+          },
+          {
+            "id": "B00",
+            "t": "As-Is Components Tree",
+            "st": "as_is",
+            "files": { "md": "docs/specs/B00_AsIs_ComponentsTree.md", "tok": "docs/specs/B00_AsIs_ComponentsTree.tok.json" }
+          },
+          {
+            "id": "B01",
+            "t": "As-Is Lib Tree",
+            "st": "as_is",
+            "files": { "md": "docs/specs/B01_AsIs_LibTree.md", "tok": "docs/specs/B01_AsIs_LibTree.tok.json" }
+          },
+          {
+            "id": "Z00",
+            "t": "As-Is Docs Tree",
+            "st": "as_is",
+            "files": { "md": "docs/specs/Z00_AsIs_DocsTree.md", "tok": "docs/specs/Z00_AsIs_DocsTree.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "ia_ux_ui",
+        "items": [
+          {
+            "id": "A01",
+            "t": "Information Architecture (IA) & Sitemap",
+            "st": "draft",
+            "files": { "md": "docs/specs/A01_IA_Sitemap.md", "tok": "docs/specs/A01_IA_Sitemap.tok.json" }
+          },
+          {
+            "id": "A02",
+            "t": "UI Layout Components (Header/Footer/Global Shell)",
+            "st": "draft",
+            "files": { "md": "docs/specs/A02_UI_LayoutComponents.md", "tok": "docs/specs/A02_UI_LayoutComponents.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "content_i18n",
+        "items": [
+          {
+            "id": "C00",
+            "t": "Content & i18n Overview",
+            "st": "draft",
+            "files": { "md": "docs/specs/C00_Content_i18n_Overview.md", "tok": "docs/specs/C00_Content_i18n_Overview.tok.json" }
+          },
+          {
+            "id": "C01",
+            "t": "i18n, Locales & Routing Strategy",
+            "st": "draft",
+            "files": { "md": "docs/specs/C01_i18n_Locales.md", "tok": "docs/specs/C01_i18n_Locales.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "integrations",
+        "items": [
+          {
+            "id": "D01",
+            "t": "Headless WordPress Integration",
+            "st": "draft",
+            "files": { "md": "docs/specs/D01_WordPress_Headless.md", "tok": "docs/specs/D01_WordPress_Headless.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "security_privacy_consent",
+        "items": [
+          {
+            "id": "E01",
+            "t": "Security Baseline (Public Site + APIs)",
+            "st": "draft",
+            "files": { "md": "docs/specs/E01_Security_Baseline.md", "tok": "docs/specs/E01_Security_Baseline.tok.json" }
+          },
+          {
+            "id": "E02",
+            "t": "Privacy & Data Handling",
+            "st": "draft",
+            "files": { "md": "docs/specs/E02_Privacy_DataHandling.md", "tok": "docs/specs/E02_Privacy_DataHandling.tok.json" }
+          },
+          {
+            "id": "E03",
+            "t": "Cookies & Consent (Banner + Script Gating)",
+            "st": "draft",
+            "files": { "md": "docs/specs/E03_Cookies_Consent.md", "tok": "docs/specs/E03_Cookies_Consent.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "env_devops",
+        "items": [
+          {
+            "id": "F01",
+            "t": "Environments & Configuration (Runtime + Secrets)",
+            "st": "draft",
+            "files": { "md": "docs/specs/F01_Environments_Config.md", "tok": "docs/specs/F01_Environments_Config.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "qa_acceptance",
+        "items": [
+          {
+            "id": "G01",
+            "t": "Acceptance Criteria & Definition of Done (DoD)",
+            "st": "draft",
+            "files": { "md": "docs/specs/G01_AcceptanceCriteria.md", "tok": "docs/specs/G01_AcceptanceCriteria.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "seo",
+        "items": [
+          {
+            "id": "H01",
+            "t": "SEO, Metadata, Sitemap & Robots",
+            "st": "draft",
+            "files": { "md": "docs/specs/H01_SEO_Metadata.md", "tok": "docs/specs/H01_SEO_Metadata.tok.json" }
+          }
+        ]
+      },
+      {
+        "domain": "glossary_decisions",
+        "items": [
+          {
+            "id": "Z01",
+            "t": "Glossary",
+            "st": "draft",
+            "files": { "md": "docs/specs/Z01_Glossary.md", "tok": "docs/specs/Z01_Glossary.tok.json" }
+          },
+          {
+            "id": "Z02",
+            "t": "Decisions Log",
+            "st": "active",
+            "files": { "md": "docs/specs/Z02_Decisions_Log.md", "tok": "docs/specs/Z02_Decisions_Log.tok.json" }
+          }
+        ]
+      }
     ],
-    "llm_load_order": ["MANIFEST", "P00"],
-    "docs": [
-      {
-        "id": "A00",
-        "t": "As-Is App Router Tree Inventory",
-        "md": "docs/specs/A00_AsIs_AppTree.md",
-        "tok": "docs/specs/A00_AsIs_AppTree.tok.json",
-        "st": "as_is",
-        "tags": ["routing", "ia", "inventory"],
-        "depends_on": ["C01", "D01"]
-      },
-      {
-        "id": "B00",
-        "t": "As-Is Components Tree Inventory",
-        "md": "docs/specs/B00_AsIs_ComponentsTree.md",
-        "tok": "docs/specs/B00_AsIs_ComponentsTree.tok.json",
-        "st": "as_is",
-        "tags": ["components", "layout", "privacy"],
-        "depends_on": ["A02", "E03", "B04"]
-      },
-      {
-        "id": "B01",
-        "t": "As-Is lib/ Tree Inventory",
-        "md": "docs/specs/B01_AsIs_LibTree.md",
-        "tok": "docs/specs/B01_AsIs_LibTree.tok.json",
-        "st": "as_is",
-        "tags": ["i18n", "privacy", "wp", "inventory"],
-        "depends_on": ["C01", "E03", "D01", "H01"]
-      },
-      {
-        "id": "Z00",
-        "t": "As-Is Docs Tree Inventory",
-        "md": "docs/specs/Z00_AsIs_DocsTree.md",
-        "tok": "docs/specs/Z00_AsIs_DocsTree.tok.json",
-        "st": "as_is",
-        "tags": ["docs", "inventory"],
-        "depends_on": ["Z01"]
-      },
-      {
-        "id": "Z10",
-        "t": "Summary: Specs Bootstrap",
-        "md": "docs/specs/Z10_Summary_SpecsBootstrap.md",
-        "tok": null,
-        "st": "draft",
-        "tags": ["summary"]
-      },
-      {
-        "id": "Z11",
-        "t": "Checklist: Spec Authoring",
-        "md": "docs/specs/Z11_Checklist_SpecAuthoring.md",
-        "tok": null,
-        "st": "draft",
-        "tags": ["process", "checklist"]
-      },
-
-      { "id": "P00", "t": "Technical PRD", "md": "docs/specs/P00_PRD.md", "tok": "docs/specs/P00_PRD.tok.json", "st": "planned", "tags": ["prd"], "depends_on": ["A01", "C01", "D01", "E03", "F01", "G01", "H01"] },
-      { "id": "C01", "t": "i18n Locales", "md": "docs/specs/C01_i18n_Locales.md", "tok": "docs/specs/C01_i18n_Locales.tok.json", "st": "planned", "tags": ["i18n"], "depends_on": ["A00"] },
-      { "id": "E03", "t": "Cookies & Consent", "md": "docs/specs/E03_Cookies_Consent.md", "tok": "docs/specs/E03_Cookies_Consent.tok.json", "st": "planned", "tags": ["privacy"], "depends_on": ["B00", "B01"] },
-      { "id": "D01", "t": "Headless WordPress", "md": "docs/specs/D01_WordPress_Headless.md", "tok": "docs/specs/D01_WordPress_Headless.tok.json", "st": "planned", "tags": ["cms", "wp"], "depends_on": ["A00", "B01"] },
-
-      { "id": "A01", "t": "IA Sitemap", "md": "docs/specs/A01_IA_Sitemap.md", "tok": "docs/specs/A01_IA_Sitemap.tok.json", "st": "planned", "tags": ["ia"] },
-      { "id": "A02", "t": "UI Layout Components", "md": "docs/specs/A02_UI_LayoutComponents.md", "tok": "docs/specs/A02_UI_LayoutComponents.tok.json", "st": "planned", "tags": ["ui"] },
-      { "id": "A03", "t": "UI Content Modules", "md": "docs/specs/A03_UI_ContentModules.md", "tok": "docs/specs/A03_UI_ContentModules.tok.json", "st": "planned", "tags": ["ui"] },
-
-      { "id": "B04", "t": "Component Conventions", "md": "docs/specs/B04_Component_Conventions.md", "tok": "docs/specs/B04_Component_Conventions.tok.json", "st": "planned", "tags": ["architecture"] },
-
-      { "id": "F01", "t": "Environments & Config", "md": "docs/specs/F01_Environments_Config.md", "tok": "docs/specs/F01_Environments_Config.tok.json", "st": "planned", "tags": ["devops"] },
-      { "id": "G01", "t": "Acceptance Criteria", "md": "docs/specs/G01_AcceptanceCriteria.md", "tok": "docs/specs/G01_AcceptanceCriteria.tok.json", "st": "planned", "tags": ["qa"] },
-      { "id": "H01", "t": "SEO & Metadata", "md": "docs/specs/H01_SEO_Metadata.md", "tok": "docs/specs/H01_SEO_Metadata.tok.json", "st": "planned", "tags": ["seo"] },
-
-      { "id": "Z01", "t": "Glossary", "md": "docs/specs/Z01_Glossary.md", "tok": "docs/specs/Z01_Glossary.tok.json", "st": "planned", "tags": ["governance"] },
-      { "id": "Z02", "t": "Decisions Log", "md": "docs/specs/Z02_Decisions_Log.md", "tok": "docs/specs/Z02_Decisions_Log.tok.json", "st": "planned", "tags": ["governance"] }
+    "llm_load_order": [
+      { "doc": "MANIFEST", "why": "Doc index + governance + file locations" },
+      { "doc": "P00", "why": "Master scope and requirements" },
+      { "doc": "A01", "why": "Route/page inventory and nav intent" },
+      { "doc": "C01", "why": "Locale routing behavior" },
+      { "doc": "D01", "why": "CMS integration for dynamic collections" },
+      { "doc": "E03", "why": "Consent gating for scripts/cookies" }
     ]
   }
 }

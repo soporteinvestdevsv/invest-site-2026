@@ -1,23 +1,20 @@
 docs/specs/B00_AsIs_ComponentsTree.md
 
-/components
+# B00 — As-Is Components Tree (Snapshot)
+**Captured from:** `tree /f /a` (Windows)  
+**Root:** `components/`
 
-# TOK Nomenclature
-B00_AsIs_ComponentsTree.tok.json
-B00_AsIs_ComponentsTree.md
-
-# Components tree (relative)
-components/
-  layout/
-    Footer.tsx
-    Header.tsx
-
-  privacy/
-    ConsentScripts.tsx
-    CookieBanner.tsx
-
-  sections/
-    (empty)
-
-  ui/
-    (reserved for shadcn/ui; currently empty)
+```txt
+Folder PATH listing
+Volume serial number is 40F3-1688
+C:\INVEST\DEV\INVEST-SITE\INVEST-SITE-2026\COMPONENTS
++---layout
+|       Footer.tsx
+|       Header.tsx
+|
++---privacy
+|       ConsentScripts.tsx
+|       CookieBanner.tsx
+|
++---sections
+\---ui
