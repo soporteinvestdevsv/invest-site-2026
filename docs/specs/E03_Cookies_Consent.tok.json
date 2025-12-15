@@ -4,16 +4,35 @@
   "t": "Cookies & Consent (Banner + Script Gating)",
   "v": "0.1.0",
   "st": "draft",
-  "own": ["eng", "product", "legal"],
+  "own": [
+    "eng",
+    "product",
+    "legal"
+  ],
   "src": {
     "md": "docs/specs/E03_Cookies_Consent.md"
   },
   "rel": [
-    { "doc": "B00", "why": "CookieBanner and ConsentScripts components exist under components/privacy." },
-    { "doc": "B01", "why": "Consent model and cookie persistence logic exist under lib/privacy/consent.ts." },
-    { "doc": "A00", "why": "Legal pages exist for cookies/privacy; routes are locale-scoped." },
-    { "doc": "A02", "why": "Global layout should provide access to legal and cookie settings links." },
-    { "doc": "H01", "why": "Analytics/SEO scripts may be subject to consent gating and consent-mode." }
+    {
+      "doc": "B00",
+      "why": "CookieBanner and ConsentScripts components exist under components/privacy."
+    },
+    {
+      "doc": "B01",
+      "why": "Consent model and cookie persistence logic exist under lib/privacy/consent.ts."
+    },
+    {
+      "doc": "A00",
+      "why": "Legal pages exist for cookies/privacy; routes are locale-scoped."
+    },
+    {
+      "doc": "A02",
+      "why": "Global layout should provide access to legal and cookie settings links."
+    },
+    {
+      "doc": "H01",
+      "why": "Analytics/SEO scripts may be subject to consent gating and consent-mode."
+    }
   ],
   "body": {
     "as_is": {
@@ -21,50 +40,84 @@
         "components/privacy/CookieBanner.tsx",
         "components/privacy/ConsentScripts.tsx"
       ],
-      "logic": ["lib/privacy/consent.ts"],
-      "legal_routes_ref": { "doc": "A00", "sec": "route_patterns" }
+      "logic": [
+        "lib/privacy/consent.ts"
+      ],
+      "legal_routes_ref": {
+        "doc": "A00",
+        "sec": "route_patterns"
+      }
     },
     "consent_model": {
-      "categories": "TBD (necessary + optional cats)",
-      "minimum_mode": "TBD (all_vs_essential_only | granular)",
+      "categories": "necessary + analytics [Decision Z02-20251215-08]",
+      "minimum_mode": "granular",
       "version": 1
     },
     "cookie_schema": {
-      "name": "TBD (CONSENT_COOKIE constant)",
+      "name": "INVEST_CONSENT",
       "path": "/",
-      "max_age_seconds": "TBD",
+      "max_age_seconds": 15552000,
       "same_site": "Lax",
       "secure_on_https": true,
       "value_format": "json_uri_encoded",
       "example": {
         "v": 1,
         "ts": "TBD_ISO",
-        "cats": { "analytics": true, "marketing": false }
+        "cats": {
+          "analytics": true,
+          "marketing": false
+        }
       }
     },
     "banner": {
       "show_when": "missing_or_invalid_cookie",
-      "actions": ["accept_all", "reject_non_essential", "manage_preferences (optional)"],
-      "policy_links": ["/{locale}/legal/cookies", "/{locale}/legal/privacy"]
+      "actions": [
+        "accept_all",
+        "reject_non_essential",
+        "manage_preferences (optional)"
+      ],
+      "policy_links": [
+        "/{locale}/legal/cookies",
+        "/{locale}/legal/privacy"
+      ]
     },
     "script_gating": {
       "non_essential_load": "after_consent",
       "idempotent_injection": true,
-      "script_registry": "TBD (list scripts by category)"
+      "script_registry": "GA4, GTM"
     },
     "req": [
-      { "id": "E03-FR-001", "txt": "Persist consent in a cookie with defined schema and expiration.", "pri": "P0" },
-      { "id": "E03-FR-002", "txt": "Display banner only when consent is missing/invalid.", "pri": "P0" },
-      { "id": "E03-FR-003", "txt": "Gate non-essential scripts based on consent.", "pri": "P0" },
-      { "id": "E03-FR-004", "txt": "Provide mechanism to update consent after initial choice.", "pri": "P1" },
-      { "id": "E03-NFR-001", "txt": "Respect SSR/CSR boundaries; banner is client-side.", "pri": "P0" },
-      { "id": "E03-NFR-002", "txt": "Consent UI meets accessibility baseline.", "pri": "P1" }
+      {
+        "id": "E03-FR-001",
+        "txt": "Persist consent in a cookie with defined schema and expiration.",
+        "pri": "P0"
+      },
+      {
+        "id": "E03-FR-002",
+        "txt": "Display banner only when consent is missing/invalid.",
+        "pri": "P0"
+      },
+      {
+        "id": "E03-FR-003",
+        "txt": "Gate non-essential scripts based on consent.",
+        "pri": "P0"
+      },
+      {
+        "id": "E03-FR-004",
+        "txt": "Provide mechanism to update consent after initial choice.",
+        "pri": "P1"
+      },
+      {
+        "id": "E03-NFR-001",
+        "txt": "Respect SSR/CSR boundaries; banner is client-side.",
+        "pri": "P0"
+      },
+      {
+        "id": "E03-NFR-002",
+        "txt": "Consent UI meets accessibility baseline.",
+        "pri": "P1"
+      }
     ],
-    "open": [
-      { "q": "Required consent categories and legal requirements?", "ref": { "doc": "P00", "sec": "open" } },
-      { "q": "Where does 'Manage cookies' live (footer link/modal/page)?", "ref": { "doc": "A02", "sec": "footer" } },
-      { "q": "Which scripts are non-essential (analytics/pixels/embeds)?", "ref": { "doc": "H01", "sec": "analytics" } },
-      { "q": "Need consent-mode support for Google tags (if used)?", "ref": { "doc": "H01", "sec": "analytics" } }
-    ]
+    "open": []
   }
 }

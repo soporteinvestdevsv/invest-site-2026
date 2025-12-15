@@ -24,24 +24,21 @@ docs/specs/E03_Cookies_Consent.md
 - Provide a clear path to review/update consent choices.
 
 ## 3) Consent categories (proposed; confirm requirements)
-**TBD (confirm legal/compliance needs).** Common model:
-- `necessary` (always enabled; cannot be disabled)
-- `analytics` (optional)
-- `marketing` (optional)
-- `preferences` (optional)
-
-Minimum viable model (if needed):
-- `all` vs `essential_only`
+**Decision Z02-20251215-08:**
+- `necessary`: Always enabled (technical cookies, session).
+- `analytics`: Optional (GA4/GTM).
+- `marketing`: Deferred to v2.
 
 ## 4) Consent cookie schema
 **Source of truth:** `lib/privacy/consent.ts` (implementation must match this spec)
 
 Define:
-- Cookie name: `TBD` (likely constant such as `CONSENT_COOKIE`)
-- Max-Age: `TBD` (e.g., 180 days)
+**Decision Z02-20251215-08:**
+- Cookie name: `INVEST_CONSENT`
+- Max-Age: `15552000` (180 days)
 - Path: `/`
-- SameSite: `Lax` (default unless requirements change)
-- Secure: enabled on HTTPS
+- SameSite: `Lax`
+- Secure: `true` (HTTPS only)
 
 Cookie value format (recommended):
 - JSON encoded + URI encoded, ex:
@@ -51,7 +48,7 @@ Cookie value format (recommended):
 ### Display rules
 - Show if no valid consent cookie exists.
 - Do not show if consent cookie exists and is valid.
-- Provide a way to reopen consent settings (footer link or settings modal) — **TBD**.
+- Provide a way to reopen consent settings: **Footer link "Manage Cookies" opens the banner in "preferences" mode.**
 
 ### Actions
 - Accept all (enables all optional categories)
@@ -66,9 +63,9 @@ Cookie value format (recommended):
 - Non-essential scripts must load only after consent allows them.
 - Necessary scripts may load unconditionally.
 - ConsentScripts should:
-  - read consent state
-  - conditionally inject scripts/tags
-  - avoid duplicate injection (idempotent)
+  - read `INVEST_CONSENT` state.
+  - conditionally inject GTM/GA4 (Decision Z02-20251215-09).
+  - avoid duplicate injection (idempotent).
 
 ## 7) Requirements
 - **E03-FR-001:** Persist consent choice in a cookie with defined schema and expiration.
@@ -80,10 +77,7 @@ Cookie value format (recommended):
 
 ## 8) Integration points
 - Header/Footer may include links: Cookies, Privacy, Terms (see `A02_UI_LayoutComponents.*`)
-- SEO/legal may require a consent mode impact on analytics tags (see `H01_SEO_Metadata.*`)
+- Google Analytics 4 via GTM must be gated (see `H01_SEO_Metadata.*`)
 
 ## 9) Open questions
-- Which consent categories are legally required for this site?
-- Where will “Manage cookies” live (footer link, modal, dedicated page)?
-- Which scripts are considered non-essential (analytics platform, pixels, embeds)?
-- Do we need consent-mode support for Google tags (if used)?
+- None.

@@ -28,15 +28,19 @@ Primary risks for this site:
 
 ## 4) API security baseline
 ### 4.1 /api/revalidate protection (required)
-- Must require a shared secret token (e.g., `REVALIDATE_SECRET`).
-- Reject requests missing/invalid secret with `401`.
-- Restrict allowed methods (e.g., `POST` only).
-- Validate payload shape (e.g., tag/path allowlist) — **TBD**.
-- Log revalidation attempts (success/failure) — **TBD**.
+- Must require a shared secret token (`REVALIDATE_SECRET`) passed via header `x-revalidate-token` or query param `secret`.
+- Reject requests missing/invalid secret with `401 Unauthorized`.
+- Restrict allowed methods (`POST` only).
+- Validate payload shape:
+  - Must provide `tag` or `path`.
+  - Optional: allowlist of tags if stricter control needed (default: allows any tag if secret is valid).
+- Log revalidation attempts (success/failure) to stdout/json-logs.
 
 ### 4.2 /api/contact protection (required)
 - Validate input (lengths, required fields, email format).
-- Rate limit by IP and/or use a CAPTCHA/honeypot — **TBD**.
+- **Decision Z02-20251215-05:**
+  - Rate limit by IP (e.g., 5 requests per hour).
+  - Honeypot field (hidden input `_honeypot` that must be empty).
 - Prevent header injection if sending email.
 - Never echo sensitive fields back in responses.
 - Return generic errors to avoid information leakage.
@@ -45,19 +49,18 @@ Primary risks for this site:
 - Treat CMS HTML as untrusted by default.
 - Prefer rendering structured content blocks rather than raw HTML.
 - If raw HTML is required:
-  - sanitize using an allowlist sanitizer (TBD library)
+  - sanitize using `isomorphic-dompurify` (or similar).
   - disable dangerous tags/attributes
   - never allow inline scripts from CMS content
 
 ## 6) Security headers (recommended baseline)
-**TBD exact values; implement via Next.js headers config or middleware.**
-Recommended:
-- `Content-Security-Policy` (CSP) — must account for consent-gated scripts
-- `Strict-Transport-Security` (HSTS) (prod only)
+**Decision:**
+- `Content-Security-Policy`: Start with `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.google-analytics.com https://*.googletagmanager.com;` (Permissive baseline for v1).
+- `Strict-Transport-Security` (HSTS): `max-age=63072000; includeSubDomains; preload`.
 - `X-Content-Type-Options: nosniff`
-- `Referrer-Policy`
-- `Permissions-Policy`
-- `X-Frame-Options` / `frame-ancestors` in CSP (clickjacking protection)
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy`: `camera=(), microphone=(), geolocation=()`
+- `X-Frame-Options: DENY`
 
 ## 7) Authentication/authorization (public site)
 - Site is public; no user authentication in v1 (per `P00_PRD.*`).
@@ -66,11 +69,10 @@ Recommended:
 ## 8) Dependency & supply chain
 - Pin dependencies via lockfile.
 - Run `npm audit` (or equivalent) in CI.
-- Implement Dependabot (or similar) — **TBD**.
+- Implement Dependabot.
 
 ## 9) Logging & monitoring (minimal)
 - Log API errors and suspicious activity (rate limit hits, invalid secrets).
-- Consider error reporting (Sentry/etc.) — **TBD**.
 
 ## 10) Requirements
 - **E01-FR-001:** Secure `/api/revalidate` with a server-only shared secret and strict method/payload validation.

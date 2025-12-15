@@ -4,74 +4,155 @@
   "t": "Security Baseline (Public Site + APIs)",
   "v": "0.1.0",
   "st": "draft",
-  "own": ["eng", "security", "devops"],
-  "src": { "md": "docs/specs/E01_Security_Baseline.md" },
+  "own": [
+    "eng",
+    "security",
+    "devops"
+  ],
+  "src": {
+    "md": "docs/specs/E01_Security_Baseline.md"
+  },
   "rel": [
-    { "doc": "A00", "why": "API routes and route surface area are defined in the as-is tree." },
-    { "doc": "D01", "why": "WP client fetch patterns and caching/revalidation are defined there." },
-    { "doc": "E03", "why": "Consent gating impacts CSP and script loading." },
-    { "doc": "F01", "why": "Environment/secrets rules and required variables." },
-    { "doc": "H01", "why": "SEO/analytics scripts may require CSP allowances and consent gating." }
+    {
+      "doc": "A00",
+      "why": "API routes and route surface area are defined in the as-is tree."
+    },
+    {
+      "doc": "D01",
+      "why": "WP client fetch patterns and caching/revalidation are defined there."
+    },
+    {
+      "doc": "E03",
+      "why": "Consent gating impacts CSP and script loading."
+    },
+    {
+      "doc": "F01",
+      "why": "Environment/secrets rules and required variables."
+    },
+    {
+      "doc": "H01",
+      "why": "SEO/analytics scripts may require CSP allowances and consent gating."
+    }
   ],
   "body": {
     "threats": [
-      { "k": "api_abuse", "targets": ["/api/contact", "/api/revalidate"] },
-      { "k": "secret_leakage", "vectors": ["NEXT_PUBLIC misuse", "logs", "client bundles"] },
-      { "k": "xss", "vectors": ["cms_html", "unsafe_rendering"] },
-      { "k": "revalidate_poison", "vectors": ["unauthorized_revalidate", "path/tag injection"] },
-      { "k": "supply_chain", "vectors": ["vuln_deps"] }
+      {
+        "k": "api_abuse",
+        "targets": [
+          "/api/contact",
+          "/api/revalidate"
+        ]
+      },
+      {
+        "k": "secret_leakage",
+        "vectors": [
+          "NEXT_PUBLIC misuse",
+          "logs",
+          "client bundles"
+        ]
+      },
+      {
+        "k": "xss",
+        "vectors": [
+          "cms_html",
+          "unsafe_rendering"
+        ]
+      },
+      {
+        "k": "revalidate_poison",
+        "vectors": [
+          "unauthorized_revalidate",
+          "path/tag injection"
+        ]
+      },
+      {
+        "k": "supply_chain",
+        "vectors": [
+          "vuln_deps"
+        ]
+      }
     ],
     "secrets": {
-      "rules_ref": { "doc": "F01", "sec": "rules" },
-      "server_only": ["WP_*", "REVALIDATE_SECRET", "SMTP_*", "EMAIL_PROVIDER_KEY"]
+      "rules_ref": {
+        "doc": "F01",
+        "sec": "rules"
+      },
+      "server_only": [
+        "WP_*",
+        "REVALIDATE_SECRET",
+        "SMTP_*",
+        "EMAIL_PROVIDER_KEY"
+      ]
     },
     "api": {
       "revalidate": {
         "path": "/api/revalidate",
-        "auth": { "mode": "shared_secret", "env": "REVALIDATE_SECRET" },
-        "methods": ["POST"],
-        "payload_validation": "TBD (allowlist path|tags)",
-        "logging": "TBD"
+        "auth": {
+          "mode": "shared_secret",
+          "env": "REVALIDATE_SECRET"
+        },
+        "methods": [
+          "POST"
+        ],
+        "payload_validation": "one_of [tag, path]",
+        "logging": "stdout_json"
       },
       "contact": {
         "path": "/api/contact",
-        "methods": ["POST"],
+        "methods": [
+          "POST"
+        ],
         "validation": "required_fields + formats + length_limits",
-        "abuse_controls": "TBD (rate_limit | captcha | honeypot)",
+        "abuse_controls": "rate_limit_ip + honeypot [Decision Z02-20251215-05]",
         "no_sensitive_echo": true
       }
     },
     "xss": {
       "cms_trust": "untrusted",
       "preferred_rendering": "structured_blocks",
-      "html_sanitization": "TBD (allowlist sanitizer)",
+      "html_sanitization": "isomorphic-dompurify",
       "no_inline_scripts": true
     },
     "headers": {
-      "csp": "TBD (consent-aware)",
+      "csp": "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.google-analytics.com https://*.googletagmanager.com",
       "hsts_prod": true,
       "x_content_type_options": "nosniff",
-      "referrer_policy": "TBD",
-      "permissions_policy": "TBD",
-      "frame_ancestors": "TBD"
+      "referrer_policy": "strict-origin-when-cross-origin",
+      "permissions_policy": "camera=(), microphone=(), geolocation=()",
+      "frame_ancestors": "'none'"
     },
     "deps": {
       "lockfile_required": true,
       "ci_audit": true,
-      "dependabot": "TBD"
+      "dependabot": true
     },
     "req": [
-      { "id": "E01-FR-001", "txt": "Secure /api/revalidate with shared secret + strict validation.", "pri": "P0" },
-      { "id": "E01-FR-002", "txt": "Validate and protect /api/contact against abuse.", "pri": "P0" },
-      { "id": "E01-FR-003", "txt": "Prevent secret leakage into client bundles/logs.", "pri": "P0" },
-      { "id": "E01-FR-004", "txt": "Apply baseline security headers for public site.", "pri": "P1" },
-      { "id": "E01-NFR-001", "txt": "CMS content rendering must not introduce XSS.", "pri": "P0" }
+      {
+        "id": "E01-FR-001",
+        "txt": "Secure /api/revalidate with shared secret + strict validation.",
+        "pri": "P0"
+      },
+      {
+        "id": "E01-FR-002",
+        "txt": "Validate and protect /api/contact against abuse.",
+        "pri": "P0"
+      },
+      {
+        "id": "E01-FR-003",
+        "txt": "Prevent secret leakage into client bundles/logs.",
+        "pri": "P0"
+      },
+      {
+        "id": "E01-FR-004",
+        "txt": "Apply baseline security headers for public site.",
+        "pri": "P1"
+      },
+      {
+        "id": "E01-NFR-001",
+        "txt": "CMS content rendering must not introduce XSS.",
+        "pri": "P0"
+      }
     ],
-    "open": [
-      { "q": "Revalidation allowlist model (path vs tags vs both)?", "ref": { "doc": "D01", "sec": "caching" } },
-      { "q": "Contact anti-abuse approach (captcha/provider vs rate limiting)?", "ref": { "doc": "P00", "sec": "req.functional" } },
-      { "q": "CSP allowances needed for analytics/embeds and consent gating?", "ref": { "doc": "E03", "sec": "script_gating" } },
-      { "q": "Hosting platform constraints for headers/rate limiting?", "ref": { "doc": "F01", "sec": "open" } }
-    ]
+    "open": []
   }
 }
