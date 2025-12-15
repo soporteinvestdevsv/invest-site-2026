@@ -109,8 +109,9 @@ export default function Header({ locale }: { locale: string }) {
           {/* Mobile Toggle */}
           <button
             onClick={toggleMenu}
-            className="lg:hidden p-2 text-white hover:bg-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="lg:hidden relative z-[110] p-2 text-white hover:bg-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-white/50"
             aria-label="Toggle navigation"
+            aria-expanded={isMobileOpen}
           >
             <div className="w-6 h-6 flex flex-col justify-center items-center relative">
               <span
