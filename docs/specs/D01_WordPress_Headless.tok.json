@@ -4,16 +4,34 @@
   "t": "Headless WordPress Integration",
   "v": "0.1.0",
   "st": "draft",
-  "own": ["eng", "product"],
+  "own": [
+    "eng",
+    "product"
+  ],
   "src": {
     "md": "docs/specs/D01_WordPress_Headless.md"
   },
   "rel": [
-    { "doc": "B01", "why": "WP client/queries/types/mappers exist under lib/wp/." },
-    { "doc": "A00", "why": "Dynamic collection routes define what WP must supply." },
-    { "doc": "C01", "why": "Locale strategy must align with WP localization and slug policy." },
-    { "doc": "E01", "why": "Revalidation endpoint must be secured." },
-    { "doc": "H01", "why": "SEO needs sitemap and metadata for dynamic content." }
+    {
+      "doc": "B01",
+      "why": "WP client/queries/types/mappers exist under lib/wp/."
+    },
+    {
+      "doc": "A00",
+      "why": "Dynamic collection routes define what WP must supply."
+    },
+    {
+      "doc": "C01",
+      "why": "Locale strategy must align with WP localization and slug policy."
+    },
+    {
+      "doc": "E01",
+      "why": "Revalidation endpoint must be secured."
+    },
+    {
+      "doc": "H01",
+      "why": "SEO needs sitemap and metadata for dynamic content."
+    }
   ],
   "body": {
     "as_is": {
@@ -23,28 +41,73 @@
         "lib/wp/types.ts",
         "lib/wp/mappers.ts"
       ],
-      "routes_ref": { "doc": "A00", "sec": "collections" },
+      "routes_ref": {
+        "doc": "A00",
+        "sec": "collections"
+      },
       "revalidate_endpoint": "app/api/revalidate/route.ts"
     },
     "layers": [
-      { "file": "lib/wp/client.ts", "role": "http_client_base" },
-      { "file": "lib/wp/queries.ts", "role": "query_functions" },
-      { "file": "lib/wp/types.ts", "role": "types_models" },
-      { "file": "lib/wp/mappers.ts", "role": "response_to_domain_mapping" }
+      {
+        "file": "lib/wp/client.ts",
+        "role": "http_client_base"
+      },
+      {
+        "file": "lib/wp/queries.ts",
+        "role": "query_functions"
+      },
+      {
+        "file": "lib/wp/types.ts",
+        "role": "types_models"
+      },
+      {
+        "file": "lib/wp/mappers.ts",
+        "role": "response_to_domain_mapping"
+      }
     ],
     "collections": [
-      { "name": "news", "index": "/{locale}/news", "detail": "/{locale}/news/{slug}", "cms_entity": "TBD", "slug_param": "slug" },
-      { "name": "events", "index": "/{locale}/events", "detail": "/{locale}/events/{slug}", "cms_entity": "TBD", "slug_param": "slug" },
-      { "name": "reports", "index": "/{locale}/insights/reports", "detail": "/{locale}/insights/reports/{slug}", "cms_entity": "TBD", "slug_param": "slug" },
-      { "name": "sectors", "index": "/{locale}/sectors", "detail": "/{locale}/sectors/{sectorSlug}", "cms_entity": "TBD", "slug_param": "sectorSlug" },
-      { "name": "success_stories", "index": "/{locale}/success-stories", "detail": "/{locale}/success-stories/{storySlug}", "cms_entity": "TBD", "slug_param": "storySlug" }
+      {
+        "name": "news",
+        "index": "/{locale}/news",
+        "detail": "/{locale}/news/{slug}",
+        "cms_entity": "cpt_news",
+        "slug_param": "slug"
+      },
+      {
+        "name": "events",
+        "index": "/{locale}/events",
+        "detail": "/{locale}/events/{slug}",
+        "cms_entity": "cpt_event",
+        "slug_param": "slug"
+      },
+      {
+        "name": "reports",
+        "index": "/{locale}/insights/reports",
+        "detail": "/{locale}/insights/reports/{slug}",
+        "cms_entity": "cpt_report",
+        "slug_param": "slug"
+      },
+      {
+        "name": "sectors",
+        "index": "/{locale}/sectors",
+        "detail": "/{locale}/sectors/{sectorSlug}",
+        "cms_entity": "cpt_sector",
+        "slug_param": "sectorSlug"
+      },
+      {
+        "name": "success_stories",
+        "index": "/{locale}/success-stories",
+        "detail": "/{locale}/success-stories/{storySlug}",
+        "cms_entity": "cpt_success_story",
+        "slug_param": "storySlug"
+      }
     ],
     "caching": {
-      "strategy": "TBD (isr_revalidate | tag_revalidate | ssr)",
+      "strategy": "ISR (3600s) + Tag Revalidation",
       "revalidate_api": {
         "enabled": true,
         "path": "/api/revalidate",
-        "auth": "TBD (shared_secret)"
+        "auth": "shared_secret (REVALIDATE_SECRET)"
       }
     },
     "errors": {
@@ -57,17 +120,32 @@
       "auth": "TBD (none | app_password | jwt | oauth)"
     },
     "req": [
-      { "id": "D01-FR-001", "txt": "Provide stable WP client/query/type/mapper layer under lib/wp/*.", "pri": "P0" },
-      { "id": "D01-FR-002", "txt": "Define CMS entity mapping for each dynamic collection route.", "pri": "P0" },
-      { "id": "D01-FR-003", "txt": "Implement caching and revalidation strategy for dynamic content.", "pri": "P1" },
-      { "id": "D01-FR-004", "txt": "Handle invalid slugs with notFound; fetch failures gracefully.", "pri": "P0" },
-      { "id": "D01-NFR-001", "txt": "Do not leak secrets; secure revalidation endpoint.", "pri": "P0" }
+      {
+        "id": "D01-FR-001",
+        "txt": "Provide stable WP client/query/type/mapper layer under lib/wp/*.",
+        "pri": "P0"
+      },
+      {
+        "id": "D01-FR-002",
+        "txt": "Define CMS entity mapping for each dynamic collection route.",
+        "pri": "P0"
+      },
+      {
+        "id": "D01-FR-003",
+        "txt": "Implement caching and revalidation strategy for dynamic content.",
+        "pri": "P1"
+      },
+      {
+        "id": "D01-FR-004",
+        "txt": "Handle invalid slugs with notFound; fetch failures gracefully.",
+        "pri": "P0"
+      },
+      {
+        "id": "D01-NFR-001",
+        "txt": "Do not leak secrets; secure revalidation endpoint.",
+        "pri": "P0"
+      }
     ],
-    "open": [
-      { "q": "WP localization approach (WPML/Polylang/multisite/custom)?", "ref": { "doc": "C01", "sec": "cms_localization" } },
-      { "q": "Exact post types/taxonomies and fields per collection?", "ref": { "doc": "D01", "sec": "collections" } },
-      { "q": "Caching strategy (ISR vs tags vs SSR)?", "ref": { "doc": "D01", "sec": "caching" } },
-      { "q": "Pagination behavior for lists?", "ref": { "doc": "D01", "sec": "collections" } }
-    ]
+    "open": []
   }
 }

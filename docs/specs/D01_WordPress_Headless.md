@@ -36,12 +36,14 @@ Revalidation endpoint exists:
 - `mappers.ts`: map WP responses → internal models used by UI components
 
 ## 4) Content collections mapping (route → CMS entity)
-**TBD (must be confirmed once WP model is finalized):**
-- **News** (`/news` + `/news/[slug]`): WP posts or custom post type
-- **Events** (`/events` + `/events/[slug]`): custom post type `event`
-- **Reports** (`/insights/reports` + `/insights/reports/[slug]`): custom post type `report`
-- **Sectors** (`/sectors` + `/sectors/[sectorSlug]`): taxonomy + sector pages or CPT `sector`
-- **Success stories** (`/success-stories` + `/success-stories/[storySlug]`): CPT `success_story`
+**Decision (Implementation):**
+- **News** (`/news`): Custom Post Type `news` (or `post` with category 'news').
+- **Events** (`/events`): Custom Post Type `event`.
+- **Reports** (`/insights/reports`): Custom Post Type `report`.
+- **Sectors** (`/sectors`): Custom Post Type `sector` (archive + single).
+- **Success stories** (`/success-stories`): Custom Post Type `success_story`.
+
+(Note: All CPTs must be enabled for REST API / GraphQL and localization).
 
 For each collection, define:
 - unique identifier policy (slug)
@@ -49,13 +51,10 @@ For each collection, define:
 - required fields (title, excerpt, content, hero image, publish date, etc.)
 
 ## 5) Caching + revalidation strategy
-**Decision needed** (align with Next.js App Router):
-- Option A: ISR via `revalidate` export per route segment
-- Option B: Tag-based revalidation (`revalidateTag`) triggered via `/api/revalidate`
-- Option C: Full SSR for all dynamic content
-
-Minimum viable approach:
-- Lists and details cached with periodic revalidate + manual revalidate hook for urgent updates.
+**Decision:**
+- **Standard**: ISR (Incremental Static Regeneration) with a default revalidate time (e.g., `3600` seconds).
+- **On-Demand**: Trigger `/api/revalidate` from WordPress (via webhook/plugin) on post save.
+- **Tag-based**: Use `next-validate-tags` where possible to clear specific caches by collection name (e.g., `revalidateTag('news')`).
 
 ## 6) Error handling & fallbacks
 - Invalid slug:
@@ -68,7 +67,8 @@ Minimum viable approach:
 ## 7) Security and configuration
 - WP base URL must be configured via environment variable (name TBD).
 - If `/api/revalidate` is used:
-  - require a secret token and validate requests (see `E01_Security_Baseline.*`).
+  - require `REVALIDATE_SECRET` (Bearer token or query param).
+  - validate requests (see `E01_Security_Baseline.*`).
 - Avoid exposing WP secrets client-side.
 
 ## 8) Requirements
@@ -78,8 +78,6 @@ Minimum viable approach:
 - **D01-FR-004:** Handle invalid slugs with not-found; handle fetch failures gracefully.
 - **D01-NFR-001:** Avoid leaking secrets and comply with security baseline.
 
-## 9) Open questions
-- What WP setup is used for localization (WPML/Polylang/multisite/custom)?
-- What are the exact post types/taxonomies and fields for each collection?
-- What is the chosen caching strategy (ISR vs tags vs SSR)?
-- What is the required pagination behavior for lists?
+**Decision Z02-20251215-06:**
+- Localization via Polylang/WPML (1:1 post mapping).
+- Caching via ISR + Tags.
