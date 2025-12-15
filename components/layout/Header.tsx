@@ -80,14 +80,36 @@ export default function Header({ locale }: { locale: string }) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
 
-        {/* Zone 1: Brand */}
-        <div className="flex-shrink-0 flex items-center">
+        {/* Mobile Toggle (Left on Mobile) */}
+        <div className="lg:hidden flex items-center">
+          <button
+            onClick={toggleMenu}
+            className="relative z-[110] p-2 text-white hover:bg-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-white/50"
+            aria-label="Toggle navigation"
+            aria-expanded={isMobileOpen}
+          >
+            <div className="w-6 h-6 flex flex-col justify-center items-center relative">
+              <span
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute ${isMobileOpen ? 'rotate-45 top-1/2 -translate-y-1/2' : 'top-1'}`}
+              />
+              <span
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute top-1/2 -translate-y-1/2 ${isMobileOpen ? 'opacity-0' : 'opacity-100'}`}
+              />
+              <span
+                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute ${isMobileOpen ? '-rotate-45 top-1/2 -translate-y-1/2' : 'bottom-1'}`}
+              />
+            </div>
+          </button>
+        </div>
+
+        {/* Brand (Right on Mobile, Left on Desktop) */}
+        <div className="flex-shrink-0 flex items-center lg:order-first">
           <Link href={`/${locale}`} className="text-xl font-bold font-sans tracking-tight hover:opacity-90 transition-opacity" onClick={closeMenu}>
             INVEST <span className="font-light text-white/80">EL SALVADOR</span>
           </Link>
         </div>
 
-        {/* Zone 2: Primary Nav (Desktop) */}
+        {/* Desktop Nav (Center/Right) */}
         <nav className="hidden lg:flex items-center gap-6">
           {navItems.map((item) => (
             <Link
@@ -100,41 +122,17 @@ export default function Header({ locale }: { locale: string }) {
           ))}
         </nav>
 
-        {/* Zone 3: Utilities */}
-        <div className="flex items-center gap-4">
-          {/* Locale Switcher Placeholder */}
-          {/* Locale Switcher */}
+        {/* Desktop Utilities (Locale) */}
+        <div className="hidden lg:flex items-center gap-4">
           <Link
             href={switchLocaleHref}
-            className="hidden sm:flex items-center justify-center text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded transition-colors"
+            className="flex items-center justify-center text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded transition-colors"
             aria-label={`Switch to ${targetLocale === 'en' ? 'English' : 'Spanish'}`}
           >
             {targetLabel}
           </Link>
-
-          {/* Mobile Toggle */}
-          <button
-            onClick={toggleMenu}
-            className="lg:hidden relative z-[110] p-2 text-white hover:bg-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-white/50"
-            aria-label="Toggle navigation"
-            aria-expanded={isMobileOpen}
-          >
-            <div className="w-6 h-6 flex flex-col justify-center items-center relative">
-              <span
-                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute ${isMobileOpen ? 'rotate-45 top-1/2 -translate-y-1/2' : 'top-1'
-                  }`}
-              />
-              <span
-                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute top-1/2 -translate-y-1/2 ${isMobileOpen ? 'opacity-0' : 'opacity-100'
-                  }`}
-              />
-              <span
-                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ease-in-out absolute ${isMobileOpen ? '-rotate-45 top-1/2 -translate-y-1/2' : 'bottom-1'
-                  }`}
-              />
-            </div>
-          </button>
         </div>
+
       </div>
 
       {/* Mobile Drawer (Overlay) */}
