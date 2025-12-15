@@ -149,3 +149,21 @@ For each decision:
 **Impacted code:** `components/privacy/ConsentScripts.tsx`
 **Acceptance notes:** GTM container loaded only after consent or with consent signals denied by default.
 
+### Z02-20251215-10 — UI Stack: PrimeReact + Tailwind + GSAP
+**Date:** 2025-12-15
+**Status:** Accepted
+**Owner:** Engineering/UX
+**Area:** Frontend
+**Context:** Need a robust component library for complex data displays and a high-performance animation engine for premium feel.
+**Decision:** 
+- **Component Lib:** PrimeReact (Unstyled/Tailwind presets).
+- **CSS:** Tailwind CSS.
+- **Animation:** GSAP (GreenSock) for complex animations; Tailwind for simple transitions.
+**Alternatives considered:** shadcn/ui (rejected), Framer Motion.
+**Consequences:** 
+- `B00` inventory must reflect PrimeReact.
+- Project setup must include `primereact`, `primeicons`, `gsap`.
+**Impacted specs:** B00, A02
+**Impacted code:** `components/*`, `tailwind.config.ts`, `lib/animations/*`
+**Acceptance notes:** Components render with Tailwind; GSAP installed and usable.
+

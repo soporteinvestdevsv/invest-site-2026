@@ -308,6 +308,32 @@
           "components/privacy/ConsentScripts.tsx"
         ],
         "acceptance_notes": "GTM container loaded only after consent or with consent signals denied by default."
+      },
+      {
+        "id": "Z02-20251215-10",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Engineering/UX",
+        "area": "Frontend",
+        "context": "Need robust components and premium animation capabilities.",
+        "decision": "PrimeReact (Components) + Tailwind (CSS) + GSAP (Animation).",
+        "alternatives": [
+          "shadcn/ui",
+          "Framer Motion"
+        ],
+        "consequences": [
+          "B00 inventory updated",
+          "Install primereact, various prime-related libs, gsap"
+        ],
+        "impacted_specs": [
+          "B00",
+          "A02"
+        ],
+        "impacted_code": [
+          "components/*",
+          "tailwind.config.ts"
+        ],
+        "acceptance_notes": "Stack installed and verified."
       }
     ]
   }

@@ -37,8 +37,9 @@ This directory is the authoritative specification store for this repository.
 ### 2) IA / UX / UI
 | ID | Title | Status | Files |
 |---|---|---|---|
-| A01 | Information Architecture (IA) & Sitemap | draft | `A01_IA_Sitemap.md`, `A01_IA_Sitemap.tok.json` |
+| A01 | Information Architecture (IA) & Sitemap | active | `A01_IA_Sitemap.md`, `A01_IA_Sitemap.tok.json` |
 | A02 | UI Layout Components (Header/Footer/Global Shell) | draft | `A02_UI_LayoutComponents.md`, `A02_UI_LayoutComponents.tok.json` |
+| A03 | UI Design Tokens & Theming | draft | `A03_UI_DesignTokens.md`, `A03_UI_DesignTokens.tok.json` |
 
 ### 3) Content & i18n
 | ID | Title | Status | Files |
