@@ -1,7 +1,7 @@
 {
     "id": "A04",
     "fn": "docs/specs/A04_UI_NavigationHeader.tok.json",
-    "t": "UI Navigation Header (Responsive & Sticky)",
+    "t": "UI Navigation Header (Global NavBar)",
     "v": "0.1.0",
     "st": "draft",
     "own": [
@@ -22,91 +22,111 @@
         },
         {
             "doc": "C01",
-            "why": "Defines locale routing rules."
+            "why": "Defines locale routing and switcher logic."
         },
         {
-            "doc": "G01",
-            "why": "Defines acceptance criteria standards."
+            "doc": "A02",
+            "why": "Header is a part of the global layout shell."
         }
     ],
     "body": {
         "layout": {
             "position": "fixed",
             "z_index": "50",
-            "height": "h-16 (default)",
-            "width": "full",
-            "background": "white (border-b neutral) or brand.primary",
+            "height": {
+                "desktop": "h-20",
+                "mobile": "h-16"
+            },
+            "width": "w-full",
+            "background": "brand.primary",
+            "text_contrast": "white (inverse)",
+            "content_max_width": "max-w-7xl",
             "breakpoints": {
-                "mobile": "< 1024px",
+                "mobile": "< 1024px (lg)",
                 "desktop": ">= 1024px"
             }
         },
         "behavior": {
             "sticky": true,
-            "scroll_lock": true,
+            "scroll_offset_required": true,
+            "mobile_scroll_lock": true,
             "close_on_route_change": true,
-            "close_on_esc": true
+            "close_on_esc": true,
+            "close_on_resize": true
         },
         "structure": {
             "zones": [
-                "Brand",
-                "Nav",
-                "Utility"
+                "Brand (Left)",
+                "Nav (Center/Right)",
+                "Utility (Right)"
             ],
+            "brand_link": "/{locale}/",
             "utility_items": [
                 "LocaleSwitcher",
-                "ContactCTA"
+                "MobileToggle (Hamburger)"
             ]
         },
-        "content_source": {
-            "doc": "A01",
-            "sections": [
-                "nav.primary",
-                "nav.header"
+        "i18n": {
+            "source": "C01",
+            "link_prefix": "/{locale}/",
+            "switcher_behavior": "preserve_path_or_redirect_root"
+        },
+        "content_model": {
+            "source": "A01",
+            "items": [
+                "why_es",
+                "why_invest",
+                "how_to_invest",
+                "sectors",
+                "stories",
+                "news_events",
+                "about",
+                "contact"
             ]
         },
-        "tokens": {
-            "bg": "white",
-            "text": "text.primary",
-            "accent": "brand.primary"
+        "tokens_used": {
+            "bg": "brand.primary",
+            "text": "white",
+            "spacing": "padding, gap",
+            "font": "font.sans"
         },
         "req": [
             {
-                "id": "A04-FR-001",
-                "txt": "Header is sticky at top of viewport.",
+                "id": "A04-AC-001",
+                "txt": "Header present on all pages, fixed at top.",
                 "pri": "P0"
             },
             {
-                "id": "A04-FR-002",
-                "txt": "Desktop view shows all primary items horizontally.",
+                "id": "A04-AC-002",
+                "txt": "Desktop view shows all A01 items horizontally.",
                 "pri": "P0"
             },
             {
-                "id": "A04-FR-003",
-                "txt": "Mobile view shows hamburger; toggles drawer.",
+                "id": "A04-AC-003",
+                "txt": "Mobile view toggles drawer and locks scroll.",
                 "pri": "P0"
             },
             {
-                "id": "A04-FR-004",
-                "txt": "Navigation via drawer locks body scroll.",
+                "id": "A04-AC-004",
+                "txt": "Menu closes on navigation/Esc/outside click.",
+                "pri": "P0"
+            },
+            {
+                "id": "A04-AC-005",
+                "txt": "Locale switcher works per C01.",
+                "pri": "P0"
+            },
+            {
+                "id": "A04-AC-006",
+                "txt": "Keyboard accessible and ARIA compliant.",
+                "pri": "P0"
+            },
+            {
+                "id": "A04-AC-007",
+                "txt": "No hardcoded hex values; uses A03 tokens.",
                 "pri": "P0"
             }
         ],
-        "open": [
-            {
-                "q": "Transparent-to-solid scroll effect vs always solid?",
-                "ref": {
-                    "doc": "A04",
-                    "sec": "layout"
-                }
-            },
-            {
-                "q": "Interaction pattern for 'Investors' grouping (click vs hover)?",
-                "ref": {
-                    "doc": "A01",
-                    "sec": "nav.primary"
-                }
-            }
-        ]
+        "open": []
     }
 }

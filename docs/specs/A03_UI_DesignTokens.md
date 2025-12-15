@@ -69,7 +69,8 @@
 - **Prohibited:** Specifying hex values directly in component styling (e.g., `className="bg-[#0b2a4a]"` is **FORBIDDEN**).
 
 ### 5.2 Consumption
-- Components must reference utility classes (e.g., `text-brand-primary`) or CSS variables (e.g., `var(--color-brand-primary)`).
+- Components must reference utility classes (e.g., `text-brand-primary`) or CSS variables.
+- **Example:** `A04` Header uses `brand.primary` background and `white` text.
 
 ### 5.3 Do's and Don'ts
 - **DO NOT** add gradients or shadows not defined here.

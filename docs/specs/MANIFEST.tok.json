@@ -136,7 +136,7 @@
           },
           {
             "id": "A04",
-            "t": "UI Navigation Header (Responsive & Sticky)",
+            "t": "UI Navigation Header (Global NavBar)",
             "st": "draft",
             "files": {
               "md": "docs/specs/A04_UI_NavigationHeader.md",

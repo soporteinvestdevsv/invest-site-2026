@@ -40,7 +40,7 @@ This directory is the authoritative specification store for this repository.
 | A01 | Information Architecture (IA) & Sitemap | active | `A01_IA_Sitemap.md`, `A01_IA_Sitemap.tok.json` |
 | A02 | UI Layout Components (Header/Footer/Global Shell) | draft | `A02_UI_LayoutComponents.md`, `A02_UI_LayoutComponents.tok.json` |
 | A03 | UI Design Tokens & Theming | draft | `A03_UI_DesignTokens.md`, `A03_UI_DesignTokens.tok.json` |
-| A04 | UI Navigation Header (Responsive & Sticky) | draft | `A04_UI_NavigationHeader.md`, `A04_UI_NavigationHeader.tok.json` |
+| A04 | UI Navigation Header (Global NavBar) | draft | `A04_UI_NavigationHeader.md`, `A04_UI_NavigationHeader.tok.json` |
 
 ### 3) Content & i18n
 | ID | Title | Status | Files |

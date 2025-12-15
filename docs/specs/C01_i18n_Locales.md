@@ -62,7 +62,7 @@ Dynamic collections exist with slug routes (see `A00_AsIs_AppTree.*`):
 - Locale switcher must preserve path where possible (same page in another locale).
 - If translation for a target locale does not exist:
   - Behavior: `show_warning` or `hide_option` (context-dependent).
-- Locale switcher placement: `Header` (see `components/layout/Header.tsx` and `A02_UI_LayoutComponents.*`)
+- Locale switcher placement: `Header` (implemented in `A04_UI_NavigationHeader`).
 
 ## 8) Requirements
 - **C01-FR-001:** Locale list and default locale must be defined in `lib/i18n/config.ts`.
