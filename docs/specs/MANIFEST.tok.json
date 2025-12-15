@@ -4,10 +4,15 @@
   "t": "docs/specs — Manifest Index",
   "v": "0.2.0",
   "st": "active",
-  "own": ["product", "eng"],
+  "own": [
+    "product",
+    "eng"
+  ],
   "body": {
     "how_to_use": {
-      "humans": ["Read P00_PRD.md first, then follow doc IDs in this manifest."],
+      "humans": [
+        "Read P00_PRD.md first, then follow doc IDs in this manifest."
+      ],
       "llm_tools": [
         "Load MANIFEST.tok.json first.",
         "Load P00_PRD.tok.json next.",
@@ -16,13 +21,20 @@
       "pairing_rule": {
         "human": "X##_Name.md",
         "tok": "X##_Name.tok.json",
-        "must_match": ["id", "title_intent", "scope"]
+        "must_match": [
+          "id",
+          "title_intent",
+          "scope"
+        ]
       }
     },
     "governance": {
       "decisions_log": {
         "rule": "Any decision that changes constraints/behavior (architecture, stack, policy, security posture, IA) must be recorded and referenced from impacted specs.",
-        "files": ["Z02_Decisions_Log.md", "Z02_Decisions_Log.tok.json"]
+        "files": [
+          "Z02_Decisions_Log.md",
+          "Z02_Decisions_Log.tok.json"
+        ]
       },
       "manifest_rule": "When adding a new spec, update BOTH MANIFEST.md and MANIFEST.tok.json.",
       "specs_drive_code": "Update specs first or in the same PR as code changes."
@@ -35,13 +47,19 @@
             "id": "MANIFEST",
             "t": "Manifest Index",
             "st": "active",
-            "files": { "md": "docs/specs/MANIFEST.md", "tok": "docs/specs/MANIFEST.tok.json" }
+            "files": {
+              "md": "docs/specs/MANIFEST.md",
+              "tok": "docs/specs/MANIFEST.tok.json"
+            }
           },
           {
             "id": "P00",
             "t": "Product Requirements Document (PRD)",
             "st": "draft",
-            "files": { "md": "docs/specs/P00_PRD.md", "tok": "docs/specs/P00_PRD.tok.json" }
+            "files": {
+              "md": "docs/specs/P00_PRD.md",
+              "tok": "docs/specs/P00_PRD.tok.json"
+            }
           }
         ]
       },
@@ -52,25 +70,37 @@
             "id": "A00",
             "t": "As-Is App Router Tree",
             "st": "as_is",
-            "files": { "md": "docs/specs/A00_AsIs_AppTree.md", "tok": "docs/specs/A00_AsIs_AppTree.tok.json" }
+            "files": {
+              "md": "docs/specs/A00_AsIs_AppTree.md",
+              "tok": "docs/specs/A00_AsIs_AppTree.tok.json"
+            }
           },
           {
             "id": "B00",
             "t": "As-Is Components Tree",
             "st": "as_is",
-            "files": { "md": "docs/specs/B00_AsIs_ComponentsTree.md", "tok": "docs/specs/B00_AsIs_ComponentsTree.tok.json" }
+            "files": {
+              "md": "docs/specs/B00_AsIs_ComponentsTree.md",
+              "tok": "docs/specs/B00_AsIs_ComponentsTree.tok.json"
+            }
           },
           {
             "id": "B01",
             "t": "As-Is Lib Tree",
             "st": "as_is",
-            "files": { "md": "docs/specs/B01_AsIs_LibTree.md", "tok": "docs/specs/B01_AsIs_LibTree.tok.json" }
+            "files": {
+              "md": "docs/specs/B01_AsIs_LibTree.md",
+              "tok": "docs/specs/B01_AsIs_LibTree.tok.json"
+            }
           },
           {
             "id": "Z00",
             "t": "As-Is Docs Tree",
             "st": "as_is",
-            "files": { "md": "docs/specs/Z00_AsIs_DocsTree.md", "tok": "docs/specs/Z00_AsIs_DocsTree.tok.json" }
+            "files": {
+              "md": "docs/specs/Z00_AsIs_DocsTree.md",
+              "tok": "docs/specs/Z00_AsIs_DocsTree.tok.json"
+            }
           }
         ]
       },
@@ -80,14 +110,20 @@
           {
             "id": "A01",
             "t": "Information Architecture (IA) & Sitemap",
-            "st": "draft",
-            "files": { "md": "docs/specs/A01_IA_Sitemap.md", "tok": "docs/specs/A01_IA_Sitemap.tok.json" }
+            "st": "active",
+            "files": {
+              "md": "docs/specs/A01_IA_Sitemap.md",
+              "tok": "docs/specs/A01_IA_Sitemap.tok.json"
+            }
           },
           {
             "id": "A02",
             "t": "UI Layout Components (Header/Footer/Global Shell)",
             "st": "draft",
-            "files": { "md": "docs/specs/A02_UI_LayoutComponents.md", "tok": "docs/specs/A02_UI_LayoutComponents.tok.json" }
+            "files": {
+              "md": "docs/specs/A02_UI_LayoutComponents.md",
+              "tok": "docs/specs/A02_UI_LayoutComponents.tok.json"
+            }
           }
         ]
       },
@@ -98,13 +134,19 @@
             "id": "C00",
             "t": "Content & i18n Overview",
             "st": "draft",
-            "files": { "md": "docs/specs/C00_Content_i18n_Overview.md", "tok": "docs/specs/C00_Content_i18n_Overview.tok.json" }
+            "files": {
+              "md": "docs/specs/C00_Content_i18n_Overview.md",
+              "tok": "docs/specs/C00_Content_i18n_Overview.tok.json"
+            }
           },
           {
             "id": "C01",
             "t": "i18n, Locales & Routing Strategy",
-            "st": "draft",
-            "files": { "md": "docs/specs/C01_i18n_Locales.md", "tok": "docs/specs/C01_i18n_Locales.tok.json" }
+            "st": "active",
+            "files": {
+              "md": "docs/specs/C01_i18n_Locales.md",
+              "tok": "docs/specs/C01_i18n_Locales.tok.json"
+            }
           }
         ]
       },
@@ -114,8 +156,11 @@
           {
             "id": "D01",
             "t": "Headless WordPress Integration",
-            "st": "draft",
-            "files": { "md": "docs/specs/D01_WordPress_Headless.md", "tok": "docs/specs/D01_WordPress_Headless.tok.json" }
+            "st": "active",
+            "files": {
+              "md": "docs/specs/D01_WordPress_Headless.md",
+              "tok": "docs/specs/D01_WordPress_Headless.tok.json"
+            }
           }
         ]
       },
@@ -125,20 +170,29 @@
           {
             "id": "E01",
             "t": "Security Baseline (Public Site + APIs)",
-            "st": "draft",
-            "files": { "md": "docs/specs/E01_Security_Baseline.md", "tok": "docs/specs/E01_Security_Baseline.tok.json" }
+            "st": "active",
+            "files": {
+              "md": "docs/specs/E01_Security_Baseline.md",
+              "tok": "docs/specs/E01_Security_Baseline.tok.json"
+            }
           },
           {
             "id": "E02",
             "t": "Privacy & Data Handling",
-            "st": "draft",
-            "files": { "md": "docs/specs/E02_Privacy_DataHandling.md", "tok": "docs/specs/E02_Privacy_DataHandling.tok.json" }
+            "st": "active",
+            "files": {
+              "md": "docs/specs/E02_Privacy_DataHandling.md",
+              "tok": "docs/specs/E02_Privacy_DataHandling.tok.json"
+            }
           },
           {
             "id": "E03",
             "t": "Cookies & Consent (Banner + Script Gating)",
-            "st": "draft",
-            "files": { "md": "docs/specs/E03_Cookies_Consent.md", "tok": "docs/specs/E03_Cookies_Consent.tok.json" }
+            "st": "active",
+            "files": {
+              "md": "docs/specs/E03_Cookies_Consent.md",
+              "tok": "docs/specs/E03_Cookies_Consent.tok.json"
+            }
           }
         ]
       },
@@ -149,7 +203,10 @@
             "id": "F01",
             "t": "Environments & Configuration (Runtime + Secrets)",
             "st": "draft",
-            "files": { "md": "docs/specs/F01_Environments_Config.md", "tok": "docs/specs/F01_Environments_Config.tok.json" }
+            "files": {
+              "md": "docs/specs/F01_Environments_Config.md",
+              "tok": "docs/specs/F01_Environments_Config.tok.json"
+            }
           }
         ]
       },
@@ -160,7 +217,10 @@
             "id": "G01",
             "t": "Acceptance Criteria & Definition of Done (DoD)",
             "st": "draft",
-            "files": { "md": "docs/specs/G01_AcceptanceCriteria.md", "tok": "docs/specs/G01_AcceptanceCriteria.tok.json" }
+            "files": {
+              "md": "docs/specs/G01_AcceptanceCriteria.md",
+              "tok": "docs/specs/G01_AcceptanceCriteria.tok.json"
+            }
           }
         ]
       },
@@ -170,8 +230,11 @@
           {
             "id": "H01",
             "t": "SEO, Metadata, Sitemap & Robots",
-            "st": "draft",
-            "files": { "md": "docs/specs/H01_SEO_Metadata.md", "tok": "docs/specs/H01_SEO_Metadata.tok.json" }
+            "st": "active",
+            "files": {
+              "md": "docs/specs/H01_SEO_Metadata.md",
+              "tok": "docs/specs/H01_SEO_Metadata.tok.json"
+            }
           }
         ]
       },
@@ -182,24 +245,48 @@
             "id": "Z01",
             "t": "Glossary",
             "st": "draft",
-            "files": { "md": "docs/specs/Z01_Glossary.md", "tok": "docs/specs/Z01_Glossary.tok.json" }
+            "files": {
+              "md": "docs/specs/Z01_Glossary.md",
+              "tok": "docs/specs/Z01_Glossary.tok.json"
+            }
           },
           {
             "id": "Z02",
             "t": "Decisions Log",
             "st": "active",
-            "files": { "md": "docs/specs/Z02_Decisions_Log.md", "tok": "docs/specs/Z02_Decisions_Log.tok.json" }
+            "files": {
+              "md": "docs/specs/Z02_Decisions_Log.md",
+              "tok": "docs/specs/Z02_Decisions_Log.tok.json"
+            }
           }
         ]
       }
     ],
     "llm_load_order": [
-      { "doc": "MANIFEST", "why": "Doc index + governance + file locations" },
-      { "doc": "P00", "why": "Master scope and requirements" },
-      { "doc": "A01", "why": "Route/page inventory and nav intent" },
-      { "doc": "C01", "why": "Locale routing behavior" },
-      { "doc": "D01", "why": "CMS integration for dynamic collections" },
-      { "doc": "E03", "why": "Consent gating for scripts/cookies" }
+      {
+        "doc": "MANIFEST",
+        "why": "Doc index + governance + file locations"
+      },
+      {
+        "doc": "P00",
+        "why": "Master scope and requirements"
+      },
+      {
+        "doc": "A01",
+        "why": "Route/page inventory and nav intent"
+      },
+      {
+        "doc": "C01",
+        "why": "Locale routing behavior"
+      },
+      {
+        "doc": "D01",
+        "why": "CMS integration for dynamic collections"
+      },
+      {
+        "doc": "E03",
+        "why": "Consent gating for scripts/cookies"
+      }
     ]
   }
 }
