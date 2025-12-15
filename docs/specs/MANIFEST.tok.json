@@ -124,6 +124,15 @@
               "md": "docs/specs/A02_UI_LayoutComponents.md",
               "tok": "docs/specs/A02_UI_LayoutComponents.tok.json"
             }
+          },
+          {
+            "id": "A03",
+            "t": "UI Design Tokens & Theming",
+            "st": "draft",
+            "files": {
+              "md": "docs/specs/A03_UI_DesignTokens.md",
+              "tok": "docs/specs/A03_UI_DesignTokens.tok.json"
+            }
           }
         ]
       },

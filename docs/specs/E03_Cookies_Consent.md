@@ -22,6 +22,7 @@ docs/specs/E03_Cookies_Consent.md
 - Persist consent choice across visits.
 - Gate non-essential scripts based on consent state.
 - Provide a clear path to review/update consent choices.
+- **Banner/buttons must follow `A03` tokens; no hardcoded colors.**
 
 ## 3) Consent categories (proposed; confirm requirements)
 **Decision Z02-20251215-08:**

@@ -1,0 +1,104 @@
+{
+    "id": "A03",
+    "fn": "docs/specs/A03_UI_DesignTokens.tok.json",
+    "t": "UI Design Tokens & Theming",
+    "v": "0.1.0",
+    "st": "draft",
+    "own": [
+        "ux",
+        "eng"
+    ],
+    "src": {
+        "md": "docs/specs/A03_UI_DesignTokens.md"
+    },
+    "rel": [
+        {
+            "doc": "A02",
+            "why": "Layout components must consume these tokens."
+        },
+        {
+            "doc": "B00",
+            "why": "Component libraries must align with these tokens."
+        },
+        {
+            "doc": "E03",
+            "why": "Consent banners must respect the palette."
+        }
+    ],
+    "body": {
+        "principles": {
+            "source_of_truth": "central_config_required",
+            "no_hardcoding": true,
+            "strict_palette": true
+        },
+        "tokens": {
+            "colors": {
+                "brand": {
+                    "primary": "#0b2a4a"
+                },
+                "text": {
+                    "primary": "#111827",
+                    "muted": "#6b7280"
+                },
+                "border": {
+                    "neutral": "#e5e7eb"
+                },
+                "warning": {
+                    "bg": "#fff7ed",
+                    "border": "#fed7aa",
+                    "title": "#9a3412",
+                    "text": "#7c2d12"
+                },
+                "code": {
+                    "bg": "#0b1220",
+                    "text": "#e5e7eb"
+                }
+            },
+            "typography": {
+                "font_family": {
+                    "sans": "Geist",
+                    "mono": "Geist Mono"
+                },
+                "scale": [
+                    "xs",
+                    "sm",
+                    "base",
+                    "lg",
+                    "xl",
+                    "2xl",
+                    "3xl"
+                ],
+                "weights": [
+                    400,
+                    500,
+                    600,
+                    700
+                ]
+            }
+        },
+        "constraints": {
+            "buttons": "brand.primary",
+            "code_blocks": "code.bg + code.text + font.mono",
+            "gradients": "forbidden",
+            "new_colors": "forbidden"
+        },
+        "req": [
+            {
+                "id": "A03-FR-001",
+                "txt": "Implement token definitions in one central config file.",
+                "pri": "P0"
+            },
+            {
+                "id": "A03-FR-002",
+                "txt": "Configure next/font for Geist and Geist Mono.",
+                "pri": "P0"
+            },
+            {
+                "id": "A03-NFR-001",
+                "txt": "No hardcoded hex values in component code.",
+                "pri": "P0"
+            }
+        ],
+        "open": []
+    }
+}

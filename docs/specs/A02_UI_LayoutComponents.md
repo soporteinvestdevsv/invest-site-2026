@@ -21,6 +21,7 @@ docs/specs/A02_UI_LayoutComponents.md
 - Implement primary navigation aligned to the IA sitemap.
 - Provide footer navigation including Legal links and cookie management entry point.
 - Integrate i18n (locale switcher) and consent (banner + script gating) in correct layout positions.
+- **Uses `A03` tokens for colors/typography; do not hardcode colors.**
 
 ## 3) Global layout structure (expected)
 ### 3.1 Root vs locale layout
