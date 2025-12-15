@@ -74,7 +74,7 @@ export default function Header({ locale }: { locale: string }) {
         <div className="flex items-center gap-4">
           {/* Locale Switcher Placeholder */}
           <div className="hidden sm:flex text-xs font-mono bg-white/10 px-2 py-1 rounded">
-            {locale.toUpperCase()}
+            {(locale || 'en').toUpperCase()}
           </div>
 
           {/* Mobile Toggle */}
