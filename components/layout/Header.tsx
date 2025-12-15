@@ -6,16 +6,28 @@ import { usePathname } from 'next/navigation';
 import 'primeicons/primeicons.css';
 
 // TODO: Move to C01/A01 shared config or translation files
-const NAV_ITEMS = [
-  { key: 'why_es', label: 'Why El Salvador', href: '/why-el-salvador' },
-  { key: 'why_invest', label: 'Why Invest', href: '/why-invest' },
-  { key: 'how_to_invest', label: 'How to Invest', href: '/how-to-invest' },
-  { key: 'sectors', label: 'Sectors', href: '/sectors' },
-  { key: 'stories', label: 'Success Stories', href: '/success-stories' },
-  { key: 'news', label: 'News & Events', href: '/news' },
-  { key: 'about', label: 'About', href: '/about' },
-  { key: 'contact', label: 'Contact', href: '/contact' },
-];
+const NAV_ITEMS = {
+  en: [
+    { key: 'why_es', label: 'Why El Salvador', href: '/why-el-salvador' },
+    { key: 'why_invest', label: 'Why Invest', href: '/why-invest' },
+    { key: 'how_to_invest', label: 'How to Invest', href: '/how-to-invest' },
+    { key: 'sectors', label: 'Sectors', href: '/sectors' },
+    { key: 'stories', label: 'Success Stories', href: '/success-stories' },
+    { key: 'news', label: 'News & Events', href: '/news' },
+    { key: 'about', label: 'About', href: '/about' },
+    { key: 'contact', label: 'Contact', href: '/contact' },
+  ],
+  es: [
+    { key: 'why_es', label: 'Por qué El Salvador', href: '/why-el-salvador' },
+    { key: 'why_invest', label: 'Por qué Invertir', href: '/why-invest' },
+    { key: 'how_to_invest', label: 'Cómo Invertir', href: '/how-to-invest' },
+    { key: 'sectors', label: 'Sectores', href: '/sectors' },
+    { key: 'stories', label: 'Casos de Éxito', href: '/success-stories' },
+    { key: 'news', label: 'Noticias y Eventos', href: '/news' },
+    { key: 'about', label: 'Nosotros', href: '/about' },
+    { key: 'contact', label: 'Contacto', href: '/contact' },
+  ],
+};
 
 export default function Header({ locale }: { locale: string }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -52,6 +64,9 @@ export default function Header({ locale }: { locale: string }) {
   // Prefix href with locale
   const getHref = (path: string) => `/${currentLocale}${path}`;
 
+  // Get items for current locale or fallback to 'en'
+  const navItems = NAV_ITEMS[currentLocale as keyof typeof NAV_ITEMS] || NAV_ITEMS.en;
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300
@@ -68,7 +83,7 @@ export default function Header({ locale }: { locale: string }) {
 
         {/* Zone 2: Primary Nav (Desktop) */}
         <nav className="hidden lg:flex items-center gap-6">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.key}
               href={getHref(item.href)}
@@ -108,7 +123,7 @@ export default function Header({ locale }: { locale: string }) {
           ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <nav className="flex flex-col gap-6 mt-8">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.key}
               href={getHref(item.href)}
