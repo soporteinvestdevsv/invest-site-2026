@@ -4,18 +4,50 @@
   "t": "Decisions Log",
   "v": "0.1.0",
   "st": "active",
-  "own": ["product", "eng"],
-  "src": { "md": "docs/specs/Z02_Decisions_Log.md" },
+  "own": [
+    "product",
+    "eng"
+  ],
+  "src": {
+    "md": "docs/specs/Z02_Decisions_Log.md"
+  },
   "rel": [
-    { "doc": "MANIFEST", "why": "MANIFEST references the governance rules and current doc statuses." },
-    { "doc": "P00", "why": "PRD scope changes must be logged." },
-    { "doc": "C01", "why": "Locale URL policy decisions must be logged." },
-    { "doc": "D01", "why": "CMS mapping/caching decisions must be logged." },
-    { "doc": "E01", "why": "Security posture decisions must be logged." },
-    { "doc": "E02", "why": "Data handling/retention decisions must be logged." },
-    { "doc": "E03", "why": "Consent model decisions must be logged." },
-    { "doc": "H01", "why": "SEO/robots/sitemap decisions must be logged." },
-    { "doc": "G01", "why": "Release gate decisions must be logged." }
+    {
+      "doc": "MANIFEST",
+      "why": "MANIFEST references the governance rules and current doc statuses."
+    },
+    {
+      "doc": "P00",
+      "why": "PRD scope changes must be logged."
+    },
+    {
+      "doc": "C01",
+      "why": "Locale URL policy decisions must be logged."
+    },
+    {
+      "doc": "D01",
+      "why": "CMS mapping/caching decisions must be logged."
+    },
+    {
+      "doc": "E01",
+      "why": "Security posture decisions must be logged."
+    },
+    {
+      "doc": "E02",
+      "why": "Data handling/retention decisions must be logged."
+    },
+    {
+      "doc": "E03",
+      "why": "Consent model decisions must be logged."
+    },
+    {
+      "doc": "H01",
+      "why": "SEO/robots/sitemap decisions must be logged."
+    },
+    {
+      "doc": "G01",
+      "why": "Release gate decisions must be logged."
+    }
   ],
   "body": {
     "rules": {
@@ -34,7 +66,12 @@
         "impacted_code",
         "acceptance_notes"
       ],
-      "status_enum": ["Proposed", "Accepted", "Rejected", "Superseded"]
+      "status_enum": [
+        "Proposed",
+        "Accepted",
+        "Rejected",
+        "Superseded"
+      ]
     },
     "entries": [
       {
@@ -45,25 +82,55 @@
         "area": "Governance",
         "context": "Need modular specs usable by humans and as LLM context.",
         "decision": "Adopt docs/specs as authoritative paired .md + .tok.json spec store with MANIFEST-driven navigation.",
-        "alternatives": ["README-only docs", "single large PRD file"],
-        "consequences": ["Specs drive code changes", "Pairs must remain in sync", "MANIFEST must be maintained"],
-        "impacted_specs": ["MANIFEST", "P00", "A*", "B*", "C*", "D*", "E*", "F*", "G*", "H*", "Z*"],
+        "alternatives": [
+          "README-only docs",
+          "single large PRD file"
+        ],
+        "consequences": [
+          "Specs drive code changes",
+          "Pairs must remain in sync",
+          "MANIFEST must be maintained"
+        ],
+        "impacted_specs": [
+          "MANIFEST",
+          "P00",
+          "A*",
+          "B*",
+          "C*",
+          "D*",
+          "E*",
+          "F*",
+          "G*",
+          "H*",
+          "Z*"
+        ],
         "impacted_code": [],
         "acceptance_notes": "Specs exist, are paired, and referenced consistently from MANIFEST."
       },
       {
         "id": "Z02-20251215-02",
         "date": "2025-12-15",
-        "status": "Proposed",
+        "status": "Accepted",
         "owner": "Product/Engineering",
         "area": "i18n/SEO",
         "context": "Scaffold uses [locale] segment for all pages; need canonical URL policy.",
-        "decision": "Use /{locale}/... as canonical for all pages initially; revisit default-locale no-prefix option later.",
-        "alternatives": ["Default locale without prefix"],
-        "consequences": ["Simpler routing+sitemap", "Potential marketing preference trade-off"],
-        "impacted_specs": ["C01", "H01", "A01"],
-        "impacted_code": ["app/(routes)/[locale]/*"],
-        "acceptance_notes": "Update to Accepted/Rejected once locale strategy is confirmed."
+        "decision": "Use /{locale}/... as canonical for all pages. Default locale will use the prefix strategy (no special \"no-prefix\" handling for now to simplify routing).",
+        "alternatives": [
+          "Default locale without prefix"
+        ],
+        "consequences": [
+          "Simpler routing and sitemap generation",
+          "Uniform URL structure"
+        ],
+        "impacted_specs": [
+          "C01",
+          "H01",
+          "A01"
+        ],
+        "impacted_code": [
+          "app/(routes)/[locale]/*"
+        ],
+        "acceptance_notes": "Specs C01 and H01 reference this decision."
       },
       {
         "id": "Z02-20251215-03",
@@ -73,9 +140,18 @@
         "area": "Privacy",
         "context": "Consent system exists; needed stable numbering without churn.",
         "decision": "Keep cookies/consent as E03 and define E01 security baseline + E02 privacy/data handling to complete E-domain.",
-        "alternatives": ["Renumber E03 to E00/E01"],
-        "consequences": ["Logical E-domain ordering without breaking refs"],
-        "impacted_specs": ["E01", "E02", "E03", "MANIFEST"],
+        "alternatives": [
+          "Renumber E03 to E00/E01"
+        ],
+        "consequences": [
+          "Logical E-domain ordering without breaking refs"
+        ],
+        "impacted_specs": [
+          "E01",
+          "E02",
+          "E03",
+          "MANIFEST"
+        ],
         "impacted_code": [],
         "acceptance_notes": "MANIFEST reflects E01/E02/E03 and all files exist."
       },
@@ -87,12 +163,152 @@
         "area": "Governance",
         "context": "Repo is adopting docs/specs as authoritative context store; need an explicit workflow to prevent drift and preserve decision rationale.",
         "decision": "Enforce specs+decisions+manifest workflow: update specs for meaningful behavior changes, log architectural/constraint decisions in Z02, and update MANIFEST when specs change.",
-        "alternatives": ["Ad-hoc docs", "Code-first changes with later documentation"],
-        "consequences": ["Reduced drift between code and requirements", "Traceable decisions", "Reliable LLM context loading via MANIFEST"],
-        "impacted_specs": ["MANIFEST", "P00", "A*", "B*", "C*", "D*", "E*", "F*", "G*", "H*", "Z*"],
+        "alternatives": [
+          "Ad-hoc docs",
+          "Code-first changes with later documentation"
+        ],
+        "consequences": [
+          "Reduced drift between code and requirements",
+          "Traceable decisions",
+          "Reliable LLM context loading via MANIFEST"
+        ],
+        "impacted_specs": [
+          "MANIFEST",
+          "P00",
+          "A*",
+          "B*",
+          "C*",
+          "D*",
+          "E*",
+          "F*",
+          "G*",
+          "H*",
+          "Z*"
+        ],
         "impacted_code": [],
         "acceptance_notes": "PRs that change behavior include spec updates; impactful decisions are logged; MANIFEST remains current."
-        }   
+      },
+      {
+        "id": "Z02-20251215-05",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Security/Engineering",
+        "area": "Security",
+        "context": "Public contact form needs protection against spam/abuse without excessive UX friction.",
+        "decision": "Use Rate Limiting (IP-based) and Honeypot fields initially. Defer CAPTCHA to v2 if abuse scales.",
+        "alternatives": [
+          "Cloudflare Turnstile",
+          "reCAPTCHA"
+        ],
+        "consequences": [
+          "E01 must define rate limits",
+          "API route must implement logic"
+        ],
+        "impacted_specs": [
+          "E01",
+          "P00"
+        ],
+        "impacted_code": [
+          "app/api/contact/route.ts"
+        ],
+        "acceptance_notes": "Rate limit functionality testable; honeypot field present."
+      },
+      {
+        "id": "Z02-20251215-06",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Engineering",
+        "area": "CMS/i18n",
+        "context": "Content must be localized. Need a strategy for mapping WP posts to Next.js locales.",
+        "decision": "1:1 mapping of posts to locales (using Polylang or WPML model). Slugs are localized (e.g., /en/news/hello vs /es/noticias/hola).",
+        "alternatives": [
+          "Single site with field-level translation",
+          "Multisite"
+        ],
+        "consequences": [
+          "D01 must specify separate query per locale or filtered query"
+        ],
+        "impacted_specs": [
+          "D01",
+          "C01"
+        ],
+        "impacted_code": [
+          "lib/wp/queries.ts"
+        ],
+        "acceptance_notes": "Fetching content for \"es\" returns ES content only."
+      },
+      {
+        "id": "Z02-20251215-07",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Security",
+        "area": "Security",
+        "context": "api/revalidate is public; needs protection.",
+        "decision": "Use a Shared Secret (REVALIDATE_SECRET) passed via header or query param.",
+        "alternatives": [
+          "Signed JWT",
+          "IP whitelist"
+        ],
+        "consequences": [
+          "Simple to implement",
+          "Must rotate secret if leaked"
+        ],
+        "impacted_specs": [
+          "E01",
+          "D01"
+        ],
+        "impacted_code": [
+          "app/api/revalidate/route.ts"
+        ],
+        "acceptance_notes": "Request without secret returns 401."
+      },
+      {
+        "id": "Z02-20251215-08",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Privacy/Legal",
+        "area": "Privacy",
+        "context": "Need a defined schema for the consent cookie to power the gating logic.",
+        "decision": "Cookie Name: INVEST_CONSENT. Categories: necessary (always on), analytics (opt-in). Max-Age: 180 days.",
+        "alternatives": [
+          "Granular marketing/preferences categories"
+        ],
+        "consequences": [
+          "E03 spec can be final",
+          "Code implements this name"
+        ],
+        "impacted_specs": [
+          "E03"
+        ],
+        "impacted_code": [
+          "lib/privacy/consent.ts"
+        ],
+        "acceptance_notes": "Cookie is set with correct JSON shape."
+      },
+      {
+        "id": "Z02-20251215-09",
+        "date": "2025-12-15",
+        "status": "Accepted",
+        "owner": "Product",
+        "area": "SEO/Data",
+        "context": "Need to measure site traffic while respecting privacy.",
+        "decision": "Use Google Analytics 4 (GA4) via Google Tag Manager or direct tag, utilizing Consent Mode v2.",
+        "alternatives": [
+          "Plausible (paid)",
+          "no analytics"
+        ],
+        "consequences": [
+          "H01/E03 must account for Google tags and consent mode integration"
+        ],
+        "impacted_specs": [
+          "H01",
+          "E03"
+        ],
+        "impacted_code": [
+          "components/privacy/ConsentScripts.tsx"
+        ],
+        "acceptance_notes": "GTM container loaded only after consent or with consent signals denied by default."
+      }
     ]
   }
 }
