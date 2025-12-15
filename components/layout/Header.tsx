@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import 'primeicons/primeicons.css';
 
 // TODO: Move to C01/A01 shared config or translation files
@@ -40,8 +41,16 @@ export default function Header({ locale }: { locale: string }) {
   const toggleMenu = () => setIsMobileOpen(!isMobileOpen);
   const closeMenu = () => setIsMobileOpen(false);
 
+  const pathname = usePathname();
+  const currentLocale = locale || 'en';
+  const targetLocale = currentLocale === 'en' ? 'es' : 'en';
+  const targetLabel = targetLocale === 'en' ? 'EN' : 'ES'; // Target label to switch TO
+
+  // Replace the locale segment in the current path
+  const switchLocaleHref = pathname?.replace(`/${currentLocale}`, `/${targetLocale}`) || `/${targetLocale}`;
+
   // Prefix href with locale
-  const getHref = (path: string) => `/${locale}${path}`;
+  const getHref = (path: string) => `/${currentLocale}${path}`;
 
   return (
     <header
@@ -73,9 +82,14 @@ export default function Header({ locale }: { locale: string }) {
         {/* Zone 3: Utilities */}
         <div className="flex items-center gap-4">
           {/* Locale Switcher Placeholder */}
-          <div className="hidden sm:flex text-xs font-mono bg-white/10 px-2 py-1 rounded">
-            {(locale || 'en').toUpperCase()}
-          </div>
+          {/* Locale Switcher */}
+          <Link
+            href={switchLocaleHref}
+            className="hidden sm:flex items-center justify-center text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded transition-colors"
+            aria-label={`Switch to ${targetLocale === 'en' ? 'English' : 'Spanish'}`}
+          >
+            {targetLabel}
+          </Link>
 
           {/* Mobile Toggle */}
           <button
@@ -105,7 +119,16 @@ export default function Header({ locale }: { locale: string }) {
             </Link>
           ))}
           <div className="mt-8 pt-8 border-t border-white/20">
-            <span className="text-sm text-white/60 font-mono">Locale: {locale.toUpperCase()}</span>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-white/60 font-mono">Locale: {currentLocale.toUpperCase()}</span>
+              <Link
+                href={switchLocaleHref}
+                onClick={closeMenu}
+                className="text-sm font-bold bg-white/10 px-3 py-1 rounded hover:bg-white/20"
+              >
+                Switch to {targetLabel}
+              </Link>
+            </div>
           </div>
         </nav>
       </div>
