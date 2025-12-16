@@ -1,104 +1,112 @@
 {
-    "id": "A03",
-    "fn": "docs/specs/A03_UI_DesignTokens.tok.json",
-    "t": "UI Design Tokens & Theming",
-    "v": "0.1.0",
-    "st": "draft",
-    "own": [
-        "ux",
-        "eng"
-    ],
-    "src": {
-        "md": "docs/specs/A03_UI_DesignTokens.md"
+  "id": "A03",
+  "fn": "docs/specs/A03_UI_DesignTokens.tok.json",
+  "t": "UI Design Tokens & Theming",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["ux", "eng"],
+  "src": { "md": "docs/specs/A03_UI_DesignTokens.md" },
+  "rel": [
+    { "doc": "A02", "why": "Global shell must consume tokens (layout spacing + shell colors)." },
+    { "doc": "A04", "why": "Header uses semantic token classes like bg-brand-primary." },
+    { "doc": "E03", "why": "Consent UI and notices may require warning tokens." }
+  ],
+  "body": {
+    "rules": {
+      "no_inline_hex_in_components": true,
+      "consume_via_semantic_tokens": true,
+      "no_new_accent_colors": true,
+      "no_gradients": true,
+      "single_source_of_truth": true
     },
-    "rel": [
-        {
-            "doc": "A02",
-            "why": "Layout components must consume these tokens."
+    "tokens": {
+      "colors": {
+        "brand": {
+          "primary": "#0b2a4a",
+          "primaryText": "#ffffff"
         },
-        {
-            "doc": "B00",
-            "why": "Component libraries must align with these tokens."
+        "text": {
+          "primary": "#111827",
+          "muted": "#6b7280",
+          "inverse": "#ffffff"
         },
-        {
-            "doc": "E03",
-            "why": "Consent banners must respect the palette."
+        "surface": {
+          "page": "#ffffff",
+          "card": "#ffffff",
+          "inverse": "#0b2a4a"
+        },
+        "border": {
+          "neutral": "#e5e7eb"
+        },
+        "warning": {
+          "bg": "#fff7ed",
+          "border": "#fed7aa",
+          "title": "#9a3412",
+          "text": "#7c2d12"
+        },
+        "code": {
+          "bg": "#0b1220",
+          "text": "#e5e7eb"
         }
-    ],
-    "body": {
-        "principles": {
-            "source_of_truth": "central_config_required",
-            "no_hardcoding": true,
-            "strict_palette": true
+      },
+      "typography": {
+        "font": {
+          "sans": "GeistSans",
+          "mono": "GeistMono"
         },
-        "tokens": {
-            "colors": {
-                "brand": {
-                    "primary": "#0b2a4a"
-                },
-                "text": {
-                    "primary": "#111827",
-                    "muted": "#6b7280"
-                },
-                "border": {
-                    "neutral": "#e5e7eb"
-                },
-                "warning": {
-                    "bg": "#fff7ed",
-                    "border": "#fed7aa",
-                    "title": "#9a3412",
-                    "text": "#7c2d12"
-                },
-                "code": {
-                    "bg": "#0b1220",
-                    "text": "#e5e7eb"
-                }
-            },
-            "typography": {
-                "font_family": {
-                    "sans": "Geist",
-                    "mono": "Geist Mono"
-                },
-                "scale": [
-                    "xs",
-                    "sm",
-                    "base",
-                    "lg",
-                    "xl",
-                    "2xl",
-                    "3xl"
-                ],
-                "weights": [
-                    400,
-                    500,
-                    600,
-                    700
-                ]
-            }
+        "scale_px": {
+          "xs": 12,
+          "sm": 14,
+          "base": 16,
+          "lg": 18,
+          "xl": 20,
+          "2xl": 24,
+          "3xl": 30
         },
-        "constraints": {
-            "buttons": "brand.primary",
-            "code_blocks": "code.bg + code.text + font.mono",
-            "gradients": "forbidden",
-            "new_colors": "forbidden"
+        "weight": {
+          "regular": 400,
+          "medium": 500,
+          "semibold": 600,
+          "bold": 700
         },
-        "req": [
-            {
-                "id": "A03-FR-001",
-                "txt": "Implement token definitions in one central config file.",
-                "pri": "P0"
-            },
-            {
-                "id": "A03-FR-002",
-                "txt": "Configure next/font for Geist and Geist Mono.",
-                "pri": "P0"
-            },
-            {
-                "id": "A03-NFR-001",
-                "txt": "No hardcoded hex values in component code.",
-                "pri": "P0"
-            }
-        ],
-        "open": []
-    }
+        "leading": {
+          "tight": 1.2,
+          "normal": 1.5,
+          "relaxed": 1.7
+        }
+      },
+      "layout": {
+        "maxWidth": "7xl",
+        "headerHeight": { "mobile_px": 64, "desktop_px": 80 },
+        "pagePaddingX": { "mobile_px": 16, "desktop_px": 24 }
+      },
+      "radius_px": {
+        "sm": 8,
+        "md": 12,
+        "lg": 16,
+        "xl": 20,
+        "2xl": 24
+      },
+      "shadows": {
+        "sm": "consistent_subtle",
+        "md": "consistent_card",
+        "lg": "consistent_modal"
+      }
+    },
+    "tailwind_semantic_names": {
+      "expect": [
+        "bg-brand-primary",
+        "text-text-primary",
+        "text-text-muted",
+        "border-border-neutral",
+        "bg-warning-bg",
+        "border-warning-border"
+      ],
+      "note": "Exact Tailwind mapping is an implementation detail, but semantic names must map back to these tokens."
+    },
+    "acceptance": [
+      { "id": "A03-AC-001", "txt": "No raw hex values in components outside the token source.", "pri": "P0" },
+      { "id": "A03-AC-004", "txt": "Theme refresh possible by editing only the centralized token source.", "pri": "P0" }
+    ]
+  }
 }

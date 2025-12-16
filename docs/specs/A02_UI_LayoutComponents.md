@@ -1,98 +1,92 @@
 docs/specs/A02_UI_LayoutComponents.md
 
 # A02 — UI Layout Components (Header, Footer, Global Shell)
-**Status:** Draft (v0.1)  
-**Scope:** Global layout structure, header/footer responsibilities, navigation wiring, and integration of consent/i18n hooks.
+**Status:** draft (v0.2)  
+**Scope:** Global layout structure for locale routes, including header/footer mounting, content offset rules for fixed header, and consent component placement.
 
-## 1) Current scaffold facts (as-is)
-- Layout components exist:
-  - `components/layout/Header.tsx`
-  - `components/layout/Footer.tsx`  (see `B00_AsIs_ComponentsTree.*`)
-- App Router layouts exist:
-  - `app/layout.tsx`
-  - `app/(routes)/[locale]/layout.tsx` (see `A00_AsIs_AppTree.*`)
-- Privacy components exist:
-  - `components/privacy/CookieBanner.tsx`
-  - `components/privacy/ConsentScripts.tsx` (see `B00`)
-- Locale routing exists: `app/(routes)/[locale]/...` (see `A00`) and i18n config in `lib/i18n/config.ts` (see `B01`).
+## 1) Current scaffold facts (as-is, confirmed)
+### 1.1 Layout entry points
+- Root layout: `app/layout.tsx`
+  - Loads Geist fonts + `app/globals.css`
+  - Sets `<html lang="en">` (currently hard-coded)
+  - Renders `<body>{children}</body>`
+- Locale layout: `app/(routes)/[locale]/layout.tsx`
+  - Mounts global shell elements for locale routes (see 3.2)
+
+### 1.2 Global shell components
+- Header: `components/layout/Header.tsx` (client) — **governed by `A04_UI_NavigationHeader.*`**
+- Footer: `components/layout/Footer.tsx`
+- Consent UI: `components/privacy/CookieBanner.tsx`
+- Consent scripts: `components/privacy/ConsentScripts.tsx`
+
+### 1.3 Locale parameter usage (as-is)
+- Locale layout reads `params.locale` and passes `locale` into:
+  - `<Header locale={locale} />`
+  - `<CookieBanner locale={locale} />`
+  - `<Footer locale={locale} />`
 
 ## 2) Objectives
 - Provide a consistent global shell across all locale pages.
-- Implement primary navigation aligned to the IA sitemap.
-- Provide footer navigation including Legal links and cookie management entry point.
-- Integrate i18n (locale switcher) and consent (banner + script gating) in correct layout positions.
-- **Uses `A03` tokens for colors/typography; do not hardcode colors.**
+- Ensure fixed header does not overlap page content (offset reserved in layout).
+- Mount consent components once, consistently, across all locale routes.
+- Keep header behavior/specification anchored in `A04`, not duplicated here.
 
-## 3) Global layout structure (expected)
-### 3.1 Root vs locale layout
-**TBD (confirm actual implementation by inspecting files):**
-- Root layout (`app/layout.tsx`): document shell (html/body), global styles, base providers.
-- Locale layout (`app/(routes)/[locale]/layout.tsx`): page shell (Header/Footer), locale context, and shared UI.
+> Note: Some UI elements may currently include direct Tailwind classes; token formalization is governed by `A03_UI_DesignTokens.*` and can be tightened later without changing this mounting contract.
 
-### 3.2 Slot model
-For all locale routes:
-- **Header**: Primary nav + switcher (Implementation: `A04_UI_NavigationHeader`)
-- **Main**: page content
-- **Footer**: legal links + manage cookies + contact/branding elements (TBD)
-- **Consent**:
-  - `ConsentScripts` should be included once at a consistent global level (where it can manage scripts).
-  - `CookieBanner` should be present globally but only render when needed.
+## 3) Global layout structure (as-is)
+### 3.1 Root vs locale layout responsibilities (as-is)
+- `app/layout.tsx`:
+  - Global document shell (`html/body`)
+  - Global CSS import
+  - Font variables
+  - **Current behavior:** html `lang` is `"en"` (not locale-driven yet)
+- `app/(routes)/[locale]/layout.tsx`:
+  - Locale-scoped page shell (Header/Footer + consent + main slot)
+  - Provides top padding offset for fixed header (see 3.2)
 
-## 4) Header requirements
-### 4.1 Navigation items (source of truth)
-Use `A01_IA_Sitemap.*` for the canonical nav list. Default recommendation:
-- Why El Salvador
-- Why Invest
-- How to Invest
-- Sectors
-- Success Stories
-- Insights
-- News & Events (or split)
-- Media
-- About
-- Contact
+### 3.2 Locale layout slot order (as implemented)
+Order is fixed and must remain stable unless a decision is logged in `Z02`:
 
-### 4.2 Locale switcher
-- Present in header.
-- Preserves current path when switching locale (when possible).
-- Behavior for missing translation: **TBD** (see `C01_i18n_Locales.*`)
+1) `Header(locale)`
+2) `ConsentScripts()`
+3) `CookieBanner(locale)`
+4) `main` content slot
+5) `Footer(locale)`
 
-### 4.3 Responsive behavior
-- Mobile: collapsible menu (drawer/dropdown).
-- Desktop: horizontal nav.
-- Must be keyboard accessible with correct focus handling.
+### 3.3 Main container + fixed-header offset (as implemented)
+`main` is responsible for preventing overlap with the fixed header:
+- `main` uses: `min-h-screen pt-16 lg:pt-20 flex flex-col`
+- Offset matches Header height:
+  - Mobile: `pt-16` (64px)
+  - Desktop (lg+): `pt-20` (80px)
 
-### 4.4 Accessibility baseline
-- Include a “Skip to content” link.
-- Provide semantic landmarks: `header`, `main`, `footer`.
-- Ensure tab order and focus states are consistent.
+**Contract:** If Header height changes, `main` padding must be updated in the same change/PR.
 
-## 5) Footer requirements
-### 5.1 Legal links (must exist)
-- Accessibility: `/{locale}/legal/accessibility`
-- Cookies: `/{locale}/legal/cookies`
-- Privacy: `/{locale}/legal/privacy`
-- Terms: `/{locale}/legal/terms`
+## 4) Header mounting contract (as-is)
+- Header is mounted once per locale route tree in `app/(routes)/[locale]/layout.tsx`.
+- Header details (nav items, responsiveness, locale switching, scroll lock) are specified in `A04_UI_NavigationHeader.*`.
+- A02 does not redefine Header UI/interaction requirements beyond the mounting + offset contract.
 
-### 5.2 Manage cookies entry point
-- Provide “Manage cookies” link or button.
-- Behavior: **TBD** (open banner/settings modal or navigate to a settings page) (see `E03_Cookies_Consent.*`)
+## 5) Footer mounting contract (as-is)
+- Footer is mounted once per locale route tree after `main`.
+- Footer receives `locale` prop.
+- Legal link destinations exist under `/{locale}/legal/*` per the route tree (see `A00_AsIs_AppTree.*`).
 
-## 6) Consent integration requirements
-- Include `ConsentScripts` at the global level (once) so it can manage non-essential script loading.
-- Include `CookieBanner` globally (once) and ensure it is client-only (if required).
-- Ensure banner does not cause layout shift beyond acceptable thresholds (NFR).
+## 6) Consent integration contract (as-is)
+- `ConsentScripts` is mounted once at the layout level (between Header and CookieBanner).
+- `CookieBanner` is mounted once at the layout level and receives `locale`.
+- Consent UI must not introduce meaningful layout shift in the primary content area (tracked under NFRs).
 
-## 7) Requirements
-- **A02-FR-001:** All locale pages use consistent Header/Footer shell.
-- **A02-FR-002:** Header nav implements `A01` sitemap links and is responsive + accessible.
-- **A02-FR-003:** Footer includes legal links and “Manage cookies” entry point.
-- **A02-FR-004:** Locale switcher exists and aligns with `C01` routing/translation rules.
-- **A02-FR-005:** ConsentScripts + CookieBanner are integrated once and behave consistently.
-- **A02-NFR-001:** Layout must be accessible (landmarks, skip link, focus management).
-- **A02-NFR-002:** Avoid significant CLS from banner/nav (targets TBD).
+## 7) Requirements (as-is vs planned)
+### 7.1 Implemented (as-is)
+- **A02-FR-001:** All locale pages use the same global shell ordering (Header → ConsentScripts → CookieBanner → Main → Footer).
+- **A02-FR-002:** Main content is offset to avoid fixed-header overlap (`pt-16 lg:pt-20`).
+- **A02-FR-003:** ConsentScripts + CookieBanner are integrated once and behave consistently across locale routes.
 
-## 8) Open questions
-- Exact split of responsibilities between `app/layout.tsx` and `app/(routes)/[locale]/layout.tsx`
-- Final header nav ordering and whether “News & Events” is merged or split
-- “Manage cookies” UX pattern (modal vs page vs reopen banner)
+### 7.2 Planned (not implemented here; tracked)
+- **A02-FR-P1:** Locale-driven `<html lang>` (likely requires moving locale awareness upward or introducing a controlled mechanism). (Ref: `C01_i18n_Locales.*`)
+- **A02-NFR-P1:** Skip-to-content link pattern (if adopted) to be implemented in Header and governed by accessibility spec (planned `A05_UI_Accessibility.*`).
+
+## 8) Open questions (updated)
+- Should `<html lang>` be locale-driven (and if so, what is the chosen Next.js pattern)? (`C01`)
+- “Manage cookies” UX pattern (banner reopen vs settings modal vs dedicated page). (`E03`)

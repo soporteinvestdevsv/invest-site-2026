@@ -1,124 +1,144 @@
-# A04 — UI Navigation Header (Global NavBar)
-**Status:** Draft (v0.1)  
-**Scope:** Specification for the global site navigation, including desktop/mobile layouts, sticky behavior, i18n switcher, and accessibility requirements.
+docs/specs/A04_UI_NavigationHeader.md
 
-## 1) Component Responsibilities
-- **Global Presence:** Rendered on all public pages (via `A02` layout shell) unless explicitly excluded (e.g., landing pages with specific exclusion rules).
-- **Navigation:** Provides access to primary site sections defined in `A01`.
-- **Locale Control:** Hosts the global language switcher (source: `C01`).
-- **Exclusions:** None defined for v1 (present on all pages).
-- **Out of Scope:** Does not fetch dynamic content (news tickers, etc.); strictly navigation.
+# A04 — UI Navigation Header (Global NavBar) — As-Is Specification
+**Status:** as_is (implemented)  
+**Version:** 0.1.0  
+**Source of truth (code):** `components/layout/Header.tsx`  
+**Related specs:** `A02_UI_LayoutComponents.*`, `C01_i18n_Locales.*`, `A01_IA_Sitemap.*`, `G01_AcceptanceCriteria.*`
 
-## 2) Layout & Styling (Token-Driven)
-**Reference:** `A03_UI_DesignTokens` for all colors and spacing.
+## 1) Component Responsibilities (as-is)
+- **Global presence:** Intended to render on all public pages via the locale layout shell (A02). No exclusions implemented.
+- **Navigation:** Provides access to primary site sections via a hard-coded in-component nav model (`NAV_ITEMS`).
+- **Locale control:** Provides a locale switch action (EN ↔ ES) that rewrites the locale segment in the current pathname.
+- **Out of scope (as-is):** No dynamic content in header (no CMS-driven menus, no search, no ticker).
 
-### 2.1 Container
-- **Type:** Fixed/Sticky header.
-- **Height:**
-    -   Desktop: `h-20` (80px)
-    -   Mobile: `h-16` (64px)
-- **Width:** Full viewport width (`w-full`).
-- **Inner Content:** `max-w-7xl` (centered), `px-4` or `px-6` (responsive).
-- **Background:** `brand.primary` (Solid) - **Decision:** Solid background for v1 to ensure consistent contrast.
-- **Border:** Optional `border-b` (`border.neutral` opacity adjustment if needed, or omit if solid brand color used).
+## 2) Component API + State (as-is)
+**Component:** `Header({ locale }: { locale: string })` (client component)
 
-### 2.2 Zones (Row Layout)
-1.  **Brand (Left):**
-    -   Logo SVG (Invest in El Salvador).
-    -   Link to `/{locale}/` (root of current locale).
-    -   Height/Size: Optimized to fit within container height.
-2.  **Primary Nav (Center/Right - Desktop only):**
-    -   Horizontal list of links.
-    -   Gap: `gap-6` or `gap-8`.
-    -   Alignment: Right-aligned (next to utilities) or Center-aligned.
-3.  **Utilities (Right):**
-    -   Locale Switcher (Icon + Code).
-    -   Mobile Toggle (Visible `< lg`).
-    -   Call-to-Action (optional, e.g., "Contact").
+### 2.1 Inputs
+- `locale` string: expected current locale from route segment. Fallback is applied.
 
-### 2.3 Styling Constraints
-- **Colors:**
-    -   Background: `brand.primary`
-    -   Text: `white` (inverse of brand primary) or `text.primary` if background is white.
-    -   *Decision:* If `brand.primary` bg, text must be `white` (or dedicated inverse token).
-- **Active State:** Underline or font-weight change (`font.medium`).
-- **Hover:** Opacity shift or underline animation.
+### 2.2 Internal state
+- `isMobileOpen` (boolean): mobile menu open/closed.
+- `isScrolled` (boolean): set when `window.scrollY > 10` but **currently not used** in rendering.
 
-## 3) Sticky Behavior
-- **Position:** `fixed` (top: 0, left: 0, right: 0).
-- **Z-Index:** `z-50` (Must be highest UI layer except modals/drawers).
-- **Offset:** Layout (`A02`) must apply `padding-top` to `main` equal to header height to prevent content overlap.
-- **Stability:** No layout shift on hydration (height must be reserved or fixed).
+### 2.3 Derived values
+- `currentLocale = locale || "en"`
+- `targetLocale = currentLocale === "en" ? "es" : "en"`
+- `targetLabel = targetLocale === "en" ? "EN" : "ES"` (label shows the locale to switch TO)
+- `navItems = NAV_ITEMS[currentLocale] || NAV_ITEMS.en`
+- `getHref(path) = "/{currentLocale}" + path`
+- `switchLocaleHref = pathname.replace("/{currentLocale}", "/{targetLocale}")` or `"/{targetLocale}"` fallback
 
-## 4) Responsive Behavior
-### 4.1 Breakpoints
-- **Switch Point:** `lg` (1024px).
-- **Desktop (`>= lg`):** Full horizontal navigation.
-- **Mobile (`< lg`):** Hamburger toggle + Drawer.
+## 3) Navigation model (as-is)
+The nav model is defined inline in `Header.tsx` as `NAV_ITEMS` and includes:
+- EN: Why El Salvador, Why Invest, How to Invest, Sectors, Success Stories, News & Events, About, Contact
+- ES: Por qué El Salvador, Por qué Invertir, Cómo Invertir, Sectores, Casos de Éxito, Noticias y Eventos, Nosotros, Contacto
 
-### 4.2 Mobile Menu (`< lg`)
-- **Type:** Drawer (Side overlay) or Full-screen Overlay.
-- **Default:** Hidden.
-- **Toggle:** Hamburger icon (right-aligned).
-- **State:**
-    -   **Open:** Drawer slides in / Overlay fades in. Body scroll **LOCKED**.
-    -   **Closed:** Hidden. Body scroll restored.
-- **Content:** Vertical list of primary nav items + Locale Switcher.
+**As-is constraints:**
+- Labels are hard-coded strings (not translation keys).
+- Hrefs are shared across locales (labels change, slugs do not).
 
-## 5) Interaction Model
-- **Toggle Trigger:** Click/Tap on Hamburger.
-- **Close Triggers:**
-    -   Click Close Button (X) inside drawer.
-    -   Click Backdrop/Outside (if Drawer).
-    -   Press `Escape` key.
-    -   **Route Change:** Navigation to a new route MUST close the menu automatically.
-- **Focus Management:**
-    -   **Open:** Focus moves to first interactive item (Close button or first link).
-    -   **Close:** Focus returns to Toggle button.
+## 4) Layout & Styling (as-is)
+### 4.1 Header container
+- **Position:** `fixed top-0 left-0 w-full`
+- **Z-index:** `z-[100]`
+- **Height:** `h-16` on mobile; `lg:h-20` on desktop
+- **Background:** `bg-brand-primary`
+- **Text color:** `text-white`
+- **Border:** `border-b border-brand-primary/10`
+- **Shadow:** `shadow-sm`
+- **Transition:** `transition-all duration-300`
 
-## 6) Accessibility Requirements
-- **Landmark:** `<header>`, `<nav>`.
-- **Labels:** `aria-label="Main navigation"`.
-- **Toggle:** `<button>` with `aria-label="Open menu"` / `aria-expanded="true/false"`.
-- **Keyboard:** Fully traversable via Tab. Focus ring visible (`focus:ring`).
-- **Target Size:** Mobile touch targets min `44px`.
+### 4.2 Inner container
+- **Max width:** `max-w-7xl mx-auto`
+- **Padding:** `px-4 sm:px-6`
+- **Layout:** `h-full flex items-center justify-between`
 
-## 7) i18n Integration
-**Source:** `C01_i18n_Locales`
-- **Current Locale:** Read from route params (`[locale]`) or `next-intl` hook.
-- **Link Generation:** All `href` props must include current locale prefix (e.g., `/es/sectors`).
-- **Switcher:**
-    -   Dropdown or Toggle.
-    -   Lists supported locales (`en`, `es`).
-    -   Action: Link to same path with swapped locale prefix (e.g., `/en/about` -> `/es/about`).
-    -   **Fallback:** If path mapping fails (unlikely for static, possible for dynamic), redirect to target locale root `/{target_locale}`.
+### 4.3 Zones (as-is)
+1) **Mobile toggle (left, mobile only)**
+   - Visible: `lg:hidden`
+   - Button has focus ring and hover background.
+2) **Brand**
+   - Link text: `INVEST EL SALVADOR` (with lighter styling on “EL SALVADOR”)
+   - Destination: `/{locale}`
+   - Clicking brand closes the mobile menu (calls `closeMenu`).
+3) **Desktop nav (desktop only)**
+   - Visible: `hidden lg:flex`
+   - Layout: horizontal links with `gap-6`
+   - Link styling: `text-sm font-medium text-white/90` + hover underline.
+4) **Desktop utilities (desktop only)**
+   - Locale switch link: `hidden lg:flex`
+   - Styling: `text-xs font-mono font-bold` with translucent background (`bg-white/10`).
 
-## 8) Navigation Content Model
-**Source:** `A01_IA_Sitemap`
-- **Structure:**
-    -   `key` (for translation)
-    -   `href` (template, e.g., `/sectors`)
-- **Items (Desktop & Mobile):**
-    -   Why El Salvador
-    -   Why Invest
-    -   How to Invest
-    -   Sectors
-    -   Success Stories
-    -   News & Events
-    -   About
-    -   Contact
-- **Translation:** Labels rendered via `t('nav.{key}')` (namespace TBD).
+## 5) Sticky behavior (as-is)
+- Header is fixed at top across scroll.
+- No content-offset rule is defined in this component; layout must ensure content does not render under the fixed header.
 
-## 9) Error/Edge Cases
-- **Missing Translation:** Render fallback label or key (dev mode).
-- **Long Labels:** Desktop nav should wrap gracefully or overflow to "More" menu (v2). For v1, ensure padding accommodates longest locale (ES usually longer than EN).
-- **Resize:** If window resized to `> lg` while menu open, menu must force close/reset state.
+## 6) Responsive behavior (as-is)
+### 6.1 Breakpoint
+- Uses Tailwind `lg` breakpoint for desktop vs mobile behavior.
 
-## 10) Acceptance Criteria
-- **A04-AC-001 (Structure):** Header present on all pages, fixed at top.
-- **A04-AC-002 (Desktop):** All `A01` items visible horizontally on `lg` screens.
-- **A04-AC-003 (Mobile):** Hamburger visible on `< lg`. Opens drawer. Locks body scroll.
-- **A04-AC-004 (Interaction):** Menu closes on route change, Esc, or outside click.
-- **A04-AC-005 (i18n):** Locale switcher cycles languages correctly; links are locale-prefixed.
-- **A04-AC-006 (A11y):** Keyboard navigable; correct ARIA attributes; focus management in drawer.
-- **A04-AC-007 (Tokens):** Uses `A03` colors/type. No inline hex values.
+### 6.2 Mobile menu type
+- Full-screen overlay “drawer” that slides in from the left:
+  - Closed: `-translate-x-full`
+  - Open: `translate-x-0`
+  - Transition: `duration-300 ease-in-out`
+- Container: `fixed inset-0 z-40 bg-brand-primary`
+- Spacing: `pt-20 px-6` (top padding to clear fixed header)
+
+## 7) Interaction model (as-is)
+### 7.1 Open/close triggers
+- **Open/Close:** hamburger toggles `isMobileOpen`
+- **Close on click:** any mobile nav link closes the menu
+- **Close on locale switch (mobile):** closes menu
+- **Close on brand click:** closes menu
+
+### 7.2 Not implemented (as-is)
+- Escape key close
+- Outside click close
+- Auto-close on route change (not explicitly implemented)
+- Focus trap / focus management
+
+## 8) Scroll locking (as-is)
+When the mobile menu is open:
+- `document.body.style.overflow = "hidden"`
+- `document.body.style.paddingRight` is set to scrollbar width to avoid layout shift
+
+On close/unmount:
+- overflow resets to `unset`
+- paddingRight resets to `0px`
+
+## 9) Accessibility (as-is)
+Implemented:
+- Toggle is a `<button>` with:
+  - `aria-label="Toggle navigation"`
+  - `aria-expanded={isMobileOpen}`
+- Visible focus ring on toggle (`focus:ring-2 focus:ring-white/50`)
+- Reasonable touch target sizing via padding
+
+Not implemented (as-is):
+- `aria-controls` linking toggle to the mobile menu container
+- Escape/outside-click close semantics
+- Focus management while menu is open
+
+## 10) i18n integration (as-is)
+- Locale source is passed as prop (`locale`), with fallback to `en`.
+- Links are generated as locale-prefixed paths: `/{locale}{href}`.
+- Locale switch rewrites current pathname by replacing `/{currentLocale}` with `/{targetLocale}`.
+
+**Known edge case (as-is):**
+- If the current pathname does not include `/{currentLocale}`, the replacement may not behave as intended; fallback is `/{targetLocale}`.
+
+## 11) Acceptance criteria (as-is verification)
+- **A04-AC-001:** Header is fixed at top and visible on all pages where rendered.
+- **A04-AC-002:** Desktop (`lg+`) shows horizontal nav links and a locale switch chip.
+- **A04-AC-003:** Mobile (`< lg`) shows hamburger; opening reveals a full-screen overlay menu.
+- **A04-AC-004:** While mobile menu is open, body scroll is locked without layout shift.
+- **A04-AC-005:** Clicking any mobile nav link closes the menu.
+- **A04-AC-006:** Locale switch changes locale segment in URL (EN ↔ ES).
+
+## 12) Spec debt (tracked follow-ups)
+- Move `NAV_ITEMS` out of component into a shared system (derive from `A01` + translations), and remove hard-coded labels from `Header.tsx`.
+- Define and implement keyboard/ARIA enhancements (Escape, focus management, aria-controls) in a dedicated accessibility spec (planned `A05_UI_Accessibility.*`).
+- Decide whether `isScrolled` should drive visual changes; currently unused and may be removed or formalized.

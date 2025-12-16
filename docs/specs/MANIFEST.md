@@ -22,25 +22,24 @@ This directory is the authoritative specification store for this repository.
 
 ### 0) Master
 | ID | Title | Status | Files |
-|---|---|---|---|
+|----|-------|--------|-------|
 | MANIFEST | Manifest Index | active | `MANIFEST.md`, `MANIFEST.tok.json` |
 | P00 | Product Requirements Document (PRD) | draft | `P00_PRD.md`, `P00_PRD.tok.json` |
 
 ### 1) As-Is Inventories (scaffold snapshots)
 | ID | Title | Status | Files |
 |---|---|---|---|
-| A00 | As-Is App Router Tree | TODO/confirm | `A00_AsIs_AppTree.md`, `A00_AsIs_AppTree.tok.json` |
-| B00 | As-Is Components Tree | TODO/confirm | `B00_AsIs_ComponentsTree.md`, `B00_AsIs_ComponentsTree.tok.json` |
-| B01 | As-Is Lib Tree | TODO/confirm | `B01_AsIs_LibTree.md`, `B01_AsIs_LibTree.tok.json` |
-| Z00 | As-Is Docs Tree | TODO/confirm | `Z00_AsIs_DocsTree.md`, `Z00_AsIs_DocsTree.tok.json` |
+| A00 | As-Is App Router Tree | as_is | `A00_AsIs_AppTree.md`, `A00_AsIs_AppTree.tok.json` |
+| B00 | As-Is Components Tree | as_is | `B00_AsIs_ComponentsTree.md`, `B00_AsIs_ComponentsTree.tok.json` |
+| B01 | As-Is Lib Tree | as_is | `B01_AsIs_LibTree.md`, `B01_AsIs_LibTree.tok.json` |
+| Z00 | As-Is Docs Tree | as_is | `Z00_AsIs_DocsTree.md`, `Z00_AsIs_DocsTree.tok.json` |
+
 
 ### 2) IA / UX / UI
 | ID | Title | Status | Files |
 |---|---|---|---|
-| A01 | Information Architecture (IA) & Sitemap | active | `A01_IA_Sitemap.md`, `A01_IA_Sitemap.tok.json` |
+| A01 | Information Architecture (IA) & Sitemap | draft | `A01_IA_Sitemap.md`, `A01_IA_Sitemap.tok.json` |
 | A02 | UI Layout Components (Header/Footer/Global Shell) | draft | `A02_UI_LayoutComponents.md`, `A02_UI_LayoutComponents.tok.json` |
-| A03 | UI Design Tokens & Theming | draft | `A03_UI_DesignTokens.md`, `A03_UI_DesignTokens.tok.json` |
-| A04 | UI Navigation Header (Global NavBar) | draft | `A04_UI_NavigationHeader.md`, `A04_UI_NavigationHeader.tok.json` |
 
 ### 3) Content & i18n
 | ID | Title | Status | Files |

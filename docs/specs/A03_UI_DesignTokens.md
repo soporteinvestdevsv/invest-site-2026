@@ -1,86 +1,104 @@
+docs/specs/A03_UI_DesignTokens.md
+
 # A03 — UI Design Tokens & Theming
 **Status:** Draft (v0.1)  
-**Scope:** Color palette, typography system (Geist), and single-point-of-change theming constraints.  
+**Scope:** Canonical design token definitions (colors, typography, spacing, radii, shadows) and the rules for consuming tokens in UI components. This spec exists to make the site themeable by changing a single source of truth.
 
-## 1) Core Principles
-- **Single Source of Truth:** All design tokens must be defined in one canonical location (e.g., `tailwind.config.ts`, CSS variables file, or a dedicated tokens module).
-- **No Hardcoded Values:** Components must consume tokens (e.g., `bg-brand-primary` or `var(--brand-primary)`). Inline hex codes are forbidden for brand/theme colors.
-- **Strict Palette:** No new colors or gradients are allowed outside the defined set.
+## 1) Objectives
+- Define a fixed, reusable token system for the INVEST site UI.
+- Prevent hex/color drift by prohibiting ad-hoc colors in components.
+- Enable a future “re-skin” by updating one token source (CSS variables / Tailwind theme mapping) without rewriting components.
 
-## 2) Color Palette (Authoritative)
-**Constraint:** Do not introduce new accent colors.
+## 2) Consumption rules (non-negotiable)
+- **No hard-coded hex values in components.** Use token classes/variables only.
+- Components must consume tokens via:
+  - Tailwind semantic color names (preferred), e.g. `bg-brand-primary`, `text-foreground`, `border-border`, OR
+  - CSS variables mapped to Tailwind semantic names (implementation detail).
+- Do not introduce gradients or new accent colors outside this token set.
 
-### 2.1 Brand & Neutral
-| Token Name | Hex Value | Role / Usage Rules |
-| :--- | :--- | :--- |
-| **brand.primary** | `#0b2a4a` | Primary headers, primary buttons, badges. **Do not use** for body text. |
-| **text.primary** | `#111827` | Main body content, strong headings on light backgrounds. |
-| **text.muted** | `#6b7280` | Secondary text, captions, helper text. |
-| **border.neutral** | `#e5e7eb` | Dividers, card borders, input borders. |
+## 3) Color tokens (authoritative palette)
+### 3.1 Brand
+- `brand.primary`: **#0b2a4a** (headers, primary buttons, badges)
+- `brand.primaryText`: **#ffffff** (text on brand.primary)
 
-### 2.2 Functional Colors (Warning/Alerts)
-| Token Name | Hex Value | Role / Usage Rules |
-| :--- | :--- | :--- |
-| **warning.bg** | `#fff7ed` | Background for warning alerts/toasts. |
-| **warning.border** | `#fed7aa` | Border for warning containers. |
-| **warning.title** | `#9a3412` | Strong text in warning headers. |
-| **warning.text** | `#7c2d12` | Body text in warning containers. |
+### 3.2 Text
+- `text.primary`: **#111827**
+- `text.muted`: **#6b7280**
+- `text.inverse`: **#ffffff**
 
-### 2.3 Code / Technical
-| Token Name | Hex Value | Role / Usage Rules |
-| :--- | :--- | :--- |
-| **code.bg** | `#0b1220` | Background for code blocks and terminal snippets. |
-| **code.text** | `#e5e7eb` | Content color for code. |
+### 3.3 Surfaces
+- `surface.page`: **#ffffff**
+- `surface.card`: **#ffffff**
+- `surface.inverse`: **#0b2a4a** (use with `text.inverse`)
 
-## 3) Typography Baseline
-**Font Family:** Geist (via `next/font`).
+### 3.4 Borders
+- `border.neutral`: **#e5e7eb**
 
-### 3.1 Families
-- **font.sans:** `Geist` — Default for UI, headings, body.
-- **font.mono:** `Geist Mono` — Code blocks, technical data, financial figures (if tabular).
+### 3.5 Warning palette (for alerts/notice blocks)
+- `warning.bg`: **#fff7ed**
+- `warning.border`: **#fed7aa**
+- `warning.title`: **#9a3412**
+- `warning.text`: **#7c2d12**
 
-### 3.2 Type Scale & Usage
-| Step | Size | Line Height | Usage Intent |
-| :--- | :--- | :--- | :--- |
-| **xs** | 0.75rem | tight | Badges, small captions. |
-| **sm** | 0.875rem | normal | Secondary body text, UI labels. |
-| **base** | 1rem | normal | Standard body text, inputs. |
-| **lg** | 1.125rem | relaxed | Lead paragraphs, large UI controls. |
-| **xl** | 1.25rem | tight | Section headers (H3/H4). |
-| **2xl** | 1.5rem | tight | Page headers (H2). |
-| **3xl** | 1.875rem | tight | Hero/main headers (H1). |
+### 3.6 Code blocks
+- `code.bg`: **#0b1220**
+- `code.text`: **#e5e7eb**
 
-### 3.3 Weights
-- **Regular (400):** Default body text.
-- **Medium (500):** Interactive elements (links, buttons).
-- **Semibold (600):** Headings, emphasized data.
-- **Bold (700):** Use sparingly for strong emphasis.
+## 4) Typography tokens
+### 4.1 Font families (as-is)
+- `font.sans`: Geist Sans (via `geist/font/sans`)
+- `font.mono`: Geist Mono (via `geist/font/mono`)
 
-## 4) Component styling constraints
-- **Buttons:** Must use `brand.primary` for solid backgrounds. Text must be legible on top (e.g., white).
-- **Links:** Use `brand.primary` or `text.primary` with underline-on-hover.
-- **Borders:** Default to `border.neutral` (1px solid).
-- **Code Blocks:** Must use `code.bg` + `code.text` + `font.mono`.
-- **Alerts:** Warning alerts must strictly follow the warning token set.
+### 4.2 Type scale (recommended)
+- `text.xs`: 12px
+- `text.sm`: 14px
+- `text.base`: 16px
+- `text.lg`: 18px
+- `text.xl`: 20px
+- `text.2xl`: 24px
+- `text.3xl`: 30px
 
-## 5) Theming & Migration Rules (Single-Point-of-Change)
-### 5.1 Token Source of Truth
-- **Required Pattern:** Define tokens in `tailwind.config.ts` (theme.extend.colors/fontFamily) or a dedicated CSS variables root.
-- **Prohibited:** Specifying hex values directly in component styling (e.g., `className="bg-[#0b2a4a]"` is **FORBIDDEN**).
+### 4.3 Weights
+- `weight.regular`: 400
+- `weight.medium`: 500
+- `weight.semibold`: 600
+- `weight.bold`: 700
 
-### 5.2 Consumption
-- Components must reference utility classes (e.g., `text-brand-primary`) or CSS variables.
-- **Example:** `A04` Header uses `brand.primary` background and `white` text.
+### 4.4 Line heights
+- `leading.tight`: 1.2
+- `leading.normal`: 1.5
+- `leading.relaxed`: 1.7
 
-### 5.3 Do's and Don'ts
-- **DO NOT** add gradients or shadows not defined here.
-- **DO NOT** use `text-black` or `text-white` for semantic text; use `text.primary` or inverse tokens.
-- **DO** consistent spacing (use Tailwind spacing scale).
+## 5) Layout tokens (global constants)
+- `layout.maxWidth`: `7xl` (Tailwind container equivalent)
+- `layout.headerHeight.mobile`: 64px (`h-16`)
+- `layout.headerHeight.desktop`: 80px (`h-20`)
+- `layout.pagePaddingX.mobile`: 16px (`px-4`)
+- `layout.pagePaddingX.desktop`: 24px (`px-6`)
 
-## 6) Requirements
-- **A03-FR-001:** Implement token definitions in one central config file.
-- **A03-FR-002:** Configure `next/font` for Geist and Geist Mono.
-- **A03-NFR-001:** No hardcoded hex values in component code.
+## 6) Radius tokens
+- `radius.sm`: 8px
+- `radius.md`: 12px
+- `radius.lg`: 16px
+- `radius.xl`: 20px
+- `radius.2xl`: 24px  
+(Use consistently; default preference: rounded “2xl” for cards/buttons unless a component spec overrides it.)
 
-## 7) Open questions
-- None.
+## 7) Shadow tokens (recommended)
+- `shadow.sm`: subtle elevation (used for header and small cards)
+- `shadow.md`: standard card elevation
+- `shadow.lg`: modal/drawer elevation  
+(Exact shadow values are implementation detail but must remain consistent across the app.)
+
+## 8) Theming strategy (single-source requirement)
+- Tokens must be definable in **one place** (single source of truth), and UI should reference semantic names.
+- Recommended approach:
+  - Define tokens as CSS variables (e.g., in `app/globals.css`) and map Tailwind theme colors to those variables, OR
+  - Define Tailwind theme colors directly (still must remain centralized in one config).
+- Components must not depend on “raw palette” values; they must depend on semantic tokens.
+
+## 9) Acceptance criteria
+- **A03-AC-001:** No component uses raw hex colors for UI styling (except within the token source file/config).
+- **A03-AC-002:** Header uses `brand.primary` consistently (e.g., `bg-brand-primary`) and meets contrast with `text.inverse`.
+- **A03-AC-003:** Warning blocks (if used) match the warning palette tokens exactly.
+- **A03-AC-004:** A theme refresh is possible by editing only the centralized token source (no component edits).

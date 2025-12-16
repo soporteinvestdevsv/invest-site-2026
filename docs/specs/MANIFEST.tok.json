@@ -136,8 +136,8 @@
           },
           {
             "id": "A04",
-            "t": "UI Navigation Header (Global NavBar)",
-            "st": "draft",
+            "t": "UI Navigation Header (Global NavBar) _ As-Is",
+            "st": "as_is",
             "files": {
               "md": "docs/specs/A04_UI_NavigationHeader.md",
               "tok": "docs/specs/A04_UI_NavigationHeader.tok.json"

@@ -1,132 +1,259 @@
 {
-    "id": "A04",
-    "fn": "docs/specs/A04_UI_NavigationHeader.tok.json",
-    "t": "UI Navigation Header (Global NavBar)",
-    "v": "0.1.0",
-    "st": "draft",
-    "own": [
-        "ux",
-        "eng"
-    ],
-    "src": {
-        "md": "docs/specs/A04_UI_NavigationHeader.md"
-    },
-    "rel": [
+  "id": "A04",
+  "fn": "docs/specs/A04_UI_NavigationHeader.tok.json",
+  "t": "UI Navigation Header (Global NavBar) — As-Is",
+  "v": "0.1.1",
+  "st": "as_is",
+  "own": ["eng", "ux"],
+  "src": {
+    "md": "docs/specs/A04_UI_NavigationHeader.md",
+    "code": ["components/layout/Header.tsx"]
+  },
+  "rel": [
+    { "doc": "B00", "why": "Header component is part of the as-is components inventory." },
+    { "doc": "A02", "why": "Header is mounted via locale layout shell and requires main offset (pt-16/lg:pt-20)." },
+    { "doc": "C01", "why": "Header locale switch behavior depends on locale routing rules and default-locale prefix policy." },
+    { "doc": "A01", "why": "Header nav items should converge to the IA nav model + i18n keys (remove hard-coded labels later)." },
+    { "doc": "G01", "why": "Acceptance criteria conventions and DoD alignment." }
+  ],
+  "body": {
+    "component": {
+      "name": "Header",
+      "file": "components/layout/Header.tsx",
+      "rendering": "client",
+      "props": [
         {
-            "doc": "A01",
-            "why": "Defines the navigation items (IA)."
-        },
-        {
-            "doc": "A03",
-            "why": "Defines styling tokens (colors, typography)."
-        },
-        {
-            "doc": "C01",
-            "why": "Defines locale routing and switcher logic."
-        },
-        {
-            "doc": "A02",
-            "why": "Header is a part of the global layout shell."
+          "name": "locale",
+          "type": "string",
+          "required": true,
+          "notes": "Expected to match active [locale] route segment. Code falls back to 'en' if falsy."
         }
+      ],
+      "deps": [
+        { "pkg": "next/link", "use": "navigation links" },
+        { "pkg": "next/navigation", "use": "usePathname for locale switch href" },
+        { "pkg": "primeicons/primeicons.css", "use": "imported (icons not currently used)" }
+      ]
+    },
+    "state": {
+      "isMobileOpen": { "type": "boolean", "default": false, "purpose": "Controls mobile overlay open/closed state." },
+      "isScrolled": {
+        "type": "boolean",
+        "default": false,
+        "purpose": "Tracks scroll position > 10px",
+        "status": "unused_in_render"
+      }
+    },
+    "derived": {
+      "currentLocale": "locale || 'en'",
+      "targetLocale": "currentLocale === 'en' ? 'es' : 'en'",
+      "targetLabel": "targetLocale === 'en' ? 'EN' : 'ES'  // label shows the locale to switch TO",
+      "navItems": "NAV_ITEMS[currentLocale] || NAV_ITEMS.en",
+      "getHref": "`/${currentLocale}${item.href}`  // locale-prefix",
+      "switchLocaleHref": "pathname?.replace(`/${currentLocale}`, `/${targetLocale}`) || `/${targetLocale}`"
+    },
+    "nav_model": {
+      "source": "inline_constant",
+      "identifier": "NAV_ITEMS",
+      "locales": ["en", "es"],
+      "items": [
+        {
+          "key": "why_el_salvador",
+          "label_en": "Why El Salvador",
+          "label_es": "Por qué El Salvador",
+          "href": "/why-el-salvador",
+          "a01_key": "why_el_salvador"
+        },
+        {
+          "key": "why_invest",
+          "label_en": "Why Invest",
+          "label_es": "Por qué Invertir",
+          "href": "/why-invest",
+          "a01_key": "why_invest"
+        },
+        {
+          "key": "how_to_invest",
+          "label_en": "How to Invest",
+          "label_es": "Cómo Invertir",
+          "href": "/how-to-invest",
+          "a01_key": "how_to_invest"
+        },
+        {
+          "key": "sectors",
+          "label_en": "Sectors",
+          "label_es": "Sectores",
+          "href": "/sectors",
+          "a01_key": "sectors"
+        },
+        {
+          "key": "success_stories",
+          "label_en": "Success Stories",
+          "label_es": "Casos de Éxito",
+          "href": "/success-stories",
+          "a01_key": "success_stories"
+        },
+        {
+          "key": "news_events",
+          "label_en": "News & Events",
+          "label_es": "Noticias y Eventos",
+          "href": "/news",
+          "a01_key": "news_events",
+          "note": "As-is routes to /news only; /events exists separately in A00."
+        },
+        {
+          "key": "about",
+          "label_en": "About",
+          "label_es": "Nosotros",
+          "href": "/about",
+          "a01_key": "about"
+        },
+        {
+          "key": "contact",
+          "label_en": "Contact",
+          "label_es": "Contacto",
+          "href": "/contact",
+          "a01_key": "contact"
+        }
+      ],
+      "constraints": [
+        "Labels are hard-coded strings (not translation keys).",
+        "Hrefs are shared across locales; only labels differ (locale prefix added at render)."
+      ],
+      "target_state_ref": { "doc": "A01", "sec": "nav.header" }
+    },
+    "layout": {
+      "header_container": {
+        "position": "fixed",
+        "top": 0,
+        "left": 0,
+        "width": "w-full",
+        "z_index": "z-[100]",
+        "height": { "mobile": "h-16", "desktop": "lg:h-20" },
+        "classes": [
+          "transition-all",
+          "duration-300",
+          "bg-brand-primary",
+          "text-white",
+          "border-b",
+          "border-brand-primary/10",
+          "shadow-sm"
+        ]
+      },
+      "inner_container": {
+        "max_width": "max-w-7xl",
+        "centered": true,
+        "padding": ["px-4", "sm:px-6"],
+        "layout": "h-full flex items-center justify-between"
+      },
+      "zones": [
+        {
+          "name": "mobile_toggle",
+          "visible": "< lg",
+          "position": "left",
+          "z_index_note": "button uses z-[110] to stay above overlay animation",
+          "a11y": { "aria_label": "Toggle navigation", "aria_expanded": "isMobileOpen" }
+        },
+        {
+          "name": "brand",
+          "visible": "all",
+          "position": "right_on_mobile_left_on_desktop",
+          "href": "/{locale}",
+          "onClick": "closeMenu()",
+          "label": "INVEST EL SALVADOR"
+        },
+        {
+          "name": "desktop_nav",
+          "visible": ">= lg",
+          "layout": "horizontal",
+          "gap": "gap-6",
+          "link_style": "text-sm font-medium text-white/90 hover:text-white hover:underline"
+        },
+        {
+          "name": "desktop_locale_switch",
+          "visible": ">= lg",
+          "type": "link_chip",
+          "label": "targetLabel",
+          "style": "text-xs font-mono font-bold bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded"
+        }
+      ],
+      "content_overlap_note": "Header is fixed; main offset is applied by locale layout (pt-16 lg:pt-20) per A02."
+    },
+    "mobile_menu": {
+      "type": "full_screen_overlay_drawer",
+      "container": {
+        "position": "fixed",
+        "inset": 0,
+        "z_index": "z-40",
+        "background": "bg-brand-primary",
+        "padding": ["pt-20", "px-6"],
+        "transition": "transform duration-300 ease-in-out",
+        "states": { "open": "translate-x-0", "closed": "-translate-x-full" }
+      },
+      "content": {
+        "nav_links": {
+          "layout": "vertical",
+          "link_style": "text-xl font-semibold border-b border-white/10 pb-4 hover:pl-2",
+          "onClick": "closeMenu()"
+        },
+        "locale_section": {
+          "shows": "Locale: {currentLocale}",
+          "switch_link": "Switch to {targetLabel}",
+          "onClick": "closeMenu()"
+        }
+      }
+    },
+    "interactions": {
+      "toggle": "hamburger toggles isMobileOpen",
+      "close_triggers": ["nav_link_click", "brand_click", "locale_switch_click"],
+      "not_implemented": [
+        "escape_to_close",
+        "outside_click_to_close",
+        "close_on_route_change",
+        "focus_management"
+      ]
+    },
+    "scroll_lock": {
+      "enabled": true,
+      "on_open": ["body.overflow='hidden'", "body.paddingRight=scrollbarWidthPx"],
+      "on_close": ["body.overflow='unset'", "body.paddingRight='0px'"],
+      "cleanup_on_unmount": true,
+      "purpose": "Prevent background scroll and avoid layout shift when scrollbar disappears."
+    },
+    "a11y": {
+      "implemented": [
+        { "item": "toggle_button_aria_label", "value": "Toggle navigation" },
+        { "item": "toggle_button_aria_expanded", "value": "isMobileOpen" },
+        { "item": "focus_ring", "value": "focus:ring-2 focus:ring-white/50" }
+      ],
+      "not_implemented": ["aria-controls", "escape_close", "focus_trap", "initial_focus_and_return_focus"]
+    },
+    "known_edge_cases": [
+      "switchLocaleHref assumes pathname begins with '/{currentLocale}' for replacement; otherwise falls back to '/{targetLocale}'.",
+      "isScrolled is computed but unused; remove or formalize visual behavior later."
     ],
-    "body": {
-        "layout": {
-            "position": "fixed",
-            "z_index": "50",
-            "height": {
-                "desktop": "h-20",
-                "mobile": "h-16"
-            },
-            "width": "w-full",
-            "background": "brand.primary",
-            "text_contrast": "white (inverse)",
-            "content_max_width": "max-w-7xl",
-            "breakpoints": {
-                "mobile": "< 1024px (lg)",
-                "desktop": ">= 1024px"
-            }
-        },
-        "behavior": {
-            "sticky": true,
-            "scroll_offset_required": true,
-            "mobile_scroll_lock": true,
-            "close_on_route_change": true,
-            "close_on_esc": true,
-            "close_on_resize": true
-        },
-        "structure": {
-            "zones": [
-                "Brand (Left)",
-                "Nav (Center/Right)",
-                "Utility (Right)"
-            ],
-            "brand_link": "/{locale}/",
-            "utility_items": [
-                "LocaleSwitcher",
-                "MobileToggle (Hamburger)"
-            ]
-        },
-        "i18n": {
-            "source": "C01",
-            "link_prefix": "/{locale}/",
-            "switcher_behavior": "preserve_path_or_redirect_root"
-        },
-        "content_model": {
-            "source": "A01",
-            "items": [
-                "why_es",
-                "why_invest",
-                "how_to_invest",
-                "sectors",
-                "stories",
-                "news_events",
-                "about",
-                "contact"
-            ]
-        },
-        "tokens_used": {
-            "bg": "brand.primary",
-            "text": "white",
-            "spacing": "padding, gap",
-            "font": "font.sans"
-        },
-        "req": [
-            {
-                "id": "A04-AC-001",
-                "txt": "Header present on all pages, fixed at top.",
-                "pri": "P0"
-            },
-            {
-                "id": "A04-AC-002",
-                "txt": "Desktop view shows all A01 items horizontally.",
-                "pri": "P0"
-            },
-            {
-                "id": "A04-AC-003",
-                "txt": "Mobile view toggles drawer and locks scroll.",
-                "pri": "P0"
-            },
-            {
-                "id": "A04-AC-004",
-                "txt": "Menu closes on navigation/Esc/outside click.",
-                "pri": "P0"
-            },
-            {
-                "id": "A04-AC-005",
-                "txt": "Locale switcher works per C01.",
-                "pri": "P0"
-            },
-            {
-                "id": "A04-AC-006",
-                "txt": "Keyboard accessible and ARIA compliant.",
-                "pri": "P0"
-            },
-            {
-                "id": "A04-AC-007",
-                "txt": "No hardcoded hex values; uses A03 tokens.",
-                "pri": "P0"
-            }
-        ],
-        "open": []
-    }
+    "acceptance": [
+      { "id": "A04-AC-001", "txt": "Header is fixed at top and visible on all pages where mounted." },
+      { "id": "A04-AC-002", "txt": "Desktop (>=lg) shows horizontal nav links and a locale switch chip." },
+      { "id": "A04-AC-003", "txt": "Mobile (<lg) shows hamburger; opening reveals full-screen overlay menu." },
+      { "id": "A04-AC-004", "txt": "Mobile menu open locks body scroll without layout shift." },
+      { "id": "A04-AC-005", "txt": "Clicking any mobile nav link closes the menu." },
+      { "id": "A04-AC-006", "txt": "Locale switch swaps locale segment in URL (EN ↔ ES)." }
+    ],
+    "spec_debt": [
+      {
+        "item": "Move NAV_ITEMS out of Header.tsx",
+        "needs": ["A01", "C00", "C01"],
+        "why": "Centralize IA + translation keys; remove hard-coded strings from component."
+      },
+      {
+        "item": "Implement a11y enhancements for mobile menu",
+        "needs": ["G01"],
+        "why": "Escape close, aria-controls, focus management, optional outside click close."
+      },
+      {
+        "item": "Decide whether to keep isScrolled",
+        "why": "Currently unused state; remove or define visual behavior."
+      }
+    ]
+  }
 }

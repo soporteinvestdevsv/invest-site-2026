@@ -2,98 +2,70 @@
   "id": "C01",
   "fn": "docs/specs/C01_i18n_Locales.tok.json",
   "t": "i18n, Locales & Routing Strategy",
-  "v": "0.1.0",
+  "v": "0.2.0",
   "st": "draft",
-  "own": [
-    "product",
-    "eng",
-    "ux"
-  ],
-  "src": {
-    "md": "docs/specs/C01_i18n_Locales.md"
-  },
+  "own": ["product", "eng", "ux"],
+  "src": { "md": "docs/specs/C01_i18n_Locales.md" },
   "rel": [
-    {
-      "doc": "A00",
-      "why": "Locale segment and route patterns are defined by the App Router tree."
-    },
-    {
-      "doc": "B01",
-      "why": "lib/i18n/config.ts is the implementation anchor for locale configuration."
-    },
-    {
-      "doc": "A02",
-      "why": "Locale switcher UI belongs in global layout/header."
-    },
-    {
-      "doc": "D01",
-      "why": "CMS localization strategy must align with WP queries and content model."
-    }
+    { "doc": "A00", "why": "Locale segment and route patterns are defined by the App Router tree." },
+    { "doc": "B01", "why": "lib/i18n/config.ts anchors locale configuration." },
+    { "doc": "A02", "why": "Locale layout mounts shell and passes locale into Header/Footer/Banner." },
+    { "doc": "A04", "why": "Header implements locale-prefixed links and locale switch algorithm." },
+    { "doc": "D01", "why": "CMS localization strategy must align with routing and content model." }
   ],
   "body": {
     "as_is": {
       "locale_seg": "[locale]",
-      "routes_ref": {
-        "doc": "A00",
-        "sec": "route_patterns"
-      },
-      "config_file": "lib/i18n/config.ts"
-    },
-    "locales": {
-      "default": "en [Decision]",
-      "supported": [
-        "en",
-        "es"
-      ]
-    },
-    "routing": {
       "canonical_pattern": "/{locale}/...",
-      "invalid_locale": "404",
-      "default_locale_prefix": "always_prefix [Decision Z02-20251215-02]"
+      "config_file": "lib/i18n/config.ts",
+      "supported_locales": ["en", "es"],
+      "default_locale": "en",
+      "middleware_file": "middleware.ts",
+      "root_layout_file": "app/layout.tsx",
+      "locale_layout_file": "app/(routes)/[locale]/layout.tsx",
+      "html_lang": { "current": "en", "note": "Hard-coded in app/layout.tsx; not locale-driven yet." }
+    },
+    "middleware": {
+      "implemented": true,
+      "supported": ["en", "es"],
+      "default": "en",
+      "skip_paths": ["_next", "api", "favicon.ico", "robots.txt", "sitemap.xml"],
+      "behavior": {
+        "if_has_supported_locale_prefix": "next",
+        "else_redirect_to": "/{defaultLocale}{pathname}"
+      },
+      "edge_case": {
+        "unsupported_locale_like_prefix": {
+          "example": "/fr/about -> /en/fr/about",
+          "status": "as_is",
+          "needs_decision": true
+        }
+      }
     },
     "translations": {
-      "source_of_truth": "code_dicts (microcopy) + cms (content)",
-      "loading": "server_load (next-intl)",
-      "fallback_locale": "en",
-      "missing_key_behavior": "fallback_to_default"
+      "source_of_truth": {
+        "as_is": "inline_strings_in_components",
+        "planned": "code_dicts (microcopy) + cms (content)"
+      },
+      "fallback_locale": "en"
     },
     "cms_localization": {
-      "collections_ref": {
-        "doc": "A00",
-        "sec": "collections"
-      },
-      "strategy": "1:1 mapping (polylang/wpml) [Decision Z02-20251215-06]",
-      "slug_policy": "per_locale"
-    },
-    "ui": {
-      "locale_switcher": {
-        "location": "components/layout/Header.tsx",
-        "behavior": "preserve_path_if_possible",
-        "missing_translation_behavior": "hide_option | show_warning"
+      "collections_ref": { "doc": "A00", "sec": "collections" },
+      "slug_policy": {
+        "as_is": "shared_slugs_across_locales",
+        "planned": "TBD",
+        "note": "If adopting localized slugs, routing + nav href generation must change and be logged in Z02."
       }
     },
     "req": [
-      {
-        "id": "C01-FR-001",
-        "txt": "Define supported locales and default locale in lib/i18n/config.ts.",
-        "pri": "P0"
-      },
-      {
-        "id": "C01-FR-002",
-        "txt": "Validate locale segment for every locale route.",
-        "pri": "P0"
-      },
-      {
-        "id": "C01-FR-003",
-        "txt": "URL locale is authoritative; persist or derive locale consistently.",
-        "pri": "P1"
-      },
-      {
-        "id": "C01-NFR-001",
-        "txt": "Translation loading must be performant; caching strategy defined.",
-        "pri": "P1"
-      }
+      { "id": "C01-FR-001", "txt": "Supported locales and default locale are defined in lib/i18n/config.ts.", "pri": "P0", "impl": true },
+      { "id": "C01-FR-002", "txt": "Non-locale paths redirect to /{defaultLocale}{pathname} via middleware.", "pri": "P0", "impl": true },
+      { "id": "C01-FR-003", "txt": "Locale switcher preserves current path best-effort with fallback to /{targetLocale}.", "pri": "P1" },
+      { "id": "C01-FR-004", "txt": "Define and implement behavior for unsupported locale-like prefixes (e.g., /fr/*).", "pri": "P1" }
     ],
-    "open": []
+    "open": [
+      { "q": "Unsupported locale-like prefixes: strip+redirect vs 404 vs redirect-to-root?", "area": "routing" },
+      { "q": "Should html lang be locale-driven?", "area": "a11y_seo" }
+    ]
   }
 }

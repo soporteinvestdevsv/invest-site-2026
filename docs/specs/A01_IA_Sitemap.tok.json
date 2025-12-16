@@ -2,234 +2,201 @@
   "id": "A01",
   "fn": "docs/specs/A01_IA_Sitemap.tok.json",
   "t": "Information Architecture (IA) & Sitemap",
-  "v": "0.1.0",
+  "v": "0.3.0",
   "st": "draft",
-  "own": [
-    "ux",
-    "product",
-    "eng"
-  ],
+  "own": ["product", "ux", "eng"],
   "src": {
     "md": "docs/specs/A01_IA_Sitemap.md"
   },
   "rel": [
     {
       "doc": "A00",
-      "why": "As-is route inventory is the authoritative input for page list and patterns."
+      "why": "Authoritative as-is route inventory (static + dynamic route patterns)."
     },
     {
       "doc": "C01",
-      "why": "Locale routing and translation workflow affect IA behavior and URL policy."
+      "why": "Locale-prefix canonical routing rules and switcher expectations."
+    },
+    {
+      "doc": "A04",
+      "why": "Header navigation is implemented as-is; IA defines target canonical model."
     },
     {
       "doc": "D01",
-      "why": "Collections (news/events/reports/etc.) are expected to be CMS-driven."
+      "why": "Collections are backed by headless WordPress; IA maps indexes and detail pages."
     },
     {
       "doc": "E03",
-      "why": "Footer/legal and cookie management link behavior depends on consent spec."
-    },
-    {
-      "doc": "A02",
-      "why": "Header/footer implementation details belong to layout components spec."
+      "why": "Footer includes manage cookies entry; depends on consent behavior."
     }
   ],
   "body": {
-    "url_policy": {
-      "canonical": "/{locale}/...",
-      "ref": {
-        "doc": "A00",
-        "sec": "route_patterns"
-      }
+    "conventions": {
+      "locale_prefix_required": true,
+      "canonical_pattern": "/{locale}/...",
+      "ref": { "doc": "C01", "sec": "routing" }
     },
     "nav": {
-      "header": [
-        {
-          "k": "why_es",
-          "label": "Why El Salvador",
-          "href": "/{locale}/why-el-salvador"
-        },
-        {
-          "k": "why_invest",
-          "label": "Why Invest",
-          "href": "/{locale}/why-invest"
-        },
-        {
-          "k": "how_to_invest",
-          "label": "How to Invest",
-          "href": "/{locale}/how-to-invest"
-        },
-        {
-          "k": "sectors",
-          "label": "Sectors",
-          "href": "/{locale}/sectors"
-        },
-        {
-          "k": "stories",
-          "label": "Success Stories",
-          "href": "/{locale}/success-stories"
-        },
-        {
-          "k": "insights",
-          "label": "Insights",
-          "href": "/{locale}/insights"
-        },
-        {
-          "k": "news_events",
-          "label": "News & Events",
-          "href": "/{locale}/news",
-          "alt": [
-            "/{locale}/events"
-          ]
-        },
-        {
-          "k": "media",
-          "label": "Media",
-          "href": "/{locale}/media"
-        },
-        {
-          "k": "about",
-          "label": "About",
-          "href": "/{locale}/about"
-        },
-        {
-          "k": "contact",
-          "label": "Contact",
-          "href": "/{locale}/contact"
-        }
-      ],
-      "primary": [
-        "Sectors",
-        "Investors",
-        "Success Stories",
-        "News & Events",
-        "About",
-        "Contact"
-      ],
-      "footer": [
-        {
-          "k": "legal_accessibility",
-          "label": "Accessibility",
-          "href": "/{locale}/legal/accessibility"
-        },
-        {
-          "k": "legal_cookies",
-          "label": "Cookies",
-          "href": "/{locale}/legal/cookies"
-        },
-        {
-          "k": "legal_privacy",
-          "label": "Privacy",
-          "href": "/{locale}/legal/privacy"
-        },
-        {
-          "k": "legal_terms",
-          "label": "Terms",
-          "href": "/{locale}/legal/terms"
-        },
-        {
-          "k": "manage_cookies",
-          "label": "Manage cookies",
-          "href": "TBD",
-          "ref": {
-            "doc": "E03",
-            "sec": "banner"
+      "header": {
+        "items": [
+          {
+            "key": "why_el_salvador",
+            "href": "/why-el-salvador",
+            "i18n_key": "nav.why_el_salvador"
+          },
+          {
+            "key": "why_invest",
+            "href": "/why-invest",
+            "i18n_key": "nav.why_invest"
+          },
+          {
+            "key": "how_to_invest",
+            "href": "/how-to-invest",
+            "i18n_key": "nav.how_to_invest"
+          },
+          {
+            "key": "sectors",
+            "href": "/sectors",
+            "i18n_key": "nav.sectors"
+          },
+          {
+            "key": "success_stories",
+            "href": "/success-stories",
+            "i18n_key": "nav.success_stories"
+          },
+          {
+            "key": "news_events",
+            "href": "/news",
+            "i18n_key": "nav.news_events",
+            "note": "Events exist at /events; header currently links only to /news."
+          },
+          {
+            "key": "about",
+            "href": "/about",
+            "i18n_key": "nav.about"
+          },
+          {
+            "key": "contact",
+            "href": "/contact",
+            "i18n_key": "nav.contact",
+            "cta": true
           }
-        }
-      ],
-      "footer_links": [
-        "Privacy",
-        "Terms",
-        "Manage Cookies (Consent)",
-        "Social Links"
-      ]
+        ],
+        "ref": { "doc": "A04", "sec": "navigation model (as-is)" }
+      },
+      "footer": {
+        "legal": [
+          {
+            "key": "accessibility",
+            "href": "/legal/accessibility",
+            "i18n_key": "footer.legal.accessibility"
+          },
+          {
+            "key": "cookies",
+            "href": "/legal/cookies",
+            "i18n_key": "footer.legal.cookies"
+          },
+          {
+            "key": "privacy",
+            "href": "/legal/privacy",
+            "i18n_key": "footer.legal.privacy"
+          },
+          {
+            "key": "terms",
+            "href": "/legal/terms",
+            "i18n_key": "footer.legal.terms"
+          }
+        ],
+        "utility": [
+          {
+            "key": "manage_cookies",
+            "action": "open_cookie_settings",
+            "ref": { "doc": "E03", "sec": "manage_cookies" }
+          }
+        ]
+      }
     },
-    "pages": {
+    "inventory": {
+      "derived_from": { "doc": "A00", "sec": "files" },
       "static": [
-        "/{locale}/",
-        "/{locale}/about",
-        "/{locale}/about/governance",
-        "/{locale}/about/team",
-        "/{locale}/why-el-salvador",
-        "/{locale}/why-el-salvador/connectivity",
-        "/{locale}/why-el-salvador/macroeconomy",
-        "/{locale}/why-el-salvador/quality-of-life",
-        "/{locale}/why-el-salvador/talent",
-        "/{locale}/why-invest",
-        "/{locale}/why-invest/incentives",
-        "/{locale}/why-invest/services",
-        "/{locale}/how-to-invest",
-        "/{locale}/how-to-invest/steps",
-        "/{locale}/how-to-invest/requirements",
-        "/{locale}/how-to-invest/faqs",
-        "/{locale}/contact",
-        "/{locale}/contact/invest-support",
-        "/{locale}/media",
-        "/{locale}/media/downloads",
-        "/{locale}/media/gallery",
-        "/{locale}/legal/accessibility",
-        "/{locale}/legal/cookies",
-        "/{locale}/legal/privacy",
-        "/{locale}/legal/terms"
+        "/",
+        "/about",
+        "/about/governance",
+        "/about/team",
+        "/why-el-salvador",
+        "/why-el-salvador/connectivity",
+        "/why-el-salvador/macroeconomy",
+        "/why-el-salvador/quality-of-life",
+        "/why-el-salvador/talent",
+        "/why-invest",
+        "/why-invest/incentives",
+        "/why-invest/services",
+        "/how-to-invest",
+        "/how-to-invest/steps",
+        "/how-to-invest/requirements",
+        "/how-to-invest/faqs",
+        "/insights",
+        "/insights/reports",
+        "/media",
+        "/media/downloads",
+        "/media/gallery",
+        "/contact",
+        "/contact/invest-support",
+        "/legal/accessibility",
+        "/legal/cookies",
+        "/legal/privacy",
+        "/legal/terms"
       ],
       "collections": [
         {
-          "k": "news",
-          "index": "/{locale}/news",
-          "detail": "/{locale}/news/{slug}",
-          "param": "slug",
-          "src": "cms",
-          "ref": {
-            "doc": "A00",
-            "sec": "collections"
-          }
+          "name": "news",
+          "index": "/news",
+          "detail": "/news/{slug}",
+          "param": "slug"
         },
         {
-          "k": "events",
-          "index": "/{locale}/events",
-          "detail": "/{locale}/events/{slug}",
-          "param": "slug",
-          "src": "cms",
-          "ref": {
-            "doc": "A00",
-            "sec": "collections"
-          }
+          "name": "events",
+          "index": "/events",
+          "detail": "/events/{slug}",
+          "param": "slug"
         },
         {
-          "k": "reports",
-          "index": "/{locale}/insights/reports",
-          "detail": "/{locale}/insights/reports/{slug}",
-          "param": "slug",
-          "src": "cms",
-          "ref": {
-            "doc": "A00",
-            "sec": "collections"
-          }
+          "name": "reports",
+          "index": "/insights/reports",
+          "detail": "/insights/reports/{slug}",
+          "param": "slug"
         },
         {
-          "k": "sectors",
-          "index": "/{locale}/sectors",
-          "detail": "/{locale}/sectors/{sectorSlug}",
-          "param": "sectorSlug",
-          "src": "cms",
-          "ref": {
-            "doc": "A00",
-            "sec": "collections"
-          }
+          "name": "sectors",
+          "index": "/sectors",
+          "detail": "/sectors/{sectorSlug}",
+          "param": "sectorSlug"
         },
         {
-          "k": "success_stories",
-          "index": "/{locale}/success-stories",
-          "detail": "/{locale}/success-stories/{storySlug}",
-          "param": "storySlug",
-          "src": "cms",
-          "ref": {
-            "doc": "A00",
-            "sec": "collections"
-          }
+          "name": "success_stories",
+          "index": "/success-stories",
+          "detail": "/success-stories/{storySlug}",
+          "param": "storySlug"
         }
-      ]
+      ],
+      "cms_ref": { "doc": "D01", "sec": "collections" }
     },
-    "open": []
+    "open": [
+      {
+        "q": "Should 'news_events' become a dropdown or be split (news + events)?",
+        "refs": [
+          { "doc": "A04", "sec": "spec_debt" },
+          { "doc": "A00", "sec": "route_patterns" }
+        ]
+      },
+      {
+        "q": "Should /insights be promoted to header navigation?",
+        "refs": [{ "doc": "A00", "sec": "files" }]
+      },
+      {
+        "q": "Should /media remain a top-level nav item or footer-only?",
+        "refs": [{ "doc": "A00", "sec": "files" }]
+      }
+    ]
   }
 }
