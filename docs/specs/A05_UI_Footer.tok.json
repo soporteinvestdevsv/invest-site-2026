@@ -1,0 +1,209 @@
+{
+  "id": "A05",
+  "fn": "docs/specs/A05_UI_Footer.tok.json",
+  "t": "UI Footer (Global Footer Component)",
+  "v": "0.1.0",
+  "st": "draft",
+  "own": ["ux", "eng", "product"],
+  "src": {
+    "md": "docs/specs/A05_UI_Footer.md",
+    "code": ["components/layout/Footer.tsx"]
+  },
+  "rel": [
+    { "doc": "A02", "why": "Footer is part of the global layout shell; must align with the global header/footer composition." },
+    { "doc": "A01", "why": "Footer links must align with the authoritative IA and sitemap." },
+    { "doc": "A03", "why": "Footer visual styles must adhere to design tokens (colors, spacing, typography)." },
+    { "doc": "C01", "why": "All internal footer links require locale prefix behavior and translation keys." },
+    { "doc": "E03", "why": "Footer includes 'Manage Cookies' entry and must not conflict with consent banner positioning." },
+    { "doc": "D01", "why": "Resource links (PDFs/content) may be CMS-managed in future versions." }
+  ],
+  "body": {
+    "component": {
+      "name": "Footer",
+      "file": "components/layout/Footer.tsx",
+      "rendering": "server",
+      "props": [
+        {
+          "name": "locale",
+          "type": "string",
+          "required": true,
+          "notes": "Used to prefix internal links and select translations."
+        }
+      ]
+    },
+
+    "structure": {
+      "sections": [
+        {
+          "id": "social",
+          "title_i18n_key": "footer.follow_us",
+          "items": [
+            { "id": "facebook", "type": "social_icon", "href": "config.social.facebook", "aria": "Facebook" },
+            { "id": "instagram", "type": "social_icon", "href": "config.social.instagram", "aria": "Instagram" },
+            { "id": "x", "type": "social_icon", "href": "config.social.x", "aria": "X" },
+            { "id": "linkedin", "type": "social_icon", "href": "config.social.linkedin", "aria": "LinkedIn" }
+          ],
+          "notes": "Icons use design tokens for color."
+        },
+
+        {
+          "id": "quick_links",
+          "title_i18n_key": "footer.quick_links.title",
+          "items": [
+            { "key": "invest", "href": "/invest", "i18n": "footer.quick_links.invest" },
+            { "key": "export", "href": "/export", "i18n": "footer.quick_links.export" },
+            { "key": "diaspora", "href": "/diaspora", "i18n": "footer.quick_links.diaspora" },
+            { "key": "transparency", "href": "https://www.transparencia.gob.sv/institutions/invest", "external": true, "i18n": "footer.quick_links.transparency" }
+          ],
+          "notes": "Internal links require locale prefix."
+        },
+
+        {
+          "id": "resources",
+          "title_i18n_key": "footer.resources.title",
+          "items": [
+            { "key": "intelligence", "href": "/resources", "i18n": "footer.resources.intelligence" },
+            {
+              "key": "investment_guide",
+              "href": "/docs/investment-guide.pdf",
+              "i18n": "footer.resources.investment_guide",
+              "external": true,
+              "target": "_blank"
+            },
+            { "key": "sector_guides", "href": "/sector-guides", "i18n": "footer.resources.sector_guides" },
+            {
+              "key": "tax_incentives",
+              "href": "/docs/tax-incentives.pdf",
+              "i18n": "footer.resources.tax_incentives",
+              "external": true,
+              "target": "_blank"
+            }
+          ]
+        },
+
+        {
+          "id": "extra",
+          "title_i18n_key": "footer.extra.title",
+          "items": [
+            { "key": "antisoborno", "href": "/politica-antisoborno", "i18n": "footer.extra.antisoborno" },
+            { "key": "events", "href": "/events", "i18n": "footer.extra.events" },
+            { "key": "why_el_salvador", "href": "/why-el-salvador", "i18n": "footer.extra.why_el_salvador" },
+            { "key": "contact_us", "href": "/contact", "i18n": "footer.extra.contact_us" },
+            { "key": "announcements", "href": "/announcements", "i18n": "footer.extra.announcements" }
+          ]
+        },
+
+        {
+          "id": "map",
+          "type": "iframe",
+          "src": "config.organization.map_embed_url",
+          "title": "INVEST Location Map",
+          "loading": "lazy",
+          "responsive": true,
+          "notes": "Must load without layout shift; height controlled by tokens."
+        },
+
+        {
+          "id": "brand_block",
+          "elements": [
+            {
+              "type": "image",
+              "src": "/images/footer/invest-logo.png",
+              "alt": "INVEST Logo",
+              "href": "/{locale}"
+            },
+            {
+              "type": "text",
+              "i18n_key": "footer.brand_statement"
+            },
+            {
+              "type": "image",
+              "src": "/images/footer/goes-logo.png",
+              "alt": "Government of El Salvador Logo"
+            },
+            {
+              "type": "text",
+              "i18n_key": "footer.legal.copyright"
+            }
+          ]
+        },
+
+        {
+          "id": "legal_links",
+          "items": [
+            { "key": "terms", "href": "/legal/terms", "i18n": "footer.legal.terms" },
+            { "key": "privacy", "href": "/legal/privacy", "i18n": "footer.legal.privacy" }
+          ]
+        }
+      ]
+    },
+
+    "tokens": {
+      "background": "brand.primary",
+      "text_color": "neutral.lightest",
+      "icon_color": "brand.primary.invert",
+      "spacing": "space.xl",
+      "column_gap": "space.lg",
+      "divider_color": "neutral/20",
+      "typography": {
+        "heading": "font.heading.xs",
+        "body": "font.body.sm"
+      }
+    },
+
+    "i18n": {
+      "namespace": "footer",
+      "keys": [
+        "follow_us",
+        "quick_links.invest",
+        "quick_links.export",
+        "quick_links.diaspora",
+        "quick_links.transparency",
+        "resources.intelligence",
+        "resources.investment_guide",
+        "resources.sector_guides",
+        "resources.tax_incentives",
+        "extra.antisoborno",
+        "extra.events",
+        "extra.why_el_salvador",
+        "extra.contact_us",
+        "extra.announcements",
+        "brand_statement",
+        "legal.terms",
+        "legal.privacy",
+        "legal.copyright"
+      ]
+    },
+
+    "a11y": {
+      "requirements": [
+        "All icons have aria-labels.",
+        "Focus states use token-based focus ring.",
+        "Iframe has a title attribute.",
+        "Footer contains a semantic <footer> landmark."
+      ]
+    },
+
+    "acceptance": [
+      { "id": "A05-AC-001", "txt": "Footer renders globally for all locale pages." },
+      { "id": "A05-AC-002", "txt": "Social icons are keyboard-navigable and use aria-labels." },
+      { "id": "A05-AC-003", "txt": "All internal links prefix with the active locale." },
+      { "id": "A05-AC-004", "txt": "Shared links resolve correctly for both locales." },
+      { "id": "A05-AC-005", "txt": "Map loads responsively without layout shift." },
+      { "id": "A05-AC-006", "txt": "Footer uses only design tokens (no inline hex values)." },
+      { "id": "A05-AC-007", "txt": "All visible strings map to i18n keys." },
+      { "id": "A05-AC-008", "txt": "Footer passes WCAG AA contrast and basic accessibility." }
+    ],
+
+    "open": [
+      {
+        "q": "Should quick links/resources be CMS-managed in v2?",
+        "note": "Would reduce code changes for update cycles."
+      },
+      {
+        "q": "Should the embedded map be replaced with a static image for performance?",
+        "note": "Iframe is slower; static image + link is lighter."
+      }
+    ]
+  }
+}
