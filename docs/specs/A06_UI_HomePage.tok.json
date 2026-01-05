@@ -1,0 +1,307 @@
+{
+    "id": "A06",
+    "fn": "docs/specs/A06_UI_HomePage.tok.json",
+    "t": "UI Home Page (Landing Page Structure)",
+    "v": "0.1.0",
+    "st": "draft",
+    "own": [
+        "ux",
+        "eng",
+        "content"
+    ],
+    "rel": [
+        {
+            "doc": "A01",
+            "why": "Page inventory and navigation structure."
+        },
+        {
+            "doc": "A03",
+            "why": "Design tokens for colors, spacing, typography."
+        },
+        {
+            "doc": "A07",
+            "why": "Hero Section component specification."
+        },
+        {
+            "doc": "A08",
+            "why": "Value Propositions component specification."
+        },
+        {
+            "doc": "A09",
+            "why": "Featured Sectors component specification."
+        },
+        {
+            "doc": "A10",
+            "why": "Success Stories component specification."
+        },
+        {
+            "doc": "A11",
+            "why": "News & Events Preview component specification."
+        },
+        {
+            "doc": "A12",
+            "why": "CTA Section component specification."
+        },
+        {
+            "doc": "A13",
+            "why": "Stats Counter component specification."
+        },
+        {
+            "doc": "D01",
+            "why": "WordPress integration for dynamic content (sectors, stories, news)."
+        },
+        {
+            "doc": "H01",
+            "why": "SEO metadata and performance requirements."
+        },
+        {
+            "doc": "C01",
+            "why": "Locale routing and i18n integration."
+        }
+    ],
+    "body": {
+        "responsibilities": [
+            "Serve as primary entry point for INVEST El Salvador website",
+            "Communicate El Salvador's value proposition for investors",
+            "Showcase key investment sectors and success stories",
+            "Provide clear pathways to deeper content",
+            "Display dynamic content from WordPress",
+            "Drive conversions through strategic CTAs",
+            "Deliver exceptional performance (Core Web Vitals)"
+        ],
+        "structure": {
+            "sections": [
+                {
+                    "order": 1,
+                    "id": "hero",
+                    "spec": "A07",
+                    "name": "Hero Section",
+                    "type": "static"
+                },
+                {
+                    "order": 2,
+                    "id": "stats",
+                    "spec": "A13",
+                    "name": "Stats Counter",
+                    "type": "static_config"
+                },
+                {
+                    "order": 3,
+                    "id": "value_props",
+                    "spec": "A08",
+                    "name": "Value Propositions",
+                    "type": "static"
+                },
+                {
+                    "order": 4,
+                    "id": "sectors",
+                    "spec": "A09",
+                    "name": "Featured Sectors",
+                    "type": "dynamic_wp"
+                },
+                {
+                    "order": 5,
+                    "id": "success_stories",
+                    "spec": "A10",
+                    "name": "Success Stories",
+                    "type": "dynamic_wp"
+                },
+                {
+                    "order": 6,
+                    "id": "news_events",
+                    "spec": "A11",
+                    "name": "News & Events Preview",
+                    "type": "dynamic_wp"
+                },
+                {
+                    "order": 7,
+                    "id": "cta",
+                    "spec": "A12",
+                    "name": "CTA Section",
+                    "type": "static"
+                }
+            ],
+            "spacing": {
+                "section_vertical": "py-16 md:py-20 lg:py-24",
+                "container_max_width": "max-w-7xl mx-auto",
+                "horizontal_padding": "px-4 sm:px-6"
+            }
+        },
+        "content_strategy": {
+            "static_sections": [
+                "hero",
+                "stats",
+                "value_props",
+                "cta"
+            ],
+            "dynamic_sections": [
+                "sectors",
+                "success_stories",
+                "news_events"
+            ],
+            "fallback_behavior": {
+                "sectors": "Show placeholder cards with generic sector names",
+                "success_stories": "Hide section entirely (graceful degradation)",
+                "news_events": "Show 'Coming soon' message or hide section"
+            }
+        },
+        "seo": {
+            "metadata": {
+                "title_en": "Invest in El Salvador | INVEST",
+                "title_es": "Invertir en El Salvador | INVEST",
+                "description_length": "150-160 characters",
+                "og_required": [
+                    "image",
+                    "title",
+                    "description"
+                ],
+                "canonical_pattern": "https://investinelsalvador.gob.sv/{locale}"
+            },
+            "structured_data": [
+                "Organization",
+                "WebSite",
+                "BreadcrumbList"
+            ],
+            "performance_targets": {
+                "lcp": "< 2.5s",
+                "fid": "< 100ms",
+                "cls": "< 0.1",
+                "hero_image": "priority loading with Next.js Image"
+            }
+        },
+        "responsive": {
+            "breakpoints": {
+                "mobile": "< 640px",
+                "tablet": "640px - 1024px",
+                "desktop": ">= 1024px"
+            },
+            "adaptations": {
+                "hero": "Full-width on all devices; text overlay adjusts padding",
+                "stats": "2 columns mobile → 4 columns desktop",
+                "value_props": "Stack mobile → 2 cols tablet → 3-4 cols desktop",
+                "sectors": "Carousel mobile → Grid desktop",
+                "success_stories": "Single column mobile → 3 columns desktop",
+                "news_events": "Stack mobile → Side-by-side desktop"
+            }
+        },
+        "a11y": {
+            "semantic_html": {
+                "wrapper": "main",
+                "sections": "section with aria-labelledby",
+                "h1_count": 1,
+                "section_titles": "h2",
+                "subsection_titles": "h3"
+            },
+            "keyboard_nav": "All CTAs, links, carousels must be keyboard accessible",
+            "color_contrast": "WCAG AA (4.5:1 body, 3:1 large text)"
+        },
+        "i18n": {
+            "translation_key_prefix": "home",
+            "required_keys": [
+                "hero.headline",
+                "hero.subheadline",
+                "hero.cta_primary",
+                "hero.cta_secondary",
+                "stats.title",
+                "stats.metric_*_label",
+                "stats.metric_*_value",
+                "value_props.title",
+                "value_props.item_*_title",
+                "value_props.item_*_description",
+                "sectors.title",
+                "sectors.view_all",
+                "success_stories.title",
+                "news_events.title",
+                "news_events.view_all_news",
+                "news_events.view_all_events",
+                "cta.headline",
+                "cta.description",
+                "cta.button_text"
+            ],
+            "dynamic_content_locale": "WordPress queries must include locale parameter with fallback to English"
+        },
+        "integration": {
+            "file_structure": {
+                "route": "app/(routes)/[locale]/page.tsx",
+                "components": [
+                    "components/sections/HeroSection.tsx",
+                    "components/sections/StatsCounter.tsx",
+                    "components/sections/ValuePropositions.tsx",
+                    "components/sections/FeaturedSectors.tsx",
+                    "components/sections/SuccessStories.tsx",
+                    "components/sections/NewsEventsPreview.tsx",
+                    "components/sections/CTASection.tsx"
+                ]
+            },
+            "data_fetching": {
+                "strategy": "Server Components (default)",
+                "wp_queries": "fetch with revalidation per D01",
+                "static_content": "i18n messages server-side"
+            },
+            "props_pattern": {
+                "base": {
+                    "locale": "string"
+                }
+            }
+        },
+        "acceptance_criteria": [
+            {
+                "id": "A06-AC-001",
+                "txt": "Home page renders all 7 sections in correct order"
+            },
+            {
+                "id": "A06-AC-002",
+                "txt": "Page uses only design tokens from A03 (no hard-coded colors/spacing)"
+            },
+            {
+                "id": "A06-AC-003",
+                "txt": "All static text uses i18n translation keys"
+            },
+            {
+                "id": "A06-AC-004",
+                "txt": "WordPress content displays correctly with graceful fallbacks"
+            },
+            {
+                "id": "A06-AC-005",
+                "txt": "Page meets Core Web Vitals targets (LCP < 2.5s, CLS < 0.1)"
+            },
+            {
+                "id": "A06-AC-006",
+                "txt": "SEO metadata is complete and correct per H01"
+            },
+            {
+                "id": "A06-AC-007",
+                "txt": "Page is fully responsive across mobile/tablet/desktop"
+            },
+            {
+                "id": "A06-AC-008",
+                "txt": "All interactive elements are keyboard accessible"
+            },
+            {
+                "id": "A06-AC-009",
+                "txt": "Color contrast meets WCAG AA standards"
+            },
+            {
+                "id": "A06-AC-010",
+                "txt": "Hero image loads with priority, other images lazy load"
+            }
+        ],
+        "open": [
+            {
+                "q": "Should stats counter data be static config or pulled from WordPress custom fields?"
+            },
+            {
+                "q": "Should we implement A/B testing capability for hero CTAs in v1?"
+            },
+            {
+                "q": "What is the revalidation strategy for WordPress content (ISR interval)?"
+            },
+            {
+                "q": "Should success stories have a dedicated collection or be a custom post type?"
+            },
+            {
+                "q": "Do we need animation/scroll effects (GSAP) or keep it simple for v1?"
+            }
+        ]
+    }
+}

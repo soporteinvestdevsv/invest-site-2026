@@ -1,0 +1,206 @@
+{
+    "id": "A08",
+    "fn": "docs/specs/A08_UI_ValuePropositions.tok.json",
+    "t": "UI Value Propositions Component",
+    "v": "0.1.0",
+    "st": "draft",
+    "own": [
+        "ux",
+        "eng"
+    ],
+    "rel": [
+        {
+            "doc": "A06",
+            "why": "Parent home page specification."
+        },
+        {
+            "doc": "A03",
+            "why": "Design tokens for colors, spacing, typography."
+        },
+        {
+            "doc": "C01",
+            "why": "i18n integration for content."
+        }
+    ],
+    "body": {
+        "responsibilities": [
+            "Highlight El Salvador's top 3-4 investment advantages",
+            "Present information in scannable format",
+            "Use icons to enhance visual appeal",
+            "Support static config and potential CMS integration",
+            "Maintain design system consistency"
+        ],
+        "api": {
+            "props": {
+                "locale": {
+                    "type": "string",
+                    "required": true
+                },
+                "title": {
+                    "type": "string",
+                    "required": false,
+                    "default": "i18n:home.value_props.title"
+                },
+                "items": {
+                    "type": "ValueProp[]",
+                    "required": false,
+                    "default": "config/valuePropositions.ts",
+                    "schema": {
+                        "id": "string",
+                        "icon": "string (icon name or SVG path)",
+                        "title": "string",
+                        "description": "string",
+                        "link": {
+                            "text": "string",
+                            "href": "string",
+                            "optional": true
+                        }
+                    }
+                }
+            },
+            "default_items": [
+                "Strategic Location",
+                "Competitive Incentives",
+                "Skilled Workforce",
+                "Modern Infrastructure"
+            ]
+        },
+        "design": {
+            "grid_layout": {
+                "desktop": "grid-cols-4 gap-8",
+                "tablet": "grid-cols-2 gap-6",
+                "mobile": "grid-cols-1 gap-6"
+            },
+            "card": {
+                "bg": "bg-white or bg-surface-card",
+                "border": "border border-border-neutral (optional)",
+                "border_radius": "rounded-2xl",
+                "padding": "p-6 lg:p-8",
+                "shadow": "shadow-md hover:shadow-lg",
+                "transition": "transition-shadow duration-300"
+            },
+            "icon": {
+                "size": "w-12 h-12 (mobile) to w-16 h-16 (desktop)",
+                "color": "text-brand-primary",
+                "format": "SVG (inline or library)",
+                "margin_bottom": "mb-4"
+            },
+            "title": {
+                "tag": "h3",
+                "font_size": "text-xl lg:text-2xl",
+                "weight": "font-semibold (600)",
+                "color": "text-text-primary",
+                "margin_bottom": "mb-2",
+                "max_length": "3-5 words"
+            },
+            "description": {
+                "tag": "p",
+                "font_size": "text-base",
+                "weight": "font-normal (400)",
+                "color": "text-text-muted",
+                "line_height": "leading-relaxed (1.7)",
+                "max_length": "15-25 words"
+            },
+            "link": {
+                "tag": "Link (Next.js)",
+                "font_size": "text-sm",
+                "weight": "font-medium (500)",
+                "color": "text-brand-primary hover:underline",
+                "margin_top": "mt-4"
+            }
+        },
+        "responsive": {
+            "mobile": {
+                "columns": 1,
+                "icon_size": "w-12 h-12"
+            },
+            "tablet": {
+                "columns": 2,
+                "icon_size": "w-14 h-14"
+            },
+            "desktop": {
+                "columns": 4,
+                "icon_size": "w-16 h-16",
+                "hover_effects": true
+            }
+        },
+        "a11y": {
+            "semantic_html": {
+                "wrapper": "section with aria-labelledby",
+                "title": "h2 with id",
+                "cards": "article or div",
+                "card_titles": "h3"
+            },
+            "icons": "aria-hidden=true (decorative) or aria-label (meaningful)",
+            "links": "descriptive text, keyboard accessible, visible focus"
+        },
+        "i18n": {
+            "translation_keys": [
+                "home.value_props.title",
+                "home.value_props.item_*_title",
+                "home.value_props.item_*_description",
+                "home.value_props.item_*_link"
+            ]
+        },
+        "acceptance_criteria": [
+            {
+                "id": "A08-AC-001",
+                "txt": "Renders 3-4 value proposition cards"
+            },
+            {
+                "id": "A08-AC-002",
+                "txt": "Grid adapts correctly (1/2/4 columns)"
+            },
+            {
+                "id": "A08-AC-003",
+                "txt": "Uses only design tokens from A03"
+            },
+            {
+                "id": "A08-AC-004",
+                "txt": "All text uses i18n keys"
+            },
+            {
+                "id": "A08-AC-005",
+                "txt": "Icons are accessible"
+            },
+            {
+                "id": "A08-AC-006",
+                "txt": "Cards have hover states on desktop"
+            },
+            {
+                "id": "A08-AC-007",
+                "txt": "Links are keyboard accessible"
+            },
+            {
+                "id": "A08-AC-008",
+                "txt": "Section title is semantic h2"
+            },
+            {
+                "id": "A08-AC-009",
+                "txt": "Color contrast meets WCAG AA"
+            },
+            {
+                "id": "A08-AC-010",
+                "txt": "No layout shift during load"
+            }
+        ],
+        "implementation": {
+            "file": "components/sections/ValuePropositions.tsx",
+            "icon_library": "Heroicons or Lucide React"
+        },
+        "open": [
+            {
+                "q": "Should items be configurable via WordPress?"
+            },
+            {
+                "q": "Support 3 or 4 items (or variable)?"
+            },
+            {
+                "q": "Animation on scroll or static?"
+            },
+            {
+                "q": "Entire card clickable or just link?"
+            }
+        ]
+    }
+}

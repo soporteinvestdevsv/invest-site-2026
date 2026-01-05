@@ -10,24 +10,31 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: '#0b2a4a',
+          primary: 'var(--color-brand-primary)',
+          'primary-text': 'var(--color-brand-primary-text)',
         },
         text: {
-          primary: '#111827',
-          muted: '#6b7280',
+          primary: 'var(--color-text-primary)',
+          muted: 'var(--color-text-muted)',
+          inverse: 'var(--color-text-inverse)',
+        },
+        surface: {
+          page: 'var(--color-surface-page)',
+          card: 'var(--color-surface-card)',
+          inverse: 'var(--color-surface-inverse)',
         },
         border: {
-          neutral: '#e5e7eb',
+          neutral: 'var(--color-border-neutral)',
         },
         warning: {
-          bg: '#fff7ed',
-          border: '#fed7aa',
-          title: '#9a3412',
-          text: '#7c2d12',
+          bg: 'var(--color-warning-bg)',
+          border: 'var(--color-warning-border)',
+          title: 'var(--color-warning-title)',
+          text: 'var(--color-warning-text)',
         },
         code: {
-          bg: '#0b1220',
-          text: '#e5e7eb',
+          bg: 'var(--color-code-bg)',
+          text: 'var(--color-code-text)',
         },
       },
       fontFamily: {

@@ -1,3 +1,5 @@
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/privacy/CookieBanner';
@@ -11,8 +13,10 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const messages = await getMessages({ locale });
+
   return (
-    <>
+    <NextIntlClientProvider messages={messages} locale={locale}>
       <Header locale={locale} />
       <ConsentScripts />
       <CookieBanner locale={locale} />
@@ -20,6 +24,6 @@ export default async function LocaleLayout({
         {children}
       </main>
       <Footer locale={locale} />
-    </>
+    </NextIntlClientProvider>
   );
 }

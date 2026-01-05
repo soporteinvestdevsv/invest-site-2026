@@ -1,0 +1,334 @@
+{
+    "id": "A07",
+    "fn": "docs/specs/A07_UI_HeroSection.tok.json",
+    "t": "UI Hero Section Component",
+    "v": "0.1.0",
+    "st": "draft",
+    "own": [
+        "ux",
+        "eng"
+    ],
+    "rel": [
+        {
+            "doc": "A06",
+            "why": "Parent home page specification."
+        },
+        {
+            "doc": "A03",
+            "why": "Design tokens for colors, spacing, typography."
+        },
+        {
+            "doc": "C01",
+            "why": "Locale routing for CTA links."
+        },
+        {
+            "doc": "H01",
+            "why": "Performance targets (LCP < 2.5s)."
+        }
+    ],
+    "body": {
+        "responsibilities": [
+            "Serve as primary visual anchor for home page",
+            "Communicate INVEST's core value proposition",
+            "Provide clear primary and secondary CTAs",
+            "Display high-quality background media",
+            "Maintain excellent performance (LCP < 2.5s)",
+            "Adapt seamlessly across viewports"
+        ],
+        "api": {
+            "props": {
+                "locale": {
+                    "type": "string",
+                    "required": true
+                },
+                "headline": {
+                    "type": "string",
+                    "required": false,
+                    "default": "i18n:home.hero.headline"
+                },
+                "subheadline": {
+                    "type": "string",
+                    "required": false,
+                    "default": "i18n:home.hero.subheadline"
+                },
+                "ctaPrimary": {
+                    "type": "object",
+                    "required": false,
+                    "fields": {
+                        "text": {
+                            "default": "i18n:home.hero.cta_primary"
+                        },
+                        "href": {
+                            "default": "/{locale}/contact"
+                        }
+                    }
+                },
+                "ctaSecondary": {
+                    "type": "object",
+                    "required": false,
+                    "fields": {
+                        "text": {
+                            "default": "i18n:home.hero.cta_secondary"
+                        },
+                        "href": {
+                            "default": "/{locale}/how-to-invest"
+                        }
+                    }
+                },
+                "backgroundMedia": {
+                    "type": "object",
+                    "required": false,
+                    "fields": {
+                        "type": {
+                            "enum": [
+                                "image",
+                                "video"
+                            ]
+                        },
+                        "src": {
+                            "type": "string"
+                        },
+                        "alt": {
+                            "type": "string",
+                            "required_if": "type === 'image'"
+                        },
+                        "poster": {
+                            "type": "string",
+                            "required_if": "type === 'video'"
+                        }
+                    },
+                    "default": {
+                        "type": "image",
+                        "src": "/images/hero/home-hero.jpg"
+                    }
+                }
+            }
+        },
+        "design": {
+            "dimensions": {
+                "height": {
+                    "mobile": "min-h-[500px] or h-[60vh]",
+                    "tablet": "min-h-[600px] or h-[70vh]",
+                    "desktop": "min-h-[700px] or h-[80vh]",
+                    "max": "max-h-[900px]"
+                },
+                "container": {
+                    "max_width": "max-w-7xl",
+                    "padding_x": "px-4 sm:px-6 lg:px-8",
+                    "centering": "flex items-center justify-center"
+                }
+            },
+            "background_media": {
+                "image": {
+                    "component": "next/image",
+                    "layout": "fill",
+                    "priority": true,
+                    "quality": 90,
+                    "sizes": "100vw",
+                    "object_fit": "object-cover object-center"
+                },
+                "video": {
+                    "autoplay": true,
+                    "muted": true,
+                    "loop": true,
+                    "poster_required": true,
+                    "note": "Consider performance impact; may defer to v2"
+                }
+            },
+            "overlay": {
+                "options": [
+                    "bg-brand-primary/70",
+                    "bg-black/50",
+                    "bg-gradient-to-r from-brand-primary/80 to-brand-primary/40"
+                ],
+                "purpose": "Ensure text contrast meets WCAG AA"
+            }
+        },
+        "typography": {
+            "headline": {
+                "tag": "h1",
+                "font_size": {
+                    "mobile": "text-4xl (36px)",
+                    "tablet": "text-5xl (48px)",
+                    "desktop": "text-6xl or text-7xl (60-72px)"
+                },
+                "weight": "font-bold (700)",
+                "color": "text-white or text-brand-primary-invert",
+                "line_height": "leading-tight (1.2)",
+                "max_width": "max-w-4xl",
+                "content_guidelines": "5-10 words, action-oriented, benefit-focused"
+            },
+            "subheadline": {
+                "tag": "p",
+                "font_size": {
+                    "mobile": "text-lg (18px)",
+                    "desktop": "text-xl or text-2xl (20-24px)"
+                },
+                "weight": "font-normal (400) or font-medium (500)",
+                "color": "text-white/90 or text-brand-primary-invert/90",
+                "line_height": "leading-relaxed (1.7)",
+                "max_width": "max-w-2xl",
+                "margin_top": "mt-4 or mt-6",
+                "content_guidelines": "15-25 words, supporting detail, value proposition"
+            }
+        },
+        "ctas": {
+            "layout": {
+                "desktop": "flex gap-4",
+                "mobile": "flex flex-col gap-3",
+                "margin_top": "mt-8 or mt-10"
+            },
+            "primary": {
+                "style": "solid",
+                "bg": "bg-white or bg-brand-accent",
+                "text_color": "text-brand-primary",
+                "padding": "px-8 py-4",
+                "border_radius": "rounded-2xl",
+                "font": "text-base font-semibold",
+                "hover": "hover:bg-white/90 transition-colors duration-200",
+                "focus": "focus:ring-4 focus:ring-white/50"
+            },
+            "secondary": {
+                "style": "outline",
+                "bg": "bg-transparent",
+                "border": "border-2 border-white",
+                "text_color": "text-white",
+                "padding": "px-8 py-4",
+                "border_radius": "rounded-2xl",
+                "font": "text-base font-semibold",
+                "hover": "hover:bg-white/10",
+                "focus": "focus:ring-4 focus:ring-white/50"
+            }
+        },
+        "responsive": {
+            "mobile": {
+                "breakpoint": "< 640px",
+                "headline": "text-4xl, centered",
+                "subheadline": "text-lg, centered",
+                "ctas": "full width or centered, stacked",
+                "padding": "px-4 py-12"
+            },
+            "tablet": {
+                "breakpoint": "640px - 1024px",
+                "headline": "text-5xl",
+                "subheadline": "text-xl",
+                "ctas": "horizontal, centered",
+                "padding": "px-6 py-16"
+            },
+            "desktop": {
+                "breakpoint": ">= 1024px",
+                "headline": "text-6xl or text-7xl",
+                "subheadline": "text-2xl",
+                "ctas": "horizontal",
+                "padding": "px-8 py-20"
+            }
+        },
+        "a11y": {
+            "semantic_html": {
+                "wrapper": "section with aria-labelledby",
+                "headline": "h1 with id",
+                "subheadline": "p",
+                "ctas": "Link (Next.js) as anchor"
+            },
+            "image": {
+                "alt": "decorative (alt='') or descriptive",
+                "contrast": "overlay ensures >= 4.5:1 ratio"
+            },
+            "keyboard": {
+                "tab_order": "Headline → Subheadline → Primary CTA → Secondary CTA",
+                "focus_indicators": "clearly visible"
+            }
+        },
+        "performance": {
+            "image_loading": {
+                "component": "next/image",
+                "priority": true,
+                "format": "WebP with JPEG fallback",
+                "sizes": "100vw",
+                "lazy_load": "additional decorative images only"
+            },
+            "lcp_target": "< 2.5s",
+            "preload": "hero image via link rel=preload",
+            "cls_prevention": "fixed/min height, object-cover"
+        },
+        "i18n": {
+            "translation_keys": [
+                "home.hero.headline",
+                "home.hero.subheadline",
+                "home.hero.cta_primary",
+                "home.hero.cta_secondary"
+            ],
+            "locale_aware_links": {
+                "primary": "/{locale}/contact",
+                "secondary": "/{locale}/how-to-invest"
+            }
+        },
+        "acceptance_criteria": [
+            {
+                "id": "A07-AC-001",
+                "txt": "Hero renders with correct headline, subheadline, and CTAs"
+            },
+            {
+                "id": "A07-AC-002",
+                "txt": "Background image loads with priority and meets LCP < 2.5s"
+            },
+            {
+                "id": "A07-AC-003",
+                "txt": "Text overlay ensures WCAG AA contrast (>= 4.5:1)"
+            },
+            {
+                "id": "A07-AC-004",
+                "txt": "Uses only design tokens from A03"
+            },
+            {
+                "id": "A07-AC-005",
+                "txt": "All text uses i18n translation keys"
+            },
+            {
+                "id": "A07-AC-006",
+                "txt": "CTAs are keyboard accessible with visible focus"
+            },
+            {
+                "id": "A07-AC-007",
+                "txt": "Fully responsive (mobile/tablet/desktop)"
+            },
+            {
+                "id": "A07-AC-008",
+                "txt": "No CLS during image load"
+            },
+            {
+                "id": "A07-AC-009",
+                "txt": "Headline is semantic h1 (only one per page)"
+            },
+            {
+                "id": "A07-AC-010",
+                "txt": "CTAs link to correct locale-aware paths"
+            }
+        ],
+        "implementation": {
+            "file": "components/sections/HeroSection.tsx",
+            "dependencies": [
+                "next/image",
+                "next/link",
+                "next-intl or custom i18n"
+            ]
+        },
+        "open": [
+            {
+                "q": "Support video backgrounds in v1 or defer to v2?"
+            },
+            {
+                "q": "Headline/subheadline editable via CMS or remain in i18n?"
+            },
+            {
+                "q": "A/B testing variants for CTAs?"
+            },
+            {
+                "q": "Add scroll indicator (down arrow)?"
+            },
+            {
+                "q": "Animation on load or keep static for performance?"
+            }
+        ]
+    }
+}

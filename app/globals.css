@@ -3,9 +3,39 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Brand Colors */
+    --color-brand-primary: #0b2a4a;
+    --color-brand-primary-text: #ffffff;
+    
+    /* Text Colors */
+    --color-text-primary: #111827;
+    --color-text-muted: #6b7280;
+    --color-text-inverse: #ffffff;
+    
+    /* Surface Colors */
+    --color-surface-page: #ffffff;
+    --color-surface-card: #ffffff;
+    --color-surface-inverse: #0b2a4a;
+    
+    /* Border Colors */
+    --color-border-neutral: #e5e7eb;
+    
+    /* Warning Palette */
+    --color-warning-bg: #fff7ed;
+    --color-warning-border: #fed7aa;
+    --color-warning-title: #9a3412;
+    --color-warning-text: #7c2d12;
+    
+    /* Code Block */
+    --color-code-bg: #0b1220;
+    --color-code-text: #e5e7eb;
+  }
+  
   html {
     @apply scroll-smooth;
   }
+  
   body {
     @apply bg-white text-text-primary antialiased font-sans;
   }
