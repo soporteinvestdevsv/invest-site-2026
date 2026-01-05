@@ -76,7 +76,7 @@ export default function Header({ locale }: { locale: string }) {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300
-        h-16 lg:h-20 bg-brand-primary text-white border-b border-brand-primary/10 shadow-sm`}
+        h-16 lg:h-20 bg-brand-primary text-white shadow-sm`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
 

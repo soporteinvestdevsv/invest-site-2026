@@ -1,5 +1,7 @@
 {
-  "site.title": "INVEST El Salvador",
+  "site": {
+    "title": "INVEST El Salvador"
+  },
   "home": {
     "hero": {
       "headline": "Invierta en la Economía Creciente de El Salvador",
