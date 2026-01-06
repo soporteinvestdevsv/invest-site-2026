@@ -254,7 +254,7 @@ export default function Footer({ locale }: FooterProps) {
         {/* ========= INVEST BRAND BLOCK ========= */}
         <div className="flex flex-col space-y-3">
           <img
-            src="/images/footer/invest-logo.png"
+            src="/images/logos/logo_white.png"
             alt="INVEST Logo"
             className="w-auto h-10 object-contain opacity-90"
           />
@@ -267,7 +267,7 @@ export default function Footer({ locale }: FooterProps) {
         </div>
 
         {/* ========= GOES BLOCK ========= */}
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-3 items-center md:items-start">
           <img
             src="/images/footer/goes-logo.png"
             alt="Government of El Salvador Logo"

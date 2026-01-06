@@ -74,7 +74,7 @@ export default function Header({ locale }: { locale: string }) {
         <div className="lg:hidden flex items-center">
           <button
             onClick={toggleMenu}
-            className="relative z-[110] p-2 text-white hover:bg-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="relative z-[110] p-2 text-white focus:outline-none"
             aria-label="Toggle navigation"
             aria-expanded={isMobileOpen}
           >
@@ -131,7 +131,7 @@ export default function Header({ locale }: { locale: string }) {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 z-40 bg-brand-primary transform transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6
+        className={`fixed inset-0 z-40 bg-brand-primary transform transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6 pb-24 overflow-y-auto
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <nav className="flex flex-col gap-6 mt-8">
