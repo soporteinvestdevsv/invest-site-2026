@@ -247,6 +247,7 @@ export default function Footer({ locale }: FooterProps) {
             title="INVEST Location Map"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.529663110364!2d-89.24040582608177!3d13.686339398808073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f63303ba1e393ff%3A0xafaeaef88e494c97!2sInvest%20in%20El%20Salvador!5e0!3m2!1ses!2ssv!4v1706289129630!5m2!1ses!2ssv"
             loading="lazy"
+            allowFullScreen
             className="w-full h-56 rounded-md border border-neutral-300"
           ></iframe>
         </div>

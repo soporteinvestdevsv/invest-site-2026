@@ -42,9 +42,8 @@ export default function HeroSection({
     const finalCtaSecondaryText = ctaSecondary?.text || t('cta_secondary');
     const finalCtaSecondaryHref = ctaSecondary?.href || `/${locale}/how-to-invest`;
     const finalBackgroundMedia = backgroundMedia || {
-        type: 'image' as const,
-        src: '/images/home/hero/home-hero.jpg',
-        alt: 'El Salvador landscape',
+        type: 'video' as const,
+        src: 'https://investinelsalvador.gob.sv/wp-content/uploads/2025/05/Video-General-2-2.mp4',
     };
 
     return (
@@ -62,7 +61,7 @@ export default function HeroSection({
                         priority
                         quality={90}
                         sizes="100vw"
-                        className="object-cover object-center filter brightness-75"
+                        className="object-cover object-center filter brightness-50"
                     />
                 ) : (
                     <video
@@ -71,7 +70,7 @@ export default function HeroSection({
                         loop
                         playsInline
                         poster={finalBackgroundMedia.poster}
-                        className="w-full h-full object-cover filter brightness-75"
+                        className="w-full h-full object-cover filter brightness-50"
                     >
                         <source src={finalBackgroundMedia.src} type="video/mp4" />
                     </video>
@@ -79,8 +78,8 @@ export default function HeroSection({
             </div>
 
             {/* Overlay (z-10) */}
-            <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-brand-primary/95 to-brand-primary/80" />
-            <div className="absolute inset-0 z-10 pointer-events-none bg-black/20" />
+            <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-brand-primary/98 to-brand-primary/85" />
+            <div className="absolute inset-0 z-10 pointer-events-none bg-black/30" />
 
             {/* Content Container (z-20) */}
             <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">

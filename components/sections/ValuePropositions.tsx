@@ -95,11 +95,11 @@ export default function ValuePropositions({
                         return (
                             <article
                                 key={item.id}
-                                className="bg-white border border-border-neutral rounded-2xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow duration-300"
+                                className="bg-white border border-border-neutral rounded-2xl p-6 lg:p-8 shadow-md hover:shadow-xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-in-out group"
                             >
                                 {/* Icon */}
                                 <Icon
-                                    className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 text-brand-primary mb-4"
+                                    className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 text-brand-primary mb-4 transition-transform duration-300 group-hover:scale-110"
                                     aria-hidden="true"
                                 />
 
@@ -117,11 +117,11 @@ export default function ValuePropositions({
                                 {item.link && (
                                     <Link
                                         href={`/${locale}${item.link.href}`}
-                                        className="inline-flex items-center text-sm font-medium text-brand-primary hover:underline focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 rounded"
+                                        className="inline-flex items-center text-sm font-medium text-brand-primary hover:underline focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 rounded transition-all duration-200"
                                     >
                                         {t(item.link.textKey)}
                                         <svg
-                                            className="ml-1 w-4 h-4"
+                                            className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
