@@ -25,10 +25,23 @@ export default getRequestConfig(async ({ locale }) => {
     }
 
     try {
-        const messages = (await import(`@/messages/${finalLocale}.json`)).default;
+        const site = (await import(`@/messages/${finalLocale}.json`)).default;
+        const header = (await import(`@/messages/layout/header/${finalLocale}.json`)).default;
+        const footer = (await import(`@/messages/layout/footer/${finalLocale}.json`)).default;
+        const hero = (await import(`@/messages/home/hero/${finalLocale}.json`)).default;
+        const value_props = (await import(`@/messages/home/value-propositions/${finalLocale}.json`)).default;
+
         return {
             locale: finalLocale as string,
-            messages
+            messages: {
+                ...site,
+                header,
+                footer,
+                home: {
+                    hero,
+                    value_props,
+                },
+            },
         };
     } catch (error) {
         console.error('Error loading messages for locale:', finalLocale, error);

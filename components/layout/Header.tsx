@@ -3,33 +3,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import 'primeicons/primeicons.css';
 
-// TODO: Move to C01/A01 shared config or translation files
-const NAV_ITEMS = {
-  en: [
-    { key: 'why_es', label: 'Why El Salvador', href: '/why-el-salvador' },
-    { key: 'why_invest', label: 'Why Invest', href: '/why-invest' },
-    { key: 'how_to_invest', label: 'How to Invest', href: '/how-to-invest' },
-    { key: 'sectors', label: 'Sectors', href: '/sectors' },
-    { key: 'stories', label: 'Success Stories', href: '/success-stories' },
-    { key: 'news', label: 'News & Events', href: '/news' },
-    { key: 'about', label: 'About', href: '/about' },
-    { key: 'contact', label: 'Contact', href: '/contact' },
-  ],
-  es: [
-    { key: 'why_es', label: 'Por qué El Salvador', href: '/why-el-salvador' },
-    { key: 'why_invest', label: 'Por qué Invertir', href: '/why-invest' },
-    { key: 'how_to_invest', label: 'Cómo Invertir', href: '/how-to-invest' },
-    { key: 'sectors', label: 'Sectores', href: '/sectors' },
-    { key: 'stories', label: 'Casos de Éxito', href: '/success-stories' },
-    { key: 'news', label: 'Noticias y Eventos', href: '/news' },
-    { key: 'about', label: 'Nosotros', href: '/about' },
-    { key: 'contact', label: 'Contacto', href: '/contact' },
-  ],
-};
-
 export default function Header({ locale }: { locale: string }) {
+  const t = useTranslations('header');
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -62,7 +40,7 @@ export default function Header({ locale }: { locale: string }) {
   const pathname = usePathname();
   const currentLocale = locale || 'en';
   const targetLocale = currentLocale === 'en' ? 'es' : 'en';
-  const targetLabel = targetLocale === 'en' ? 'EN' : 'ES'; // Target label to switch TO
+  const targetLabel = targetLocale === 'en' ? 'EN' : 'ES';
 
   // Replace the locale segment in the current path
   const switchLocaleHref = pathname?.replace(`/${currentLocale}`, `/${targetLocale}`) || `/${targetLocale}`;
@@ -70,8 +48,20 @@ export default function Header({ locale }: { locale: string }) {
   // Prefix href with locale
   const getHref = (path: string) => `/${currentLocale}${path}`;
 
-  // Get items for current locale or fallback to 'en'
-  const navItems = NAV_ITEMS[currentLocale as keyof typeof NAV_ITEMS] || NAV_ITEMS.en;
+  // Keys align with the JSON structure keys
+  const navKeys = ['why_es', 'why_invest', 'how_to_invest', 'sectors', 'stories', 'news', 'about', 'contact'];
+
+  // Map keys to hrefs
+  const navHrefs: Record<string, string> = {
+    why_es: '/why-el-salvador',
+    why_invest: '/why-invest',
+    how_to_invest: '/how-to-invest',
+    sectors: '/sectors',
+    stories: '/success-stories',
+    news: '/news',
+    about: '/about',
+    contact: '/contact'
+  };
 
   return (
     <header
@@ -102,22 +92,26 @@ export default function Header({ locale }: { locale: string }) {
           </button>
         </div>
 
-        {/* Brand (Right on Mobile, Left on Desktop) */}
+        {/* Brand */}
         <div className="flex-shrink-0 flex items-center lg:order-first">
-          <Link href={`/${locale}`} className="text-xl font-bold font-sans tracking-tight hover:opacity-90 transition-opacity" onClick={closeMenu}>
-            INVEST <span className="font-light text-white/80">EL SALVADOR</span>
+          <Link href={`/${locale}`} className="hover:opacity-90 transition-opacity" onClick={closeMenu}>
+            <img
+              src="/images/logos/logo_white.png"
+              alt="INVEST El Salvador"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
         </div>
 
-        {/* Desktop Nav (Center/Right) */}
+        {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-6">
-          {navItems.map((item) => (
+          {navKeys.map((key) => (
             <Link
-              key={item.key}
-              href={getHref(item.href)}
+              key={key}
+              href={getHref(navHrefs[key])}
               className="text-sm font-medium text-white/90 hover:text-white hover:underline decoration-2 underline-offset-4 transition-all"
             >
-              {item.label}
+              {t(key)}
             </Link>
           ))}
         </nav>
@@ -127,7 +121,7 @@ export default function Header({ locale }: { locale: string }) {
           <Link
             href={switchLocaleHref}
             className="flex items-center justify-center text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded transition-colors"
-            aria-label={`Switch to ${targetLocale === 'en' ? 'English' : 'Spanish'}`}
+            aria-label={`${t('switch_locale')} ${targetLabel}`}
           >
             {targetLabel}
           </Link>
@@ -135,20 +129,20 @@ export default function Header({ locale }: { locale: string }) {
 
       </div>
 
-      {/* Mobile Drawer (Overlay) */}
+      {/* Mobile Drawer */}
       <div
         className={`fixed inset-0 z-40 bg-brand-primary transform transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <nav className="flex flex-col gap-6 mt-8">
-          {navItems.map((item) => (
+          {navKeys.map((key) => (
             <Link
-              key={item.key}
-              href={getHref(item.href)}
+              key={key}
+              href={getHref(navHrefs[key])}
               onClick={closeMenu}
               className="text-xl font-semibold text-white border-b border-white/10 pb-4 hover:pl-2 transition-all"
             >
-              {item.label}
+              {t(key)}
             </Link>
           ))}
           <div className="mt-8 pt-8 border-t border-white/20">
@@ -159,7 +153,7 @@ export default function Header({ locale }: { locale: string }) {
                 onClick={closeMenu}
                 className="text-sm font-bold bg-white/10 px-3 py-1 rounded hover:bg-white/20"
               >
-                Switch to {targetLabel}
+                {t('switch_locale')} {targetLabel}
               </Link>
             </div>
           </div>

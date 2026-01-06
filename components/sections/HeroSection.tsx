@@ -43,7 +43,7 @@ export default function HeroSection({
     const finalCtaSecondaryHref = ctaSecondary?.href || `/${locale}/how-to-invest`;
     const finalBackgroundMedia = backgroundMedia || {
         type: 'image' as const,
-        src: '/images/hero/home-hero.jpg',
+        src: '/images/home/hero/home-hero.jpg',
         alt: 'El Salvador landscape',
     };
 
