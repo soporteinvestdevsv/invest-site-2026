@@ -50,37 +50,40 @@ export default function HeroSection({
     return (
         <section
             aria-labelledby="hero-headline"
-            className="relative min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] max-h-[900px] h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full overflow-hidden"
+            className="relative isolate min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] max-h-[900px] h-[60vh] sm:h-[70vh] lg:h-[80vh] w-full overflow-hidden"
         >
-            {/* Background Media */}
-            {finalBackgroundMedia.type === 'image' ? (
-                <Image
-                    src={finalBackgroundMedia.src}
-                    alt={finalBackgroundMedia.alt || ''}
-                    fill
-                    priority
-                    quality={90}
-                    sizes="100vw"
-                    className="object-cover object-center"
-                />
-            ) : (
-                <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    poster={finalBackgroundMedia.poster}
-                    className="absolute inset-0 w-full h-full object-cover"
-                >
-                    <source src={finalBackgroundMedia.src} type="video/mp4" />
-                </video>
-            )}
+            {/* Background Media (z-0) */}
+            <div className="absolute inset-0 z-0">
+                {finalBackgroundMedia.type === 'image' ? (
+                    <Image
+                        src={finalBackgroundMedia.src}
+                        alt={finalBackgroundMedia.alt || ''}
+                        fill
+                        priority
+                        quality={90}
+                        sizes="100vw"
+                        className="object-cover object-center filter brightness-75"
+                    />
+                ) : (
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        poster={finalBackgroundMedia.poster}
+                        className="w-full h-full object-cover filter brightness-75"
+                    >
+                        <source src={finalBackgroundMedia.src} type="video/mp4" />
+                    </video>
+                )}
+            </div>
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/80 to-brand-primary/40" />
+            {/* Overlay (z-10) */}
+            <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-brand-primary/95 to-brand-primary/80" />
+            <div className="absolute inset-0 z-10 pointer-events-none bg-black/20" />
 
-            {/* Content Container */}
-            <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+            {/* Content Container (z-20) */}
+            <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
                 <div className="text-center max-w-4xl py-12 sm:py-16 lg:py-20">
                     {/* Headline */}
                     <h1
