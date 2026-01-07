@@ -131,7 +131,7 @@ export default function Header({ locale }: { locale: string }) {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 z-40 bg-brand-primary transform transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6 pb-24 overflow-y-auto
+        className={`fixed top-16 bottom-0 left-0 right-0 z-40 bg-brand-primary transform transition-transform duration-300 ease-in-out lg:hidden pt-8 px-6 pb-24 overflow-y-auto
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <nav className="flex flex-col gap-6 mt-8">

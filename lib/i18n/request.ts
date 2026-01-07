@@ -30,7 +30,7 @@ export default getRequestConfig(async ({ locale }) => {
         const footer = (await import(`@/messages/layout/footer/${finalLocale}.json`)).default;
         const hero = (await import(`@/messages/home/hero/${finalLocale}.json`)).default;
         const value_props = (await import(`@/messages/home/value-propositions/${finalLocale}.json`)).default;
-        const anti_bribery = (await import(`@/messages/legal/anti-bribery/${finalLocale}.json`)).default;
+        const anti_bribery = (await import(`@/messages/anti-bribery/${finalLocale}.json`)).default;
 
         return {
             locale: finalLocale as string,
@@ -42,9 +42,7 @@ export default getRequestConfig(async ({ locale }) => {
                     hero,
                     value_props,
                 },
-                legal: {
-                    anti_bribery,
-                },
+                anti_bribery,
             },
         };
     } catch (error) {

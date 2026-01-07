@@ -1,0 +1,25 @@
+{
+    "title": "Anti-Bribery Policy",
+    "introduction": "With the purpose of strengthening the principles of integrity, legality, and transparency in the management of all services provided by the Investment and Export Promotion Agency of El Salvador (INVEST), this Anti-Bribery Policy is hereby established, maintained, and subject to continuous review.",
+    "commitments_intro": "INVEST undertakes the following commitments:",
+    "commitments": {
+        "i": "Zero tolerance toward bribery in all its forms.",
+        "ii": "INVEST officials and employees commit to complying with and continuously improving the Anti-Bribery Management System (ABMS), based on the ISO 37001:2016 Standard. This entails adopting concrete actions to prevent, detect, and address bribery in all its forms in a rational, proportional, effective, and appropriate manner.",
+        "iii": "Every INVEST official or employee has the responsibility to identify and report indications of bribery whenever circumstances allow. Such indications may include promises, offers, gifts, gratuities, or other improper advantages in exchange for performing or omitting actions that benefit a third party. INVEST personnel who witness or are victims of such situations must categorically reject any request or offer of bribery and report the incident through the INVEST website (Online Bribery Report Form), Email: denuncias_soborno@investinelsalvador.gob.sv, Phone: 7071-7019, or Physical reporting boxes located at INVEST offices.",
+        "iv": "The Anti-Bribery Compliance Function, together with the leadership of its President, is responsible for verifying, assessing, and monitoring the effective implementation of this policy, ensuring the efficient and effective achievement of anti-bribery objectives.",
+        "v": "Officials, employees, suppliers, business partners, and other interested parties related to INVEST must comply with the requirements of the ABMS and this policy. It is mandatory for everyone to apply the legal and technical framework for bribery prevention in institutional projects, activities, relationships, and services.",
+        "vi": "All officials and personnel within INVEST must adopt the necessary measures to ensure the protection, confidentiality, and anonymity of individuals who, in good faith, with reasonable belief and responsibility, report alleged acts of bribery. Such reports shall be managed by the Compliance Office.",
+        "vii": "The Compliance Function has the competence, status, responsibility, authority, and independence necessary to provide advice and guidance on the implementation and continuous improvement of the ABMS. INVEST authorities shall conduct the relevant investigations, exhausting administrative and legal avenues according to the nature and particularities of each case. This shall be without prejudice to administrative sanctions or criminal actions applicable to those found to have engaged in bribery, whether they are employees of INVEST or not, taking into account the facts, nature, and seriousness of the offense or non-compliance."
+    },
+    "closing": "INVEST, as the leading institution for promoting foreign investment and exports in El Salvador, reaffirms its commitment to upholding the highest standards of integrity, transparency, and ethics in all its operations and processes. In this regard, INVEST implements its Anti-Bribery Management System (ABMS), of which this policy forms an integral part. Non-compliance with this policy may result in administrative sanctions and legal actions, including civil and criminal consequences. Therefore, all officials, employees, suppliers, business partners, and other interested parties are urged to abstain from, refuse, or avoid participating— either actively or passively—in any activity that could constitute an act of bribery, thus contributing to an ethical and corruption-free management.",
+    "date": "San Salvador, August 2025",
+    "form": {
+        "title": "Reports of Possible Acts of Bribery",
+        "name": "Name (Optional)",
+        "phone": "Phone Number (Optional)",
+        "email": "Email Address (Optional)",
+        "date_label": "Date of the Identified Incident:",
+        "description_label": "Describe the identified possible act of bribery:",
+        "submit_btn": "Submit report"
+    }
+}

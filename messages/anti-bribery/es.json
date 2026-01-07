@@ -1,0 +1,25 @@
+{
+    "title": "Política Antisoborno",
+    "introduction": "Con el propósito de consolidar los principios de integridad, legalidad y transparencia en la gestión de todos los servicios que proporciona la Agencia de Promoción de Inversión y Exportaciones de El Salvador (INVEST), se establece, mantiene y se revisará de manera continua la presente Política Antisoborno.",
+    "commitments_intro": "INVEST asume los siguientes compromisos:",
+    "commitments": {
+        "i": "Cero tolerancia frente al soborno en todas sus formas de expresión.",
+        "ii": "Los funcionarios y empleados de INVEST se comprometen a cumplir y mejorar continuamente el Sistema de Gestión Antisoborno (SGAS), basado en la Norma ISO 37001:2016. Esto implica la adopción de acciones concretas para prevenir, detectar y abordar el soborno en todas sus formas de manera racional, proporcional, efectiva y pertinente.",
+        "iii": "Todo funcionario o empleado de INVEST, tiene la responsabilidad de identificar y reportar indicios de soborno, cuando las circunstancias lo permitan. Estos indicios pueden incluir promesas, ofrecimientos de regalos, dádivas u otras ventajas indebidas a cambio de realizar u omitir acciones que beneficien a un tercero. El personal de INVEST que presencie o sea víctima de estas situaciones debe rechazar categóricamente cualquier solicitud u oferta de soborno y denunciar los hechos por medio del sitio web de INVEST, el correo denuncias_soborno@investinelsalvador.gob.sv, el número telefónico 7071-7019 o Buzones de denuncia físicos en INVEST, aportando las pruebas que posea para la acción jurídica pertinente.",
+        "iv": "La Función de Cumplimiento Antisoborno, en conjunto con el liderazgo de su presidente, es responsable de verificar, evaluar y dar seguimiento a la implementación efectiva de esta política, asegurando el logro eficiente y eficaz de los objetivos antisoborno.",
+        "v": "Los funcionarios, empleados, proveedores, socios de negocios y demás partes interesadas relacionadas con INVEST deben cumplir con los requisitos del SGAS y su política. Es obligatorio para todos aplicar el marco legal y técnico para la prevención del soborno en los proyectos, actividades, relaciones y servicios institucionales.",
+        "vi": "Los funcionarios y personal que conforman todas las dependencias de INVEST, deberán adoptar las medidas necesarias para asegurar la protección, confidencialidad y anonimato de las personas que, con actitudes de buena fe, creencia razonable y responsabilidad, denuncien presuntos actos de soborno, los cuales deberá gestionar la Oficina de Cumplimiento.",
+        "vii": "Las autoridades de INVEST realizarán investigaciones pertinentes, agotando las instancias administrativas y legales en función de la naturaleza y las particularidades de cada caso, todo ello, sin perjuicio de las sanciones administrativas y acciones penales, en que puedan incurrir los infractores, a quienes se les impute un acto de soborno, independientemente que sean empleados o no de INVEST, considerando el hecho, la naturaleza y gravedad de la falta o incumplimiento."
+    },
+    "closing": "INVEST, como institución líder en la promoción de la inversión extranjera y las exportaciones de El Salvador, reafirma su compromiso de mantener los más altos estándares de integridad, transparencia y ética en todas sus operaciones y procesos. En este sentido, implementa su Sistema de Gestión Antisoborno (SGAS), del cual esta política forma parte integral. El incumplimiento de la misma podrá dar lugar a sanciones administrativas y acciones legales, incluyendo consecuencias civiles y penales. Por ello, se exhorta a todos los funcionarios, empleados, proveedores, socios de negocios y demás partes interesadas a abstenerse, negarse o participar de manera activa o pasiva en cualquier actividad que pueda constituir un acto de soborno, contribuyendo así a una gestión íntegra y libre de corrupción.",
+    "date": "San Salvador, Agosto 2025",
+    "form": {
+        "title": "Denuncias de Posibles Actos de Soborno",
+        "name": "Nombre (Opcional)",
+        "phone": "Teléfono (Opcional)",
+        "email": "Correo Electrónico (Opcional)",
+        "date_label": "Fecha del hecho identificado:",
+        "description_label": "Describa la denuncia de posible hecho de Soborno identificada:",
+        "submit_btn": "Enviar reporte"
+    }
+}
