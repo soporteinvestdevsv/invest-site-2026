@@ -146,8 +146,7 @@ export default function Header({ locale }: { locale: string }) {
             </Link>
           ))}
           <div className="mt-8 pt-8 border-t border-white/20">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-white/60 font-mono">Locale: {currentLocale.toUpperCase()}</span>
+            <div className="flex items-center justify-center">
               <Link
                 href={switchLocaleHref}
                 onClick={closeMenu}
