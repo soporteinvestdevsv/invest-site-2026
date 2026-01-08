@@ -1,0 +1,36 @@
+{
+    "title": "Si desea obtener más información sobre cómo invertir, exportar o establecer un nuevo negocio, contacte con Invest in El Salvador.",
+    "body": "El Salvador tiene la energía que su negocio necesita. Estamos impulsados por una de las mayores fuerzas laborales de la región y respaldados por la infraestructura más rentable y moderna de América Central. No dude en ponerse en contacto completando el formulario o descargando nuestra guía detallada para inversores para que pueda comenzar el viaje para su mejor decisión comercial. Lo esperamos.",
+    "bullets": {
+        "business_climate": "Clima de negocios",
+        "access_connectivity": "Acceso y Conectividad",
+        "legal_framework": "Marco Legal e Incentivos",
+        "human_capital": "Capital humano",
+        "investment_opportunities": "Oportunidades de inversión",
+        "setting_up": "Estableciendo y Operando un Negocio en el Salvador"
+    },
+    "download_button": "Descargar Guía",
+    "form": {
+        "title": "Envíenos un mensaje",
+        "name": "Nombre",
+        "last_name": "Apellidos",
+        "phone": "Número de teléfono",
+        "email": "Correo electrónico",
+        "country": "País",
+        "state": "Estado / Departamento",
+        "sector_label": "Sector de interés",
+        "sector_options": {
+            "software": "Desarrollo de software y contenido digital",
+            "btc": "BTC y activos digitales",
+            "aeronautics": "Aeronáutico",
+            "tourism": "Infraestructura turística",
+            "electronics": "Equipos electrónicos y autopartes",
+            "pharma": "Farmacéutica y dispositivos médicos",
+            "food": "Alimentos y bebidas",
+            "real_estate": "Infraestructura inmobiliaria"
+        },
+        "subject": "Asunto del mensaje",
+        "message_placeholder": "Detalles de la compañía y sus necesidades",
+        "submit": "Enviar mensaje"
+    }
+}

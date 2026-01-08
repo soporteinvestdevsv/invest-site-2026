@@ -1,0 +1,36 @@
+{
+    "title": "If you need more information about how to invest, export or establish a new business, get in touch with Invest in El Salvador.",
+    "body": "El Salvador has the energy your business needs. We are fueled by one of the greatest work force in the region and supported by the most cost effective and modern infrastructure in Central America. Please feel free to get in touch by filing the form, or downloading our detailed investors guide so you can start the journey of your best business desition. We are waiting for you.",
+    "bullets": {
+        "business_climate": "Business Climate",
+        "access_connectivity": "Access and Connectivity",
+        "legal_framework": "Legal Framework and Incentives",
+        "human_capital": "Human Capital",
+        "investment_opportunities": "Investment Opportunities",
+        "setting_up": "Setting Up and Operating a Business in el Salvador"
+    },
+    "download_button": "Download Guide",
+    "form": {
+        "title": "Send us a message",
+        "name": "Name",
+        "last_name": "Last",
+        "phone": "Phone number",
+        "email": "Email",
+        "country": "Country",
+        "state": "State",
+        "sector_label": "Sector of interest",
+        "sector_options": {
+            "software": "Software development and digital content",
+            "btc": "BTC and digital assets",
+            "aeronautics": "Aeronautics",
+            "tourism": "Tourism infrastructure",
+            "electronics": "Electronic equipment and auto parts",
+            "pharma": "Pharmaceuticals and medical devices",
+            "food": "Food and beverages",
+            "real_estate": "Real estate infrastructure"
+        },
+        "subject": "Message subject",
+        "message_placeholder": "Details of the company and its needs",
+        "submit": "Send message"
+    }
+}
