@@ -205,7 +205,7 @@ Default items loaded from `config/valuePropositions.ts` or i18n:
 ## 9) Implementation Notes
 
 ### 9.1 File Location
-- `components/sections/ValuePropositions.tsx`
+- `app/(routes)/[locale]/(home)/sections/ValuePropositions.tsx`
 
 ### 9.2 Icon Strategy
 - Use Heroicons or Lucide React for consistency
@@ -213,7 +213,7 @@ Default items loaded from `config/valuePropositions.ts` or i18n:
 
 ### 9.3 Example Usage
 ```tsx
-import ValuePropositions from '@/components/sections/ValuePropositions';
+import ValuePropositions from '@/app/(routes)/[locale]/(home)/sections/ValuePropositions';
 
 <ValuePropositions locale={locale} />
 ```

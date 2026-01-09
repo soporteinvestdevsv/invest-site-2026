@@ -306,7 +306,7 @@
             }
         ],
         "implementation": {
-            "file": "components/sections/HeroSection.tsx",
+            "file": "app/(routes)/[locale]/(home)/sections/HeroSection.tsx",
             "dependencies": [
                 "next/image",
                 "next/link",

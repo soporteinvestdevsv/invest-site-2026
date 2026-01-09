@@ -185,7 +185,7 @@
             }
         ],
         "implementation": {
-            "file": "components/sections/ValuePropositions.tsx",
+            "file": "app/(routes)/[locale]/(home)/sections/ValuePropositions.tsx",
             "icon_library": "Heroicons or Lucide React"
         },
         "open": [

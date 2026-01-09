@@ -158,13 +158,13 @@ home.cta.button_text
 ### 8.1 Component File Structure
 ```
 app/(routes)/[locale]/page.tsx          # Home page route
-components/sections/HeroSection.tsx     # A07
-components/sections/StatsCounter.tsx    # A13
-components/sections/ValuePropositions.tsx # A08
-components/sections/FeaturedSectors.tsx # A09
-components/sections/SuccessStories.tsx  # A10
-components/sections/NewsEventsPreview.tsx # A11
-components/sections/CTASection.tsx      # A12
+app/(routes)/[locale]/(home)/sections/HeroSection.tsx     # A07
+app/(routes)/[locale]/(home)/sections/StatsCounter.tsx    # A13
+app/(routes)/[locale]/(home)/sections/ValuePropositions.tsx # A08
+app/(routes)/[locale]/(home)/sections/FeaturedSectors.tsx # A09
+app/(routes)/[locale]/(home)/sections/SuccessStories.tsx  # A10
+app/(routes)/[locale]/(home)/sections/NewsEventsPreview.tsx # A11
+app/(routes)/[locale]/(home)/sections/CTASection.tsx      # A12
 ```
 
 ### 8.2 Data Fetching Strategy

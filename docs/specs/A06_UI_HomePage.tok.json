@@ -224,13 +224,13 @@
             "file_structure": {
                 "route": "app/(routes)/[locale]/page.tsx",
                 "components": [
-                    "components/sections/HeroSection.tsx",
-                    "components/sections/StatsCounter.tsx",
-                    "components/sections/ValuePropositions.tsx",
-                    "components/sections/FeaturedSectors.tsx",
-                    "components/sections/SuccessStories.tsx",
-                    "components/sections/NewsEventsPreview.tsx",
-                    "components/sections/CTASection.tsx"
+                    "app/(routes)/[locale]/(home)/sections/HeroSection.tsx",
+                    "app/(routes)/[locale]/(home)/sections/StatsCounter.tsx",
+                    "app/(routes)/[locale]/(home)/sections/ValuePropositions.tsx",
+                    "app/(routes)/[locale]/(home)/sections/FeaturedSectors.tsx",
+                    "app/(routes)/[locale]/(home)/sections/SuccessStories.tsx",
+                    "app/(routes)/[locale]/(home)/sections/NewsEventsPreview.tsx",
+                    "app/(routes)/[locale]/(home)/sections/CTASection.tsx"
                 ]
             },
             "data_fetching": {

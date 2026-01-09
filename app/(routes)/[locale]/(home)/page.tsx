@@ -1,5 +1,5 @@
-import HeroSection from '@/components/sections/HeroSection';
-import ValuePropositions from '@/components/sections/ValuePropositions';
+import HeroSection from './sections/HeroSection';
+import ValuePropositions from './sections/ValuePropositions';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

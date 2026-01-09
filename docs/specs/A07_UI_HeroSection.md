@@ -283,7 +283,7 @@ Required keys in `messages/{locale}.json`:
 ## 11) Implementation Notes
 
 ### 11.1 File Location
-- `components/sections/HeroSection.tsx`
+- `app/(routes)/[locale]/(home)/sections/HeroSection.tsx`
 
 ### 11.2 Dependencies
 - `next/image` (Image component)
@@ -293,7 +293,7 @@ Required keys in `messages/{locale}.json`:
 ### 11.3 Example Usage
 ```tsx
 // In app/(routes)/[locale]/page.tsx
-import HeroSection from '@/components/sections/HeroSection';
+import HeroSection from '@/app/(routes)/[locale]/(home)/sections/HeroSection';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
