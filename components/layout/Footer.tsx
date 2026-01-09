@@ -239,7 +239,7 @@ export default function Footer({ locale }: FooterProps) {
       {/* ============================
           MAP + BRAND BLOCK
       ============================ */}
-      <div className="max-w-7xl mx-auto px-6 mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto px-6 mt-12 grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10">
 
         {/* ========= MAP ========= */}
         <div className="w-full">
@@ -252,36 +252,39 @@ export default function Footer({ locale }: FooterProps) {
           ></iframe>
         </div>
 
-        {/* ========= INVEST BRAND BLOCK ========= */}
-        <div className="flex flex-col space-y-3">
-          <img
-            src="/images/logos/logo_white.png"
-            alt="INVEST Logo"
-            className="w-auto h-10 object-contain opacity-90"
-          />
-          <p className="text-sm max-w-xs leading-relaxed">
-            {t('invest_desc')}
-          </p>
-          <p className="text-xs mt-2">
-            {t('rights')}
-          </p>
-        </div>
+        {/* ========= BRAND BLOCKS GROUP ========= */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* ========= INVEST BRAND BLOCK ========= */}
+          <div className="flex flex-col space-y-1 items-center text-center">
+            <img
+              src="/images/logos/logo_white.png"
+              alt="INVEST Logo"
+              className="w-32 h-auto object-contain opacity-90"
+            />
+            <p className="text-xs max-w-xs leading-snug">
+              {t('invest_desc')}
+            </p>
+            <p className="text-[10px] opacity-80">
+              {t('rights')}
+            </p>
+          </div>
 
-        {/* ========= GOES BLOCK ========= */}
-        <div className="flex flex-col space-y-3 items-center md:items-start">
-          <img
-            src="/images/footer/goes-logo.png"
-            alt="Government of El Salvador Logo"
-            className="w-20 h-auto object-contain opacity-90"
-          />
-          <div className="text-sm space-x-2">
-            <Link href={href(locale, "/legal/terms")} className="hover:underline">
-              {t('terms')}
-            </Link>
-            <span>|</span>
-            <Link href={href(locale, "/legal/privacy")} className="hover:underline">
-              {t('privacy')}
-            </Link>
+          {/* ========= GOES BLOCK ========= */}
+          <div className="flex flex-col space-y-1 items-center">
+            <img
+              src="/images/footer/goes-logo.png"
+              alt="Government of El Salvador Logo"
+              className="w-16 h-auto object-contain opacity-90"
+            />
+            <div className="text-xs space-x-2">
+              <Link href={href(locale, "/legal/terms")} className="hover:underline">
+                {t('terms')}
+              </Link>
+              <span>|</span>
+              <Link href={href(locale, "/legal/privacy")} className="hover:underline">
+                {t('privacy')}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
