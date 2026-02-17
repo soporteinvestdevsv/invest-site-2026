@@ -1,0 +1,52 @@
+Home page links (from code)
+
+Hero
+- Contact Us -> /{locale}/contact
+- How to Invest -> /{locale}/how-to-invest
+
+Value propositions
+- Strategic Location (Learn more) -> /{locale}/why-el-salvador
+- Competitive Incentives (Learn more) -> /{locale}/why-invest/incentives
+- Skilled Workforce (Learn more) -> /{locale}/why-el-salvador/talent
+- Modern Infrastructure (Learn more) -> /{locale}/why-el-salvador/connectivity
+
+Story sections
+- Find out more -> /{locale}/invest
+- Learn more -> /{locale}/export
+- Join us -> /{locale}/diaspora
+
+Footer
+Social
+- Facebook -> https://www.facebook.com/lnvestinElSalvador
+- Instagram -> https://www.instagram.com/investinsv/
+- X (Twitter) -> https://x.com/investinsv
+- LinkedIn -> https://sv.linkedin.com/company/investinelsalvador
+- TikTok -> https://www.tiktok.com/@investin.sv
+- YouTube -> https://www.youtube.com/@InvestinElSalvador
+
+Quick Links
+- I want to invest -> /{locale}/invest
+- I want to export -> /{locale}/export
+- Salvadoran diaspora -> /{locale}/diaspora
+- Transparency portal -> https://www.transparencia.gob.sv/institutions/invest
+
+Resources
+- Business Intelligence -> /{locale}/resources
+- Investment Guide -> /docs/investment-guide.pdf
+- Sector Guides -> /{locale}/sector-guides
+- Tax incentives and benefits -> /docs/tax-incentives.pdf
+
+More
+- Antisoborno Policy -> /{locale}/politica-antisoborno
+- Events -> /{locale}/events
+- Why El Salvador -> /{locale}/why-el-salvador
+- Contact -> /{locale}/contact
+- Announcements -> /{locale}/announcements
+
+Legal
+- Terms and Conditions -> /{locale}/legal/terms
+- Privacy Policy -> /{locale}/legal/privacy
+
+External media used on home
+- https://investinelsalvador.gob.sv/wp-content/uploads/2025/05/Video-General-2-2.mp4
+- https://assets.ireland.ie/images/Invest_stories_image_right.2e16d0ba.fill-460x450-c100.jpg

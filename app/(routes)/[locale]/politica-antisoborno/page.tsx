@@ -30,7 +30,7 @@ export default async function AntiBriberyPolicyPage({ params }: { params: Promis
                     </h3>
 
                     <div className="space-y-6">
-                        {['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii'].map((key) => (
+                        {['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix'].map((key) => (
                             <div key={key} className="flex gap-3 md:gap-4">
                                 <div className="shrink-0 pt-1">
                                     <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#0F2A4D] border border-[#1E3A5F] text-[#F8FAFC] font-bold text-sm uppercase shadow-lg">

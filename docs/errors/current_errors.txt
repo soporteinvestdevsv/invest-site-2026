@@ -1,16 +1,44 @@
-Plan / TODO
+<div class="story story--dark story--right-aligned section section--padding">
+    <div class="wrapper wrapper--large">
+        <div class="story__container">
+            
+            
+            <div class="">
+                
+                <img alt="view of Samuel Beckett Bridge in Dublin" class="story__image" height="450" src="https://assets.ireland.ie/images/samuel-beckett-bridge-dublin-.716f8f37.fill-460x450-c100.jpg" width="460">
+            </div>
+            
+            
+            <div class="story__content">
+                <div class="story__copy">
+                    
+                    
+                    <a href="/en/invest/ireland-for-finance/" aria-label="Ireland For Finance">
+                        <h2 class="story__heading heading--2">Ireland For Finance</h2>
+                    </a>
+                    
+                    <div class="rich-text">
+                        <p data-block-key="3bxe0">Over the last 40 years, Ireland has built a well-regarded, specialist international financial services sector. It is home to approximately 600 international financial services companies and 60,100 employees - representing a 50% increase in jobs since 2015.</p><p data-block-key="9gsda">Ireland is home to some of the world’s largest international financial services companies in sub-sectors such as banking, funds, asset management and investment, insurance and reinsurance, fintech, and aircraft leasing.</p><p data-block-key="84oj8">The ‘Ireland for Finance’ strategy supports Ireland to continue to be a top-tier location of choice for specialist international financial services firms.</p>
+                    </div>
+                    
+                    
+                    <div class="rich-text">
+                        <div class="wrapper wrapper--large" style="padding-top: 15px; padding-bottom: 15px;">
+                            
+                            <a class="button_text" aria-label="Button text" href="/en/invest/ireland-for-finance/">Find out more</a>
+                            
+                        </div>
+                    </div>
+                    
+                    
 
-Task 1: Audit current structure and imports (completed)
-- Located home page entry at app/(routes)/[locale]/page.tsx
-- Confirmed sections lived in components/sections
-- Verified only home page imports HeroSection and ValuePropositions
 
-Task 2: Propose minimal refactor plan (completed)
-- Targeted app/(routes)/[locale]/(home) for home page and sections
-- Planned move to app/(routes)/[locale]/(home)/sections
-- Planned import updates to use relative paths
-
-Task 3: Move home sections and update imports (completed)
-- Moved page to app/(routes)/[locale]/(home)/page.tsx
-- Moved sections to app/(routes)/[locale]/(home)/sections
-- Updated imports in new page file
+                    
+                </div>
+                
+                
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
