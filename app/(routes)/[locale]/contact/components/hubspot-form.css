@@ -1,0 +1,233 @@
+/* Scoped HubSpot Form Styles */
+
+/* 1. Container & Layout Root */
+.hs-form {
+    font-family: var(--font-museo-sans), sans-serif !important;
+    color: var(--color-text-primary);
+    width: 100%;
+}
+
+.hs-form * {
+    font-family: var(--font-museo-sans), sans-serif !important;
+}
+
+/* 2. Typography - Headings & Text */
+.hs-richtext h1,
+.hs-richtext h2,
+.hs-richtext h3 {
+    color: #0b2a4a;
+    /* Brand Primary */
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hs-richtext h1 {
+    font-size: 2rem;
+}
+
+.hs-richtext h2 {
+    font-size: 1.5rem;
+}
+
+.hs-richtext p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}
+
+/* 3. Field Wrappers & Labels */
+.hs-form-field {
+    margin-bottom: 24px;
+}
+
+.hs-form-field>label {
+    display: block;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+}
+
+/* Helper text / English translations in legends */
+.hs-field-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+/* Required asterisk */
+.hs-form-required {
+    color: #ef4444;
+    /* Tailwind red-500 */
+    margin-left: 2px;
+}
+
+/* 4. Inputs (Text, Email, Phone, Select, Textarea) */
+.hs-input:not([type="checkbox"]):not([type="radio"]) {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-page);
+    background-clip: padding-box;
+    border: 1px solid var(--color-border-neutral);
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.hs-input:not([type="checkbox"]):not([type="radio"]):focus {
+    border-color: #0b2a4a;
+    outline: 0;
+    box-shadow: 0 0 0 4px rgba(11, 42, 74, 0.1);
+}
+
+textarea.hs-input {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Select specific tweaks */
+select.hs-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+/* 5. Checkboxes & Radios */
+.inputs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inputs-list li {
+    margin: 0;
+}
+
+.hs-form-radio-display,
+.hs-form-booleancheckbox-display,
+.hs-form-checkbox-display {
+    display: flex;
+    align-items: flex-start;
+    /* Align top for long text */
+    cursor: pointer;
+    gap: 10px;
+}
+
+.hs-input[type="radio"],
+.hs-input[type="checkbox"] {
+    margin-top: 3px;
+    width: 1.25em;
+    height: 1.25em;
+    border: 1px solid var(--color-border-neutral);
+    border-radius: 4px;
+    accent-color: #0b2a4a;
+}
+
+.hs-input[type="radio"] {
+    border-radius: 50%;
+}
+
+/* 6. Submit Button */
+.actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1.5rem;
+    padding-bottom: 0;
+    /* Removing potential padding */
+}
+
+.hs-button.primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #ffffff;
+    background-color: #0b2a4a;
+    /* Hardcoded Brand Primary */
+    border: none;
+    border-radius: 1rem;
+    /* rounded-2xl to match hero */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .hs-button.primary {
+        width: auto;
+    }
+}
+
+.hs-button.primary:hover {
+    background-color: #08213a;
+    /* Darker shade */
+}
+
+.hs-button.primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(11, 42, 74, 0.2);
+}
+
+/* 7. Error States */
+.hs-error-msgs {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0 0;
+    color: #ef4444;
+    font-size: 0.875rem;
+}
+
+.hs-input.invalid {
+    border-color: #ef4444;
+}
+
+/* 8. Modern Layout Improvements (Preserving Columns) */
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+}
+
+/* Mobile: Ensure no overflow and better stacking */
+@media (max-width: 767px) {
+    .hs-form-field {
+        width: 100% !important;
+        float: none !important;
+        margin-bottom: 16px;
+        /* Tighter on mobile */
+    }
+
+    .hs-richtext h1 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Fix text color for dark mode if supported, or enforce light mode contrast */
+.hs-form {
+    --color-text-primary: #111827;
+    --color-text-muted: #6b7280;
+    --color-border-neutral: #e5e7eb;
+}
+
+/* Remove any potential extra spacing from hidden fields or container */
+.hs_submit {
+    margin-bottom: 0;
+}
