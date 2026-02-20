@@ -1,10 +1,10 @@
-import HeroSection from './sections/HeroSection';
-import ValuePropositions from './sections/ValuePropositions';
-import StrategicSector from './sections/StrategicSector';
-import ResourcesSection from './sections/ResourcesSection';
-import SuccessCasesSection from './sections/SuccessCasesSection';
-import AboutSection from './sections/AboutSection';
-import ContactSection from './sections/ContactSection';
+import HeroSection from './sections/01-HeroSection';
+import WhyElSalvador from './sections/02-WhyElSalvador';
+import StrategicSector from './sections/03-StrategicSector';
+import ResourcesSection from './sections/04-ResourcesSection';
+import SuccessCasesSection from './sections/05-SuccessCasesSection';
+import AboutSection from './sections/06-AboutSection';
+import ContactSection from './sections/07-ContactSection';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -12,7 +12,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <main>
       <HeroSection locale={locale} />
-      <ValuePropositions locale={locale} title="Why El Salvador" />
+      <WhyElSalvador locale={locale} title="Why El Salvador" />
       <StrategicSector locale={locale} />
       <ResourcesSection locale={locale} />
       <SuccessCasesSection locale={locale} />

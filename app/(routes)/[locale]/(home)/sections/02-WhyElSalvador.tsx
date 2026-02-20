@@ -16,7 +16,7 @@ interface ValueProp {
     };
 }
 
-interface ValuePropositionsProps {
+interface WhyElSalvadorProps {
     locale: string;
     title?: string;
     items?: ValueProp[];
@@ -86,11 +86,11 @@ const defaultItems: ValueProp[] = [
     },
 ];
 
-export default function ValuePropositions({
+export default function WhyElSalvador({
     locale,
     title,
     items = defaultItems,
-}: ValuePropositionsProps) {
+}: WhyElSalvadorProps) {
     const t = useTranslations('home.why_el_salvador');
     const [openId, setOpenId] = useState<string | null>(null);
 
@@ -102,7 +102,7 @@ export default function ValuePropositions({
     return (
         <section
             aria-labelledby="value-props-title"
-            id="why-invest"
+            id="why-el-salvador"
             className="py-16 md:py-20 lg:py-24 bg-surface-page"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6">

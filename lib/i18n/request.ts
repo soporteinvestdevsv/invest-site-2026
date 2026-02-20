@@ -28,8 +28,8 @@ export default getRequestConfig(async ({ locale }) => {
         const site = (await import(`@/messages/${finalLocale}.json`)).default;
         const header = (await import(`@/messages/layout/header/${finalLocale}.json`)).default;
         const footer = (await import(`@/messages/layout/footer/${finalLocale}.json`)).default;
-        const hero = (await import(`@/messages/home/hero/${finalLocale}.json`)).default;
-        const why_el_salvador = (await import(`@/messages/home/why-el-salvador/${finalLocale}.json`)).default;
+        const hero = (await import(`@/messages/01-home/01-hero/${finalLocale}.json`)).default;
+        const why_el_salvador = (await import(`@/messages/01-home/02-why-el-salvador/${finalLocale}.json`)).default;
         const anti_bribery = (await import(`@/messages/anti-bribery/${finalLocale}.json`)).default;
         const contact = (await import(`@/messages/contact/${finalLocale}.json`)).default;
 
