@@ -53,7 +53,7 @@ export default function Header({ locale }: { locale: string }) {
 
   // Map keys to hrefs
   const navHrefs: Record<string, string> = {
-    why_es: '/why-el-salvador',
+    why_es: '/#why-el-salvador',
     sectors: '/sectors',
     resources: '/resources',
     stories: '/success-stories',
