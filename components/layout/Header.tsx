@@ -48,6 +48,23 @@ export default function Header({ locale }: { locale: string }) {
   // Prefix href with locale
   const getHref = (path: string) => `/${currentLocale}${path}`;
 
+  const handleLocaleSwitch = () => {
+    if (typeof window === 'undefined') return;
+    sessionStorage.setItem('locale-scroll', String(window.scrollY));
+  };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const storedScroll = sessionStorage.getItem('locale-scroll');
+    if (!storedScroll) return;
+    const scrollY = Number(storedScroll);
+    sessionStorage.removeItem('locale-scroll');
+    if (Number.isNaN(scrollY)) return;
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: scrollY, left: 0, behavior: 'auto' });
+    });
+  }, []);
+
   // Keys align with the JSON structure keys
   const navKeys = ['why_es', 'sectors', 'resources', 'stories', 'about', 'contact'];
 
@@ -118,6 +135,7 @@ export default function Header({ locale }: { locale: string }) {
         <div className="hidden lg:flex items-center gap-4">
           <Link
             href={switchLocaleHref}
+            onClick={handleLocaleSwitch}
             className="flex items-center justify-center text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded transition-colors"
             aria-label={`${t('switch_locale')} ${targetLabel}`}
           >
@@ -147,7 +165,10 @@ export default function Header({ locale }: { locale: string }) {
             <div className="flex items-center justify-center">
               <Link
                 href={switchLocaleHref}
-                onClick={closeMenu}
+                onClick={() => {
+                  handleLocaleSwitch();
+                  closeMenu();
+                }}
                 className="text-sm font-bold bg-white/10 px-3 py-1 rounded hover:bg-white/20"
               >
                 {t('switch_locale')} {targetLabel}
