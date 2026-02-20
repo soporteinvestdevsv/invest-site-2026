@@ -1,8 +1,10 @@
 import HeroSection from './sections/HeroSection';
 import ValuePropositions from './sections/ValuePropositions';
-import InvestSection from './sections/InvestSection';
-import ExportSection from './sections/ExportSection';
-import DiasporaSection from './sections/DiasporaSection';
+import StrategicSector from './sections/StrategicSector';
+import ResourcesSection from './sections/ResourcesSection';
+import SuccessCasesSection from './sections/SuccessCasesSection';
+import AboutSection from './sections/AboutSection';
+import ContactSection from './sections/ContactSection';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -10,10 +12,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <main>
       <HeroSection locale={locale} />
-      <ValuePropositions locale={locale} />
-      <InvestSection locale={locale} />
-      <ExportSection locale={locale} />
-      <DiasporaSection locale={locale} />
+      <ValuePropositions locale={locale} title="Why El Salvador" />
+      <StrategicSector locale={locale} />
+      <ResourcesSection locale={locale} />
+      <SuccessCasesSection locale={locale} />
+      <AboutSection locale={locale} />
+      <ContactSection locale={locale} />
       <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
       <style dangerouslySetInnerHTML={{
         __html: `

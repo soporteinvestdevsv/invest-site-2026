@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { MapPinIcon, CurrencyDollarIcon, UserGroupIcon, BuildingOffice2Icon } from '@heroicons/react/24/outline';
+import { ShieldCheckIcon, MapPinIcon, CurrencyDollarIcon, UserGroupIcon, BuildingOffice2Icon, BuildingLibraryIcon } from '@heroicons/react/24/outline';
 
 interface ValueProp {
     id: string;
@@ -24,6 +25,16 @@ interface ValuePropositionsProps {
 // Default value propositions
 const defaultItems: ValueProp[] = [
     {
+        id: 'stability',
+        icon: BuildingLibraryIcon,
+        titleKey: 'item_0_title',
+        descriptionKey: 'item_0_description',
+        link: {
+            textKey: 'item_0_link',
+            href: '/why-el-salvador',
+        },
+    },
+    {
         id: 'location',
         icon: MapPinIcon,
         titleKey: 'item_1_title',
@@ -34,32 +45,42 @@ const defaultItems: ValueProp[] = [
         },
     },
     {
-        id: 'incentives',
-        icon: CurrencyDollarIcon,
+        id: 'security',
+        icon: ShieldCheckIcon,
         titleKey: 'item_2_title',
         descriptionKey: 'item_2_description',
         link: {
             textKey: 'item_2_link',
+            href: '/why-el-salvador',
+        },
+    },
+    {
+        id: 'incentives',
+        icon: CurrencyDollarIcon,
+        titleKey: 'item_3_title',
+        descriptionKey: 'item_3_description',
+        link: {
+            textKey: 'item_3_link',
             href: '/why-invest/incentives',
         },
     },
     {
         id: 'workforce',
         icon: UserGroupIcon,
-        titleKey: 'item_3_title',
-        descriptionKey: 'item_3_description',
+        titleKey: 'item_4_title',
+        descriptionKey: 'item_4_description',
         link: {
-            textKey: 'item_3_link',
+            textKey: 'item_4_link',
             href: '/why-el-salvador/talent',
         },
     },
     {
         id: 'infrastructure',
         icon: BuildingOffice2Icon,
-        titleKey: 'item_4_title',
-        descriptionKey: 'item_4_description',
+        titleKey: 'item_5_title',
+        descriptionKey: 'item_5_description',
         link: {
-            textKey: 'item_4_link',
+            textKey: 'item_5_link',
             href: '/why-el-salvador/connectivity',
         },
     },
@@ -70,13 +91,18 @@ export default function ValuePropositions({
     title,
     items = defaultItems,
 }: ValuePropositionsProps) {
-    const t = useTranslations('home.value_props');
+    const t = useTranslations('home.why_el_salvador');
+    const [openId, setOpenId] = useState<string | null>(null);
 
     const finalTitle = title || t('title');
+    const toggleOpen = (id: string) => {
+        setOpenId((current) => (current === id ? null : id));
+    };
 
     return (
         <section
             aria-labelledby="value-props-title"
+            id="why-invest"
             className="py-16 md:py-20 lg:py-24 bg-surface-page"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -92,6 +118,8 @@ export default function ValuePropositions({
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                     {items.map((item) => {
                         const Icon = item.icon;
+                        const isOpen = openId === item.id;
+                        const panelId = `value-prop-panel-${item.id}`;
                         return (
                             <article
                                 key={item.id}
@@ -115,26 +143,47 @@ export default function ValuePropositions({
 
                                 {/* Link */}
                                 {item.link && (
-                                    <Link
-                                        href={`/${locale}${item.link.href}`}
-                                        className="inline-flex items-center text-sm font-medium text-brand-primary hover:underline focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 rounded transition-all duration-200"
-                                    >
-                                        {t(item.link.textKey)}
-                                        <svg
-                                            className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
+                                    <>
+                                        <button
+                                            type="button"
+                                            onClick={() => toggleOpen(item.id)}
+                                            aria-expanded={isOpen}
+                                            aria-controls={panelId}
+                                            className="inline-flex items-center text-sm font-medium text-brand-primary hover:underline focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 rounded transition-all duration-200"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 5l7 7-7 7"
-                                            />
-                                        </svg>
-                                    </Link>
+                                            {t(item.link.textKey)}
+                                            <svg
+                                                className={`ml-1 w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`}
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                aria-hidden="true"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M9 5l7 7-7 7"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <div
+                                            id={panelId}
+                                            className={`mt-4 overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
+                                        >
+                                            <div className="pt-2">
+                                                <p className="text-sm text-text-muted leading-relaxed mb-4">
+                                                    {t('item_body')}
+                                                </p>
+                                                <Link
+                                                    href={`/${locale}${item.link.href}`}
+                                                    className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition-all duration-200 bg-brand-primary rounded-full hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                                                >
+                                                    {t('expanded_cta')}
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </>
                                 )}
                             </article>
                         );

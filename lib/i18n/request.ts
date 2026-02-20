@@ -29,7 +29,7 @@ export default getRequestConfig(async ({ locale }) => {
         const header = (await import(`@/messages/layout/header/${finalLocale}.json`)).default;
         const footer = (await import(`@/messages/layout/footer/${finalLocale}.json`)).default;
         const hero = (await import(`@/messages/home/hero/${finalLocale}.json`)).default;
-        const value_props = (await import(`@/messages/home/value-propositions/${finalLocale}.json`)).default;
+        const why_el_salvador = (await import(`@/messages/home/why-el-salvador/${finalLocale}.json`)).default;
         const anti_bribery = (await import(`@/messages/anti-bribery/${finalLocale}.json`)).default;
         const contact = (await import(`@/messages/contact/${finalLocale}.json`)).default;
 
@@ -41,7 +41,7 @@ export default getRequestConfig(async ({ locale }) => {
                 footer,
                 home: {
                     hero,
-                    value_props,
+                    why_el_salvador,
                 },
                 anti_bribery,
                 contact,
