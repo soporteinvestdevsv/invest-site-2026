@@ -49,7 +49,7 @@ export default function Header({ locale }: { locale: string }) {
   const getHref = (path: string) => `/${currentLocale}${path}`;
 
   // Keys align with the JSON structure keys
-  const navKeys = ['why_es', 'why_invest', 'how_to_invest', 'sectors', 'stories', 'news', 'about', 'contact'];
+  const navKeys = ['why_es', 'why_invest', 'how_to_invest', 'sectors', 'stories', 'about', 'contact'];
 
   // Map keys to hrefs
   const navHrefs: Record<string, string> = {
@@ -58,7 +58,6 @@ export default function Header({ locale }: { locale: string }) {
     how_to_invest: '/how-to-invest',
     sectors: '/sectors',
     stories: '/success-stories',
-    news: '/news',
     about: '/about',
     contact: '/contact'
   };
